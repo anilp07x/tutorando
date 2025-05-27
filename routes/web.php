@@ -44,10 +44,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         
         // Institutions
-        Route::resource('instituicoes', InstituicaoController::class);
+        Route::resource('instituicoes', App\Http\Controllers\Admin\InstituicaoController::class);
         
         // Users
-        Route::resource('users', UserController::class);
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class);
         
         // Projects management
         Route::get('/projetos', [App\Http\Controllers\Admin\ProjetoController::class, 'index'])->name('projetos.index');
