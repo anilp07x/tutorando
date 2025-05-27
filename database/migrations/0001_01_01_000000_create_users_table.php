@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['admin', 'tutor', 'tutorando'])->default('tutorando');
             $table->string('curso')->nullable();
-            $table->foreignId('instituicao_id')->nullable()->constrained()->onDelete('set null');
+            $table->unsignedBigInteger('instituicao_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

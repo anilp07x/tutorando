@@ -33,13 +33,25 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'string', 'in:tutor,tutorando'],
+            'curso' => ['required', 'string', 'max:255'],
+            'instituicao_id' => ['required', 'exists:instituicoes,id'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'curso' => $request->curso,
+            'instituicao_id' => $request->instituicao_id,
         ]);
+
+        // Handle document upload if provided
+        if ($request->hasFile('document') && $request->file('document')->isValid()) {
+            $path = $request->file('document')->store('documents', 'public');
+            // You could save this path to a user_documents table or similar
+        }
 
         event(new Registered($user));
 

@@ -38,15 +38,54 @@
                     
                     @if(auth()->user()->role === 'admin')
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" 
+                            <a class="nav-link dropdown-toggle {{ request()->routeIs('admin.*') ? 'active' : '' }}" href="#" id="adminDropdown" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-gear me-1"></i> Administração
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-                                <li><a class="dropdown-item" href="{{ route('admin.instituicoes.index') }}">Instituições</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">Usuários</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.projetos.index') }}">Projetos</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.publicacoes.index') }}">Publicações</a></li>
+                                <li><h6 class="dropdown-header"><i class="bi bi-speedometer2 me-1"></i> Dashboard</h6></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                    <i class="bi bi-graph-up me-2"></i> Dashboard Admin
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                
+                                <li><h6 class="dropdown-header"><i class="bi bi-building me-1"></i> Instituições</h6></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.instituicoes.index') }}">
+                                    <i class="bi bi-list me-2"></i> Listar Todas
+                                </a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.instituicoes.create') }}">
+                                    <i class="bi bi-plus-circle me-2"></i> Nova Instituição
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                
+                                <li><h6 class="dropdown-header"><i class="bi bi-folder me-1"></i> Projetos</h6></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.projetos.index') }}">
+                                    <i class="bi bi-list me-2"></i> Todos os Projetos
+                                </a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}">
+                                    <i class="bi bi-clock me-2"></i> Projetos Pendentes
+                                </a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.projetos.index', ['status' => 'aprovado']) }}">
+                                    <i class="bi bi-check-circle me-2"></i> Projetos Aprovados
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                
+                                <li><h6 class="dropdown-header"><i class="bi bi-book me-1"></i> Publicações</h6></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.publicacoes.index') }}">
+                                    <i class="bi bi-list me-2"></i> Todas as Publicações
+                                </a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}">
+                                    <i class="bi bi-clock me-2"></i> Publicações Pendentes
+                                </a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.publicacoes.index', ['status' => 'aprovado']) }}">
+                                    <i class="bi bi-check-circle me-2"></i> Publicações Aprovadas
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                
+                                <li><h6 class="dropdown-header"><i class="bi bi-people me-1"></i> Usuários</h6></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">
+                                    <i class="bi bi-person-lines-fill me-2"></i> Gerir Usuários
+                                </a></li>
                             </ul>
                         </li>
                     @endif

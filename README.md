@@ -1,33 +1,117 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Tutorando
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Uma plataforma de interação entre tutores e tutorandos, focada no apoio acadêmico e profissional.
 
-## About Laravel
+## 🚀 Tecnologias
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Laravel 12](https://laravel.com/)
+- [Bootstrap 5](https://getbootstrap.com/)
+- [SQLite](https://www.sqlite.org/)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Requisitos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.1 ou superior
+- Composer
+- Node.js e NPM
+- SQLite3
 
-## Learning Laravel
+## 🔧 Instalação
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/tutorando.git
+cd tutorando
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Instale as dependências do PHP:
+```bash
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Instale as dependências do Node.js:
+```bash
+npm install
+```
+
+4. Copie o arquivo de ambiente:
+```bash
+cp .env.example .env
+```
+
+5. Gere a chave da aplicação:
+```bash
+php artisan key:generate
+```
+
+6. Configure o banco de dados SQLite no arquivo `.env`:
+```
+DB_CONNECTION=sqlite
+DB_DATABASE=/path/absoluto/para/database.sqlite
+```
+
+7. Execute o script de configuração de armazenamento:
+```bash
+./setup-storage.sh
+```
+
+8. Execute o script de configuração do banco de dados:
+```bash
+./setup-database.sh
+```
+
+9. Compile os assets:
+```bash
+npm run build
+```
+
+10. Inicie o servidor:
+```bash
+php artisan serve
+```
+
+Ou use o script para configurar e iniciar automaticamente:
+```bash
+./start-app.sh
+```
+
+## 🔐 Credenciais padrão
+
+- **Administrador**:
+  - Email: admin@tutorando.com
+  - Senha: password
+
+- **Tutor**:
+  - Email: joao@tutorando.com
+  - Senha: password
+
+- **Tutorando**:
+  - Email: pedro@example.com
+  - Senha: password
+
+## 🌟 Funcionalidades
+
+### 👨‍🏫 Tutor
+- Publicar projetos com imagens, PDF e link do YouTube
+- Publicar conteúdos acadêmicos (artigos, livros, vídeos, sebentas, cursos)
+- Visualizar e interagir com tutorandos
+
+### 🎓 Tutorando
+- Visualizar temas de orientação e lista de tutores
+- Publicar projetos com imagens, PDF e link do YouTube
+- Acesso gratuito às sebentas disponíveis
+
+### 🛡️ Administrador
+- Aprovar ou rejeitar contas de usuários, projetos e publicações
+- Cadastrar e gerenciar instituições
+- Definir conteúdos em destaque na plataforma
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT.
+
+## 👥 Autores
+
+- Seu Nome - [GitHub](https://github.com/seu-usuario)
 
 ## Laravel Sponsors
 
