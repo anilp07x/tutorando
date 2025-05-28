@@ -1,17 +1,26 @@
 <x-guest-layout>
     <div class="mb-4">
-        <ul class="nav nav-tabs" id="authTabs" role="tablist">
+        <ul class="nav nav-tabs nav-fill" id="authTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" href="{{ route('login') }}">Entrar</a>
+                <a class="nav-link active" href="{{ route('login') }}">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
+                </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" href="{{ route('register') }}">Cadastrar</a>
+                <a class="nav-link" href="{{ route('register') }}">
+                    <i class="bi bi-person-plus me-2"></i>Cadastrar
+                </a>
             </li>
         </ul>
     </div>
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <div class="alert alert-info mb-4">
+        <i class="bi bi-info-circle-fill me-2"></i>
+        Acesse sua conta para gerenciar seus projetos e interagir com a comunidade acadêmica.
+    </div>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -32,6 +41,9 @@
             <div class="input-group">
                 <span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
                 <x-text-input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Sua senha" />
+                <button class="btn btn-outline-secondary toggle-password" type="button" tabindex="-1">
+                    <i class="bi bi-eye"></i>
+                </button>
             </div>
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -44,8 +56,8 @@
 
         <div class="d-flex justify-content-between align-items-center">
             @if (Route::has('password.request'))
-                <a class="text-decoration-none text-muted" href="{{ route('password.request') }}">
-                    <small>Esqueceu sua senha?</small>
+                <a class="text-decoration-none text-muted d-flex align-items-center" href="{{ route('password.request') }}">
+                    <i class="bi bi-question-circle me-1"></i> Esqueceu sua senha?
                 </a>
             @endif
 
@@ -54,4 +66,31 @@
             </x-primary-button>
         </div>
     </form>
+
+    <div class="mt-5 pt-2 text-center">
+        <p class="text-muted mb-0">Novo no Tutorando?</p>
+        <a href="{{ route('register') }}" class="text-decoration-none">
+            <strong>Cadastre-se agora</strong> <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle password visibility
+            document.querySelector('.toggle-password').addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                }
+            });
+        });
+    </script>
 </x-guest-layout>

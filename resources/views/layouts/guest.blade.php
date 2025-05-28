@@ -22,6 +22,7 @@
             body {
                 background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
                 height: 100vh;
+                font-family: 'Nunito', sans-serif;
             }
             .auth-card {
                 border-radius: 15px;
@@ -42,6 +43,9 @@
                 -webkit-text-fill-color: transparent;
                 display: inline-block;
             }
+            .nav-tabs {
+                border-bottom: 1px solid rgba(0,0,0,0.08);
+            }
             .nav-tabs .nav-link {
                 font-weight: 600;
                 color: #495057;
@@ -49,30 +53,82 @@
                 padding: 0.8rem 1.5rem;
                 border-radius: 0;
                 transition: all 0.3s;
+                position: relative;
             }
             .nav-tabs .nav-link.active {
                 color: #2575fc;
-                border-bottom: 3px solid #2575fc;
                 background: transparent;
+                border-bottom: 3px solid #2575fc;
+            }
+            .nav-tabs .nav-link.active:after {
+                content: '';
+                position: absolute;
+                bottom: -3px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 20px;
+                height: 3px;
+                background: #2575fc;
+                border-radius: 3px;
+            }
+            .input-group-text {
+                border-right: 0;
+            }
+            .form-control {
+                border-left: 0;
+            }
+            .form-control:focus {
+                box-shadow: none;
+                border-color: #ced4da;
+            }
+            .input-group:focus-within {
+                box-shadow: 0 0 0 0.25rem rgba(37, 117, 252, 0.15);
             }
             .btn-primary {
                 background: linear-gradient(45deg, #6a11cb, #2575fc);
                 border: none;
                 box-shadow: 0 4px 15px rgba(37, 117, 252, 0.2);
+                font-weight: 600;
             }
             .btn-primary:hover {
                 background: linear-gradient(45deg, #5b0fb0, #1e68e6);
                 box-shadow: 0 8px 25px rgba(37, 117, 252, 0.3);
             }
+            .alert-info {
+                background-color: rgba(37, 117, 252, 0.1);
+                border-color: rgba(37, 117, 252, 0.2);
+                color: #2575fc;
+            }
+            .form-check-input:checked {
+                background-color: #2575fc;
+                border-color: #2575fc;
+            }
+            .form-text {
+                color: #6c757d;
+                font-size: 0.875rem;
+            }
+            .toggle-password:focus {
+                box-shadow: none;
+                border-color: #ced4da;
+            }
+            .progress {
+                border-radius: 50px;
+                overflow: hidden;
+            }
+            @media (max-width: 767.98px) {
+                .auth-card {
+                    margin: 0 10px;
+                }
+            }
         </style>
     </head>
     <body>
-        <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="d-flex justify-content-center align-items-center min-vh-100 py-5">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-8">
                         <div class="auth-card card border-0">
-                            <div class="auth-header text-center">
+                            <div class="auth-header text-center py-4">
                                 <a href="/" class="text-decoration-none">
                                     <div class="brand-logo">Tutorando</div>
                                 </a>
@@ -94,5 +150,35 @@
         
         <!-- Bootstrap Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <script>
+            // Enable form validation styling
+            document.addEventListener('DOMContentLoaded', function() {
+                // Apply validation styles on submit
+                const forms = document.querySelectorAll('.needs-validation');
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+                
+                // Add animation to cards
+                const authCard = document.querySelector('.auth-card');
+                if (authCard) {
+                    authCard.style.opacity = '0';
+                    authCard.style.transform = 'translateY(20px)';
+                    authCard.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        authCard.style.opacity = '1';
+                        authCard.style.transform = 'translateY(0)';
+                    }, 100);
+                }
+            });
+        </script>
     </body>
 </html>
