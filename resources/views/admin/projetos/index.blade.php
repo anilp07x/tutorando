@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="fw-bold text-primary">{{ __('Projects Management') }}</h1>
+                    <h1 class="fw-bold text-primary">Gestão de Projetos</h1>
                 </div>
 
                 @if(session('success'))
@@ -28,18 +28,18 @@
                     <div class="card-header bg-white">
                         <form action="{{ route('admin.projetos.index') }}" method="GET" class="row g-3">
                             <div class="col-md-4">
-                                <input type="text" class="form-control" name="search" placeholder="{{ __('Search by title') }}" value="{{ request('search') }}">
+                                <input type="text" class="form-control" name="search" placeholder="Buscar por título" value="{{ request('search') }}">
                             </div>
                             <div class="col-md-3">
                                 <select class="form-select" name="status">
-                                    <option value="">{{ __('All Status') }}</option>
-                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>{{ __('Approved') }}</option>
-                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>{{ __('Pending') }}</option>
+                                    <option value="">Todos os Status</option>
+                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Aprovado</option>
+                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Pendente</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <select class="form-select" name="user_id">
-                                    <option value="">{{ __('All Users') }}</option>
+                                    <option value="">Todos os Usuários</option>
                                     @foreach(App\Models\User::all() as $user)
                                         <option value="{{ $user->id }}" {{ request('user_id') == $user->id ? 'selected' : '' }}>
                                             {{ $user->name }}
@@ -63,8 +63,8 @@
 
                 <div class="card">
                     <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">{{ __('Projects List') }}</h5>
-                        <span class="badge bg-primary">{{ $projetos->total() }} {{ __('projects') }}</span>
+                        <h5 class="mb-0">Lista de Projetos</h5>
+                        <span class="badge bg-primary">{{ $projetos->total() }} projetos</span>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -73,14 +73,14 @@
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <div>
                                         <input type="checkbox" id="selectAll" class="form-check-input">
-                                        <label for="selectAll" class="form-check-label">{{ __('Select All') }}</label>
+                                        <label for="selectAll" class="form-check-label">Selecionar Todos</label>
                                     </div>
                                     <div class="btn-group" id="bulkActions" style="display: none;">
                                         <button type="button" class="btn btn-success btn-sm" onclick="bulkAction('approve')">
-                                            <i class="bi bi-check-lg"></i> {{ __('Bulk Approve') }}
+                                            <i class="bi bi-check-lg"></i> Aprovar em Massa
                                         </button>
                                         <button type="button" class="btn btn-warning btn-sm" onclick="bulkAction('reject')">
-                                            <i class="bi bi-x-lg"></i> {{ __('Bulk Reject') }}
+                                            <i class="bi bi-x-lg"></i> Rejeitar em Massa
                                         </button>
                                     </div>
                                 </div>
@@ -91,12 +91,12 @@
                                             <th width="40">
                                                 <input type="checkbox" id="selectAllTable" class="form-check-input">
                                             </th>
-                                            <th>{{ __('ID') }}</th>
-                                            <th>{{ __('Title') }}</th>
-                                            <th>{{ __('Author') }}</th>
-                                            <th>{{ __('Created') }}</th>
-                                            <th>{{ __('Status') }}</th>
-                                            <th>{{ __('Actions') }}</th>
+                                            <th>ID</th>
+                                            <th>Título</th>
+                                            <th>Autor</th>
+                                            <th>Criado em</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -141,7 +141,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="{{ route('admin.projetos.show', $projeto) }}" class="btn btn-sm btn-info" title="{{ __('View Details') }}">
+                                                        <a href="{{ route('admin.projetos.show', $projeto) }}" class="btn btn-sm btn-info" title="Ver Detalhes">
                                                             <i class="bi bi-eye"></i>
                                                         </a>
                                                         
@@ -149,7 +149,7 @@
                                                             <form action="{{ route('admin.projetos.approve', $projeto) }}" method="POST" class="d-inline">
                                                                 @csrf
                                                                 @method('PATCH')
-                                                                <button type="submit" class="btn btn-sm btn-success" title="{{ __('Approve') }}">
+                                                                <button type="submit" class="btn btn-sm btn-success" title="Aprovar">
                                                                     <i class="bi bi-check-lg"></i>
                                                                 </button>
                                                             </form>
@@ -157,17 +157,17 @@
                                                             <form action="{{ route('admin.projetos.reject', $projeto) }}" method="POST" class="d-inline">
                                                                 @csrf
                                                                 @method('PATCH')
-                                                                <button type="submit" class="btn btn-sm btn-warning" title="{{ __('Reject') }}">
+                                                                <button type="submit" class="btn btn-sm btn-warning" title="Rejeitar">
                                                                     <i class="bi bi-x-lg"></i>
                                                                 </button>
                                                             </form>
                                                         @endif
                                                         
-                                                        <a href="{{ route('projetos.show', $projeto) }}" class="btn btn-sm btn-outline-primary" title="{{ __('View Public') }}" target="_blank">
+                                                        <a href="{{ route('projetos.show', $projeto) }}" class="btn btn-sm btn-outline-primary" title="Ver Público" target="_blank">
                                                             <i class="bi bi-box-arrow-up-right"></i>
                                                         </a>
                                                         
-                                                        <button type="button" class="btn btn-sm btn-danger" title="{{ __('Delete') }}" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $projeto->id }}">
+                                                        <button type="button" class="btn btn-sm btn-danger" title="Excluir" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $projeto->id }}">
                                                             <i class="bi bi-trash"></i>
                                                         </button>
                                                     </div>
@@ -177,45 +177,25 @@
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="deleteModalLabel-{{ $projeto->id }}">{{ __('Confirm Deletion') }}</h5>
+                                                                    <h5 class="modal-title" id="deleteModalLabel-{{ $projeto->id }}">Confirmar Exclusão</h5>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <p>{{ __('Are you sure you want to delete this project?') }}</p>
+                                                                    <p>Tem certeza que deseja excluir este projeto?</p>
                                                                     <div class="alert alert-warning">
                                                                         <strong>{{ $projeto->titulo }}</strong><br>
-                                                                        <small>{{ __('Author') }}: {{ $projeto->user->name }}</small>
+                                                                        <small>Autor: {{ $projeto->user->name }}</small>
                                                                     </div>
-                                                                    <p class="text-danger"><small>{{ __('This action cannot be undone.') }}</small></p>
+                                                                    <p class="text-danger"><small>Esta ação não pode ser desfeita.</small></p>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                                     <form action="{{ route('admin.projetos.destroy', $projeto) }}" method="POST" class="d-inline">
                                                                         @csrf
                                                                         @method('DELETE')
-                                                                        <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                                                                        <button type="submit" class="btn btn-danger">Excluir</button>
                                                                     </form>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                            <div class="modal-body">
-                                                                <p>{{ __('Are you sure you want to delete this project?') }}</p>
-                                                                <p><strong>{{ $projeto->titulo }}</strong></p>
-                                                                
-                                                                <div class="alert alert-warning">
-                                                                    <i class="bi bi-exclamation-triangle me-2"></i>
-                                                                    {{ __('This action cannot be undone. All files associated with this project will be permanently deleted.') }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                                                                <form action="{{ route('projetos.destroy', $projeto) }}" method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
-                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -226,8 +206,8 @@
                                                 <td colspan="6" class="text-center py-4">
                                                     <div class="d-flex flex-column align-items-center">
                                                         <i class="bi bi-folder-x text-secondary" style="font-size: 3rem;"></i>
-                                                        <h5 class="mt-3">{{ __('No projects found') }}</h5>
-                                                        <p class="text-muted">{{ __('No projects match your search criteria.') }}</p>
+                                                        <h5 class="mt-3">Nenhum projeto encontrado</h5>
+                                                        <p class="text-muted">Nenhum projeto corresponde aos seus critérios de busca.</p>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -252,19 +232,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="bulkActionModalLabel">{{ __('Confirm Bulk Action') }}</h5>
+                <h5 class="modal-title" id="bulkActionModalLabel">Confirmar Ação em Massa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p id="bulkActionMessage"></p>
                 <div class="alert alert-info">
                     <i class="bi bi-info-circle me-2"></i>
-                    {{ __('This action will affect the selected projects and send notification emails to the authors.') }}
+                    Esta ação afetará os projetos selecionados e enviará emails de notificação aos autores.
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                <button type="button" class="btn btn-primary" id="confirmBulkAction">{{ __('Confirm') }}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="confirmBulkAction">Confirmar</button>
             </div>
         </div>
     </div>

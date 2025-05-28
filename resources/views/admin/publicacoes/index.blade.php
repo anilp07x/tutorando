@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="fw-bold text-primary">{{ __('Publications Management') }}</h1>
+                    <h1 class="fw-bold text-primary">Gestão de Publicações</h1>
                 </div>
 
                 @if(session('success'))
@@ -28,23 +28,23 @@
                     <div class="card-header bg-white">
                         <form action="{{ route('admin.publicacoes.index') }}" method="GET" class="row g-3">
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="search" placeholder="{{ __('Search by title') }}" value="{{ request('search') }}">
+                                <input type="text" class="form-control" name="search" placeholder="Buscar por título" value="{{ request('search') }}">
                             </div>
                             <div class="col-md-3">
                                 <select class="form-select" name="tipo">
-                                    <option value="">{{ __('All Types') }}</option>
-                                    <option value="livro" {{ request('tipo') == 'livro' ? 'selected' : '' }}>{{ __('Book') }}</option>
-                                    <option value="artigo" {{ request('tipo') == 'artigo' ? 'selected' : '' }}>{{ __('Article') }}</option>
-                                    <option value="video" {{ request('tipo') == 'video' ? 'selected' : '' }}>{{ __('Video') }}</option>
-                                    <option value="curso" {{ request('tipo') == 'curso' ? 'selected' : '' }}>{{ __('Course') }}</option>
-                                    <option value="sebenta" {{ request('tipo') == 'sebenta' ? 'selected' : '' }}>{{ __('Notes') }}</option>
+                                    <option value="">Todos os Tipos</option>
+                                    <option value="livro" {{ request('tipo') == 'livro' ? 'selected' : '' }}>Livro</option>
+                                    <option value="artigo" {{ request('tipo') == 'artigo' ? 'selected' : '' }}>Artigo</option>
+                                    <option value="video" {{ request('tipo') == 'video' ? 'selected' : '' }}>Vídeo</option>
+                                    <option value="curso" {{ request('tipo') == 'curso' ? 'selected' : '' }}>Curso</option>
+                                    <option value="sebenta" {{ request('tipo') == 'sebenta' ? 'selected' : '' }}>Sebenta</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <select class="form-select" name="status">
-                                    <option value="">{{ __('All Status') }}</option>
-                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>{{ __('Approved') }}</option>
-                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>{{ __('Pending') }}</option>
+                                    <option value="">Todos os Status</option>
+                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Aprovado</option>
+                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Pendente</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -63,8 +63,8 @@
 
                 <div class="card">
                     <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">{{ __('Publications List') }}</h5>
-                        <span class="badge bg-primary">{{ $publicacoes->total() }} {{ __('publications') }}</span>
+                        <h5 class="mb-0">Lista de Publicações</h5>
+                        <span class="badge bg-primary">{{ $publicacoes->total() }} publicações</span>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -73,14 +73,14 @@
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <div>
                                         <input type="checkbox" id="selectAll" class="form-check-input">
-                                        <label for="selectAll" class="form-check-label">{{ __('Select All') }}</label>
+                                        <label for="selectAll" class="form-check-label">Selecionar Todos</label>
                                     </div>
                                     <div class="btn-group" id="bulkActions" style="display: none;">
                                         <button type="button" class="btn btn-success btn-sm" onclick="bulkAction('approve')">
-                                            <i class="bi bi-check-lg"></i> {{ __('Bulk Approve') }}
+                                            <i class="bi bi-check-lg"></i> Aprovar em Massa
                                         </button>
                                         <button type="button" class="btn btn-warning btn-sm" onclick="bulkAction('reject')">
-                                            <i class="bi bi-x-lg"></i> {{ __('Bulk Reject') }}
+                                            <i class="bi bi-x-lg"></i> Rejeitar em Massa
                                         </button>
                                     </div>
                                 </div>

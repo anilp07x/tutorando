@@ -95,11 +95,15 @@
             <!-- User Menu -->
             <ul class="navbar-nav ms-auto">
                 @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Entrar</a>
+                    <li class="nav-item me-2">
+                        <a class="nav-link btn btn-outline-primary px-3" href="{{ route('login') }}">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Registrar</a>
+                        <a class="nav-link btn btn-primary text-white px-3" href="{{ route('register') }}">
+                            <i class="bi bi-person-plus me-1"></i> Cadastrar
+                        </a>
                     </li>
                 @else
                     <li class="nav-item dropdown">

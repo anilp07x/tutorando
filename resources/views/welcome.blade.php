@@ -23,25 +23,35 @@
                 font-family: 'Instrument Sans', sans-serif;
             }
             .hero-section {
-                background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+                background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
                 color: white;
                 padding: 6rem 0;
             }
             .features-icon {
                 font-size: 2.5rem;
-                color: #007bff;
+                color: #2575fc;
                 margin-bottom: 1rem;
             }
             .btn-primary {
-                background-color: #007bff;
-                border-color: #007bff;
+                background: linear-gradient(45deg, #6a11cb, #2575fc);
+                border: none;
+                box-shadow: 0 4px 15px rgba(37, 117, 252, 0.2);
+            }
+            .btn-primary:hover {
+                background: linear-gradient(45deg, #5b0fb0, #1e68e6);
+                box-shadow: 0 8px 25px rgba(37, 117, 252, 0.3);
             }
             .btn-outline-light:hover {
-                color: #007bff;
+                color: #2575fc;
             }
             .navbar-brand {
                 font-weight: 600;
-                color: #007bff;
+                font-size: 2rem;
+                background: linear-gradient(45deg, #6a11cb, #2575fc);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                display: inline-block;
             }
         </style>
     </head>
@@ -60,15 +70,21 @@
                         @if (Route::has('login'))
                             @auth
                                 <li class="nav-item">
-                                    <a href="{{ url('/dashboard') }}" class="nav-link">Dashboard</a>
+                                    <a href="{{ url('/dashboard') }}" class="nav-link btn btn-outline-primary px-3">
+                                        <i class="bi bi-speedometer2 me-1"></i> Dashboard
+                                    </a>
                                 </li>
                             @else
-                                <li class="nav-item">
-                                    <a href="{{ route('login') }}" class="nav-link">Login</a>
+                                <li class="nav-item me-2">
+                                    <a href="{{ route('login') }}" class="nav-link btn btn-outline-primary px-3">
+                                        <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+                                    </a>
                                 </li>
                                 @if (Route::has('register'))
                                     <li class="nav-item">
-                                        <a href="{{ route('register') }}" class="nav-link">Registro</a>
+                                        <a href="{{ route('register') }}" class="nav-link btn btn-primary text-white px-3">
+                                            <i class="bi bi-person-plus me-1"></i> Cadastrar
+                                        </a>
                                     </li>
                                 @endif
                             @endauth
@@ -204,11 +220,13 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="py-5 bg-primary text-white">
-            <div class="container py-4 text-center">
+        <section class="py-5" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);">
+            <div class="container py-4 text-center text-white">
                 <h2 class="fw-bold mb-4">Pronto para começar sua jornada acadêmica?</h2>
                 <p class="lead mb-4">Registre-se agora e conecte-se com tutores e tutorandos de todo o país.</p>
-                <a href="{{ route('register') }}" class="btn btn-light btn-lg px-4">Criar conta gratuita</a>
+                <a href="{{ route('register') }}" class="btn btn-light btn-lg px-4">
+                    <i class="bi bi-person-plus me-2"></i> Criar conta gratuita
+                </a>
             </div>
         </section>
 

@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="fw-bold text-primary">{{ __('Users Management') }}</h1>
+                    <h1 class="fw-bold text-primary">Gestão de Usuários</h1>
                     <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
-                        <i class="bi bi-plus-circle me-1"></i> {{ __('New User') }}
+                        <i class="bi bi-plus-circle me-1"></i> Novo Usuário
                     </a>
                 </div>
 
@@ -27,19 +27,19 @@
                     <div class="card-header bg-white">
                         <form action="{{ route('admin.users.index') }}" method="GET" class="row g-3">
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="search" placeholder="{{ __('Search by name or email') }}" value="{{ request('search') }}">
+                                <input type="text" class="form-control" name="search" placeholder="Buscar por nome ou email" value="{{ request('search') }}">
                             </div>
                             <div class="col-md-3">
                                 <select class="form-select" name="role">
-                                    <option value="">{{ __('All Roles') }}</option>
-                                    <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>{{ __('Admin') }}</option>
-                                    <option value="tutor" {{ request('role') == 'tutor' ? 'selected' : '' }}>{{ __('Tutor') }}</option>
-                                    <option value="tutorando" {{ request('role') == 'tutorando' ? 'selected' : '' }}>{{ __('Tutorando') }}</option>
+                                    <option value="">Todos os Perfis</option>
+                                    <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Administrador</option>
+                                    <option value="tutor" {{ request('role') == 'tutor' ? 'selected' : '' }}>Tutor</option>
+                                    <option value="tutorando" {{ request('role') == 'tutorando' ? 'selected' : '' }}>Tutorando</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <select class="form-select" name="instituicao_id">
-                                    <option value="">{{ __('All Institutions') }}</option>
+                                    <option value="">Todas as Instituições</option>
                                     @foreach(App\Models\Instituicao::all() as $instituicao)
                                         <option value="{{ $instituicao->id }}" {{ request('instituicao_id') == $instituicao->id ? 'selected' : '' }}>
                                             {{ $instituicao->nome }}
@@ -49,10 +49,10 @@
                             </div>
                             <div class="col-md-3">
                                 <button type="submit" class="btn btn-primary me-2">
-                                    <i class="bi bi-search me-1"></i> {{ __('Filter') }}
+                                    <i class="bi bi-search me-1"></i> Filtrar
                                 </button>
                                 <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
-                                    <i class="bi bi-x-circle me-1"></i> {{ __('Clear') }}
+                                    <i class="bi bi-x-circle me-1"></i> Limpar
                                 </a>
                             </div>
                         </form>
@@ -65,14 +65,14 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>{{ __('ID') }}</th>
-                                        <th>{{ __('Name') }}</th>
-                                        <th>{{ __('Email') }}</th>
-                                        <th>{{ __('Role') }}</th>
-                                        <th>{{ __('Course') }}</th>
-                                        <th>{{ __('Institution') }}</th>
-                                        <th>{{ __('Created') }}</th>
-                                        <th>{{ __('Actions') }}</th>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Perfil</th>
+                                        <th>Curso</th>
+                                        <th>Instituição</th>
+                                        <th>Criado em</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -107,25 +107,25 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="deleteModalLabel-{{ $user->id }}">{{ __('Confirm Deletion') }}</h5>
+                                                                <h5 class="modal-title" id="deleteModalLabel-{{ $user->id }}">Confirmar Exclusão</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <p>{{ __('Are you sure you want to delete this user?') }} <strong>{{ $user->name }}</strong>?</p>
+                                                                <p>Tem certeza que deseja excluir este usuário? <strong>{{ $user->name }}</strong>?</p>
                                                                 
                                                                 @if($user->id === Auth::id())
                                                                     <div class="alert alert-danger">
                                                                         <i class="bi bi-exclamation-triangle me-2"></i>
-                                                                        {{ __('Warning: You cannot delete your own account!') }}
+                                                                        Atenção: Você não pode excluir sua própria conta!
                                                                     </div>
                                                                 @endif
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" class="btn btn-danger" {{ $user->id === Auth::id() ? 'disabled' : '' }}>{{ __('Delete') }}</button>
+                                                                    <button type="submit" class="btn btn-danger" {{ $user->id === Auth::id() ? 'disabled' : '' }}>Excluir</button>
                                                                 </form>
                                                             </div>
                                                         </div>

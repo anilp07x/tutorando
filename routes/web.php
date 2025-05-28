@@ -40,6 +40,9 @@ Route::middleware(['auth'])->group(function () {
     
     // Admin routes
     Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
+        // Test Route (remove after testing)
+        Route::get('/test', [App\Http\Controllers\Admin\TestController::class, 'index'])->name('test');
+        
         // Admin Dashboard
         Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         
