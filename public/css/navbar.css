@@ -1,0 +1,453 @@
+/* Estilos globais do navbar */
+.navbar {
+    padding: 0.85rem 0;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+    min-height: 70px;
+}
+
+/* Estilo minimalista para o navbar */
+.navbar-minimal {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.03);
+}
+
+/* Centralização do navbar */
+.navbar-centered .navbar-collapse {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-centered .navbar-nav {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Para dispositivos maiores, melhora o posicionamento dos itens */
+@media (min-width: 992px) {
+    .navbar-centered .navbar-collapse {
+        position: static;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .navbar-centered .navbar-nav.mx-auto {
+        position: relative;
+        width: auto;
+        left: 0;
+        transform: none;
+        margin: 0 auto;
+    }
+    
+    .navbar-admin-minimal .navbar-nav.ms-auto {
+        position: static;
+        transform: none;
+        margin-left: auto !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Ajuste no branding do admin para melhor equilíbrio */
+    .navbar-admin-minimal .navbar-brand {
+        margin-right: 1.5rem;
+    }
+}
+
+/* Animação suave para scroll */
+.navbar-minimal.scrolled {
+    padding: 0.6rem 0;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* Links do navbar */
+.navbar-minimal .nav-link {
+    color: #6c757d;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    margin: 0 0.35rem;
+    border-radius: 0.35rem;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.navbar-minimal .nav-link:hover {
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.04);
+    transform: translateY(-1px);
+}
+
+.navbar-minimal .nav-link.active {
+    color: #0d6efd;
+    font-weight: 600;
+    background-color: rgba(13, 110, 253, 0.08);
+}
+
+.navbar-minimal .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    background-color: #0d6efd;
+    border-radius: 10px;
+}
+
+/* Estilo para o brand/logo */
+.navbar-minimal .navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    padding: 0.5rem 0;
+    transition: all 0.2s ease;
+}
+
+.navbar-minimal .navbar-brand:hover {
+    transform: translateY(-1px);
+}
+
+/* Estilo para botões no navbar */
+.navbar-minimal .nav-btn {
+    border-radius: 50rem;
+    padding: 0.4rem 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    letter-spacing: 0.2px;
+}
+
+.navbar-minimal .nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-minimal .btn-login {
+    background-color: rgba(13, 110, 253, 0.08);
+    color: #0d6efd;
+    border: 1px solid rgba(13, 110, 253, 0.2);
+}
+
+.navbar-minimal .btn-login:hover {
+    background-color: rgba(13, 110, 253, 0.12);
+    border-color: rgba(13, 110, 253, 0.3);
+}
+
+.navbar-minimal .btn-signup {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Versão administrador do navbar */
+.navbar-admin-minimal {
+    background: linear-gradient(135deg, #0d6efd 0%, #0855bf 100%) !important;
+    box-shadow: 0 2px 8px rgba(10, 88, 202, 0.12);
+    border-bottom: none;
+}
+
+.navbar-admin-minimal .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    padding: 0.45rem 0.9rem;
+    margin: 0 0.4rem;
+    border-radius: 0.35rem;
+    transition: all 0.2s ease;
+    position: relative;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+}
+
+.navbar-admin-minimal .nav-link:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+}
+
+.navbar-admin-minimal .nav-link.active {
+    color: white;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.navbar-admin-minimal .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 2px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+/* Status badge para admin */
+.navbar-admin-minimal .admin-badge {
+    font-size: 0.62rem;
+    padding: 0.12rem 0.4rem;
+    border-radius: 50rem;
+    background-color: rgba(255, 255, 255, 0.18);
+    color: white;
+    display: inline-block;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* Estilo para o dropdown de usuário */
+.dropdown-menu {
+    padding: 0.4rem 0;
+    margin-top: 0.6rem;
+    border: none;
+    border-radius: 0.4rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    animation: dropdownFadeIn 0.2s ease;
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.dropdown-item i {
+    width: 1.2rem;
+    text-align: center;
+}
+
+/* Estilo para os badges */
+.badge {
+    font-weight: 500;
+    padding: 0.3rem 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.navbar-admin-minimal .badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.45rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.badge:hover {
+    transform: translateY(-1px);
+}
+
+/* Ajustes para o toggle mode */
+.toggle-admin-mode {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.toggle-admin-mode .toggle-icon {
+    width: 26px;
+    height: 14px;
+    background-color: #e9ecef;
+    border-radius: 50px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.toggle-admin-mode .toggle-icon:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    top: 2px;
+    left: 2px;
+    transition: all 0.3s ease;
+}
+
+.toggle-admin-mode.on .toggle-icon {
+    background-color: #0d6efd;
+}
+
+.toggle-admin-mode.on .toggle-icon:after {
+    left: 14px;
+}
+
+/* Botão de ação rápida no admin */
+.btn-action-admin {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-radius: 50rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.35rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    letter-spacing: 0.2px;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 28px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-action-admin:hover {
+    background-color: white;
+    color: #0a58ca;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão de notificação no admin */
+.btn-notification {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.35rem 0.5rem;
+    transition: all 0.2s ease;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-notification:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: white;
+}
+
+/* Corrigir sobreposição de botões */
+.navbar-nav .nav-item {
+    position: relative;
+    z-index: 1;
+}
+
+.navbar-nav .btn, 
+.navbar-nav .nav-btn,
+.navbar-nav .btn-action-admin,
+.navbar-nav .btn-notification {
+    margin: 0 0.25rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Espaçamento adicional para conteúdo principal */
+main.content-wrapper {
+    margin-top: 1.5rem;
+}
+
+/* Ajuste para o footer */
+footer.footer {
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsividade */
+@media (max-width: 991.98px) {
+    .navbar-centered .navbar-collapse {
+        justify-content: flex-start;
+    }
+    
+    .navbar-centered .navbar-nav {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    
+    .navbar-minimal .nav-link {
+        padding: 0.75rem 1rem;
+        margin: 0.25rem 0;
+    }
+    
+    .navbar-admin-minimal .navbar-collapse {
+        background-color: #0a58ca;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+    }
+    
+    /* Barra de status admin removida */
+    
+    .navbar-nav .nav-item {
+        margin-bottom: 0.5rem;
+    }
+    
+    .navbar-nav .btn, 
+    .navbar-nav .nav-btn,
+    .navbar-nav .btn-action-admin,
+    .navbar-nav .btn-notification {
+        display: inline-block;
+        margin: 0.25rem;
+    }
+}
+
+/* Barra de status admin foi removida */
+
+/* Ícones no navbar */
+.navbar-icon {
+    font-size: 1rem;
+    margin-right: 0.4rem;
+    vertical-align: -0.125em;
+}
+
+.navbar-admin-minimal .navbar-icon {
+    opacity: 0.9;
+}
+
+/* User avatar no navbar */
+.navbar-avatar {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-right: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.navbar-avatar:hover {
+    transform: scale(1.05);
+}
+
+.navbar-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.navbar-avatar .avatar-initial {
+    font-weight: bold;
+    color: #6c757d;
+}
+
+.navbar-admin-minimal .navbar-avatar {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    width: 2rem;
+    height: 2rem;
+}
+
+.navbar-admin-minimal .navbar-avatar .avatar-initial {
+    color: white;
+    font-size: 0.9rem;
+}

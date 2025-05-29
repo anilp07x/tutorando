@@ -17,11 +17,13 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
         <!-- Custom Admin CSS -->
         <link href="/css/admin.css" rel="stylesheet">
+        <!-- Custom Navbar CSS -->
+        <link href="/css/navbar.css" rel="stylesheet">
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
+    <body class="{{ auth()->check() && auth()->user()->role === 'admin' && request()->is('admin*') ? 'admin-body' : '' }}">
         <div class="d-flex flex-column min-vh-100">
             @include('layouts.navigation')
 
@@ -42,12 +44,15 @@
             </main>
 
             <!-- Footer -->
-            <footer class="footer mt-auto py-3 bg-light">
+            <footer class="footer mt-auto py-3 {{ auth()->check() && auth()->user()->role === 'admin' && request()->is('admin*') ? 'bg-primary bg-opacity-10' : 'bg-light' }}">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4">
                             <h5>Tutorando</h5>
                             <p>Plataforma de interação entre tutores e tutorandos, focada no apoio acadêmico e profissional.</p>
+                            @if(auth()->check() && auth()->user()->role === 'admin' && request()->is('admin*'))
+                                <div class="badge bg-primary text-white mb-2">Modo Administrador</div>
+                            @endif
                         </div>
                         <div class="col-md-4">
                             <h5>Links</h5>
@@ -77,9 +82,75 @@
                     </div>
                 </div>
             </footer>
+            
+            <!-- Botão Voltar ao Topo -->
+            <button id="backToTop" class="btn btn-primary rounded-circle shadow position-fixed bottom-0 end-0 me-4 d-none" 
+                    style="width: 45px; height: 45px; z-index: 1000; bottom: 20px;">
+                <i class="bi bi-arrow-up"></i>
+            </button>
         </div>
         
         <!-- Bootstrap JS with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <!-- Custom Navbar JS -->
+        <script src="/js/navbar.js"></script>
+        
+        <!-- Funcionalidade Voltar ao Topo -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Botão Voltar ao Topo
+                const backToTopBtn = document.getElementById('backToTop');
+                
+                // Mostrar o botão quando rolar para baixo
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        backToTopBtn.classList.remove('d-none');
+                        backToTopBtn.classList.add('d-flex', 'justify-content-center', 'align-items-center');
+                    } else {
+                        backToTopBtn.classList.add('d-none');
+                        backToTopBtn.classList.remove('d-flex', 'justify-content-center', 'align-items-center');
+                    }
+                });
+                
+                // Rolar para o topo quando clicar no botão
+                backToTopBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        </script>
+        
+        <!-- Admin Mode Toggle Script -->
+        @if(auth()->check() && auth()->user()->role === 'admin')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggle = document.getElementById('adminModeToggle');
+                if (toggle) {
+                    toggle.addEventListener('click', function() {
+                        // Se estiver no modo admin, redireciona para o dashboard normal
+                        if (toggle.classList.contains('on')) {
+                            window.location.href = '{{ route('dashboard') }}';
+                        } 
+                        // Se estiver no modo usuário, redireciona para o dashboard admin
+                        else {
+                            window.location.href = '{{ route('admin.dashboard') }}';
+                        }
+                        
+                        // Toggle da classe (embora possa não ser visto devido ao redirecionamento)
+                        toggle.classList.toggle('on');
+                        
+                        // Alterna o texto
+                        const statusText = toggle.querySelector('.small');
+                        if (statusText) {
+                            statusText.textContent = toggle.classList.contains('on') ? 'ON' : 'OFF';
+                        }
+                    });
+                }
+            });
+        </script>
+        @endif
     </body>
 </html>

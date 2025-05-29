@@ -4,97 +4,29 @@
     </x-slot>
     
     <div class="container-fluid py-4">
-        <!-- Quick Actions Sidebar and Main Content -->
-        <div class="row g-4 mb-4">
-            <div class="col-lg-3">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <h6 class="mb-0">
-                            <i class="bi bi-lightning-charge me-2"></i>
-                            Ações Rápidas
-                        </h6>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="d-grid gap-2">
-                            <!-- Instituições -->
-                            <h6 class="text-muted mb-2 mt-2">
-                                <i class="bi bi-building me-1"></i> Instituições
-                            </h6>
-                            <a href="{{ route('admin.instituicoes.create') }}" class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-plus me-1"></i> Nova Instituição
-                            </a>
-                            <a href="{{ route('admin.instituicoes.index') }}" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-list me-1"></i> Listar Todas
-                            </a>
-                            
-                            <!-- Projetos -->
-                            <hr class="my-2">
-                            <h6 class="text-muted mb-2">
-                                <i class="bi bi-folder me-1"></i> Projetos
-                            </h6>
-                            <a href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-warning">
-                                <i class="bi bi-clock me-1"></i> Pendentes ({{ \App\Models\Projeto::where('aprovado', false)->count() }})
-                            </a>
-                            <a href="{{ route('admin.projetos.index') }}" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-list me-1"></i> Todos os Projetos
-                            </a>
-                            
-                            <!-- Publicações -->
-                            <hr class="my-2">
-                            <h6 class="text-muted mb-2">
-                                <i class="bi bi-book me-1"></i> Publicações
-                            </h6>
-                            <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-warning">
-                                <i class="bi bi-clock me-1"></i> Pendentes ({{ \App\Models\Publicacao::where('aprovado', false)->count() }})
-                            </a>
-                            <a href="{{ route('admin.publicacoes.index') }}" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-list me-1"></i> Todas as Publicações
-                            </a>
-                            
-                            <!-- Usuários -->
-                            <hr class="my-2">
-                            <h6 class="text-muted mb-2">
-                                <i class="bi bi-people me-1"></i> Usuários
-                            </h6>
-                            <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-person-lines-fill me-1"></i> Gerir Usuários
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- System Status Card -->
-                <div class="card border-0 shadow-sm mt-4">
-                    <div class="card-header bg-success text-white">
-                        <h6 class="mb-0">
-                            <i class="bi bi-shield-check me-2"></i>
-                            Status do Sistema
-                        </h6>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="text-muted">Sistema</span>
-                            <span class="badge bg-success">Online</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="text-muted">Database</span>
-                            <span class="badge bg-success">Conectada</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="text-muted">Laravel</span>
-                            <span class="badge bg-info">{{ app()->version() }}</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-muted">PHP</span>
-                            <span class="badge bg-info">{{ PHP_VERSION }}</span>
+        <!-- Header Welcome Card -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm bg-primary bg-opacity-10">
+                    <div class="card-body py-4">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between">
+                            <div>
+                                <h2 class="fw-bold text-primary mb-1">Olá, {{ Auth::user()->name }}!</h2>
+                                <p class="mb-0">Bem-vindo ao painel administrativo do Tutorando. Aqui você gerencia todos os aspectos da plataforma.</p>
+                            </div>
+                            <div class="mt-3 mt-md-0">
+                                <span class="badge bg-info px-3 py-2">
+                                    <i class="bi bi-code-slash me-1"></i> Laravel {{ app()->version() }}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-9">
-                <!-- Status Cards -->
-                <div class="row g-4 mb-4">
+        </div>
+
+        <!-- Status Cards -->
+        <div class="row g-4 mb-4">
             <div class="col-md-6 col-xl-3">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body">
@@ -117,30 +49,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="col-md-6 col-xl-3">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                                <div class="bg-success bg-opacity-10 p-3 rounded">
-                                    <i class="bi bi-mortarboard text-success fs-1"></i>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <h5 class="mb-1">Tutores</h5>
-                                <h3 class="mb-0 fw-bold">{{ \App\Models\User::where('role', 'tutor')->count() }}</h3>
-                                <p class="text-muted mb-0 small">
-                                    <span class="text-success">
-                                        <i class="bi bi-arrow-up"></i> 
-                                        {{ \App\Models\User::where('role', 'tutor')->where('created_at', '>=', now()->subDays(7))->count() }}
-                                    </span> 
-                                    novos esta semana
-                                </p>
-                            </div>
-                        </div>
+                    <div class="card-footer bg-white border-0">
+                        <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-outline-primary w-100">
+                            <i class="bi bi-people-fill me-1"></i> Gerenciar Usuários
+                        </a>
                     </div>
                 </div>
             </div>
@@ -150,22 +62,25 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="flex-shrink-0">
-                                <div class="bg-info bg-opacity-10 p-3 rounded">
-                                    <i class="bi bi-person-workspace text-info fs-1"></i>
+                                <div class="bg-success bg-opacity-10 p-3 rounded">
+                                    <i class="bi bi-building text-success fs-1"></i>
                                 </div>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h5 class="mb-1">Tutorandos</h5>
-                                <h3 class="mb-0 fw-bold">{{ \App\Models\User::where('role', 'tutorando')->count() }}</h3>
+                                <h5 class="mb-1">Instituições</h5>
+                                <h3 class="mb-0 fw-bold">{{ \App\Models\Instituicao::count() }}</h3>
                                 <p class="text-muted mb-0 small">
-                                    <span class="text-success">
-                                        <i class="bi bi-arrow-up"></i> 
-                                        {{ \App\Models\User::where('role', 'tutorando')->where('created_at', '>=', now()->subDays(7))->count() }}
+                                    <span class="text-primary">
+                                        {{ \App\Models\Instituicao::where('tipo', 'superior')->count() }} Ensino Superior
                                     </span> 
-                                    novos esta semana
                                 </p>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <a href="{{ route('admin.instituicoes.index') }}" class="btn btn-sm btn-outline-success w-100">
+                            <i class="bi bi-building-fill me-1"></i> Gerenciar Instituições
+                        </a>
                     </div>
                 </div>
             </div>
@@ -192,262 +107,96 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer bg-white border-0">
+                        <a href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-warning w-100">
+                            <i class="bi bi-hourglass-split me-1"></i> Ver Pendentes
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-xl-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <div class="bg-info bg-opacity-10 p-3 rounded">
+                                    <i class="bi bi-book text-info fs-1"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="mb-1">Publicações</h5>
+                                <h3 class="mb-0 fw-bold">{{ \App\Models\Publicacao::count() }}</h3>
+                                <p class="text-muted mb-0 small">
+                                    <span class="text-danger">
+                                        <i class="bi bi-exclamation-triangle"></i> 
+                                        {{ \App\Models\Publicacao::where('aprovado', false)->count() }}
+                                    </span> 
+                                    aguardando aprovação
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-info w-100">
+                            <i class="bi bi-hourglass-split me-1"></i> Ver Pendentes
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Charts Row -->
-        <div class="row g-4 mb-4">
+        <!-- Main Content and Sidebar -->
+        <div class="row g-4">
+            <!-- Main Content -->
             <div class="col-lg-8">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="card-title mb-0">Atividades Recentes</h5>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="activityChart" height="300"></canvas>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="card-title mb-0">Distribuição de Usuários</h5>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="userDistributionChart" height="300"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Quick Actions -->
-        <div class="row g-4 mb-4">
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="card-title mb-0">
-                            <i class="bi bi-building me-2 text-primary"></i>
-                            Gestão de Instituições
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-muted mb-3">Gerir todas as instituições do sistema</p>
-                        <div class="d-grid gap-2">
-                            <a href="{{ route('admin.instituicoes.index') }}" class="btn btn-outline-primary">
-                                <i class="bi bi-list me-1"></i> Ver Todas as Instituições
-                            </a>
-                            <a href="{{ route('admin.instituicoes.create') }}" class="btn btn-primary">
-                                <i class="bi bi-plus-circle me-1"></i> Nova Instituição
-                            </a>
-                        </div>
-                        <hr class="my-3">
-                        <div class="row text-center">
-                            <div class="col">
-                                <h6 class="fw-bold text-primary">{{ \App\Models\Instituicao::count() }}</h6>
-                                <small class="text-muted">Total</small>
-                            </div>
-                            <div class="col">
-                                <h6 class="fw-bold text-success">{{ \App\Models\Instituicao::where('tipo', 'superior')->count() }}</h6>
-                                <small class="text-muted">Superior</small>
-                            </div>
-                            <div class="col">
-                                <h6 class="fw-bold text-info">{{ \App\Models\Instituicao::where('tipo', 'técnico')->count() }}</h6>
-                                <small class="text-muted">Técnico</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="card-title mb-0">
-                            <i class="bi bi-folder me-2 text-success"></i>
-                            Gestão de Projetos
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-muted mb-3">Aprovar e gerir projetos de utilizadores</p>
-                        <div class="d-grid gap-2">
-                            <a href="{{ route('admin.projetos.index') }}" class="btn btn-outline-success">
-                                <i class="bi bi-list me-1"></i> Ver Todos os Projetos
-                            </a>
-                            <a href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}" class="btn btn-warning">
-                                <i class="bi bi-clock me-1"></i> Projetos Pendentes
-                            </a>
-                        </div>
-                        <hr class="my-3">
-                        <div class="row text-center">
-                            <div class="col">
-                                <h6 class="fw-bold text-primary">{{ \App\Models\Projeto::count() }}</h6>
-                                <small class="text-muted">Total</small>
-                            </div>
-                            <div class="col">
-                                <h6 class="fw-bold text-success">{{ \App\Models\Projeto::where('aprovado', true)->count() }}</h6>
-                                <small class="text-muted">Aprovados</small>
-                            </div>
-                            <div class="col">
-                                <h6 class="fw-bold text-warning">{{ \App\Models\Projeto::where('aprovado', false)->count() }}</h6>
-                                <small class="text-muted">Pendentes</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="card-title mb-0">
-                            <i class="bi bi-book me-2 text-info"></i>
-                            Gestão de Publicações
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-muted mb-3">Aprovar e gerir publicações de utilizadores</p>
-                        <div class="d-grid gap-2">
-                            <a href="{{ route('admin.publicacoes.index') }}" class="btn btn-outline-info">
-                                <i class="bi bi-list me-1"></i> Ver Todas as Publicações
-                            </a>
-                            <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="btn btn-warning">
-                                <i class="bi bi-clock me-1"></i> Publicações Pendentes
-                            </a>
-                        </div>
-                        <hr class="my-3">
-                        <div class="row text-center">
-                            <div class="col">
-                                <h6 class="fw-bold text-primary">{{ \App\Models\Publicacao::count() }}</h6>
-                                <small class="text-muted">Total</small>
-                            </div>
-                            <div class="col">
-                                <h6 class="fw-bold text-success">{{ \App\Models\Publicacao::where('aprovado', true)->count() }}</h6>
-                                <small class="text-muted">Aprovadas</small>
-                            </div>
-                            <div class="col">
-                                <h6 class="fw-bold text-warning">{{ \App\Models\Publicacao::where('aprovado', false)->count() }}</h6>
-                                <small class="text-muted">Pendentes</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Quick Actions Sidebar -->
-        <div class="row g-4 mb-4">
-            <div class="col-lg-3">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <h6 class="mb-0">
-                            <i class="bi bi-lightning-charge me-2"></i>
-                            Ações Rápidas
-                        </h6>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="d-grid gap-2">
-                            <!-- Instituições -->
-                            <div class="dropdown-divider"></div>
-                            <h6 class="text-muted mb-2">
-                                <i class="bi bi-building me-1"></i> Instituições
-                            </h6>
-                            <a href="{{ route('admin.instituicoes.create') }}" class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-plus me-1"></i> Nova Instituição
-                            </a>
-                            <a href="{{ route('admin.instituicoes.index') }}" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-list me-1"></i> Listar Todas
-                            </a>
-                            
-                            <!-- Projetos -->
-                            <div class="dropdown-divider mt-3"></div>
-                            <h6 class="text-muted mb-2">
-                                <i class="bi bi-folder me-1"></i> Projetos
-                            </h6>
-                            <a href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-warning">
-                                <i class="bi bi-clock me-1"></i> Pendentes ({{ \App\Models\Projeto::where('aprovado', false)->count() }})
-                            </a>
-                            <a href="{{ route('admin.projetos.index') }}" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-list me-1"></i> Todos os Projetos
-                            </a>
-                            
-                            <!-- Publicações -->
-                            <div class="dropdown-divider mt-3"></div>
-                            <h6 class="text-muted mb-2">
-                                <i class="bi bi-book me-1"></i> Publicações
-                            </h6>
-                            <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-warning">
-                                <i class="bi bi-clock me-1"></i> Pendentes ({{ \App\Models\Publicacao::where('aprovado', false)->count() }})
-                            </a>
-                            <a href="{{ route('admin.publicacoes.index') }}" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-list me-1"></i> Todas as Publicações
-                            </a>
-                            
-                            <!-- Usuários -->
-                            <div class="dropdown-divider mt-3"></div>
-                            <h6 class="text-muted mb-2">
-                                <i class="bi bi-people me-1"></i> Usuários
-                            </h6>
-                            <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-person-lines-fill me-1"></i> Gerir Usuários
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- System Status Card -->
-                <div class="card border-0 shadow-sm mt-4">
-                    <div class="card-header bg-success text-white">
-                        <h6 class="mb-0">
-                            <i class="bi bi-shield-check me-2"></i>
-                            Status do Sistema
-                        </h6>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="text-muted">Sistema</span>
-                            <span class="badge bg-success">Online</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="text-muted">Database</span>
-                            <span class="badge bg-success">Conectada</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="text-muted">Laravel</span>
-                            <span class="badge bg-info">{{ app()->version() }}</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-muted">PHP</span>
-                            <span class="badge bg-info">{{ PHP_VERSION }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-9">
-                <!-- Existing dashboard content continues here... -->
-                <!-- Latest Activity -->
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <div class="card border-0 shadow-sm">
+                <!-- Charts Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-7">
+                        <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Projetos Recentes</h5>
+                                <h5 class="card-title mb-0">Atividades Recentes</h5>
                                 <div class="dropdown">
                                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                        Ações
+                                        <i class="bi bi-calendar-range me-1"></i> Período
                                     </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{ route('admin.projetos.index') }}">
-                                            <i class="bi bi-list me-1"></i> Ver Todos
-                                        </a></li>
-                                        <li><a class="dropdown-item" href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}">
-                                            <i class="bi bi-clock me-1"></i> Pendentes
-                                        </a></li>
-                                        <li><a class="dropdown-item" href="{{ route('admin.projetos.index', ['status' => 'aprovado']) }}">
-                                            <i class="bi bi-check-circle me-1"></i> Aprovados
-                                        </a></li>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="#">Últimos 7 dias</a></li>
+                                        <li><a class="dropdown-item" href="#">Último mês</a></li>
+                                        <li><a class="dropdown-item" href="#">Último trimestre</a></li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="activityChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-5">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-white py-3">
+                                <h5 class="card-title mb-0">Distribuição de Usuários</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="userDistributionChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Recent Activities Tables -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-folder text-warning me-2"></i>
+                                    Projetos Recentes
+                                </h5>
+                                <a href="{{ route('admin.projetos.index') }}" class="btn btn-sm btn-outline-warning">
+                                    Ver Todos
+                                </a>
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive">
@@ -500,25 +249,15 @@
                     </div>
                     
                     <div class="col-md-6">
-                        <div class="card border-0 shadow-sm">
+                        <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Publicações Recentes</h5>
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                        Ações
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{ route('admin.publicacoes.index') }}">
-                                            <i class="bi bi-list me-1"></i> Ver Todas
-                                        </a></li>
-                                        <li><a class="dropdown-item" href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}">
-                                            <i class="bi bi-clock me-1"></i> Pendentes
-                                        </a></li>
-                                        <li><a class="dropdown-item" href="{{ route('admin.publicacoes.index', ['status' => 'aprovado']) }}">
-                                            <i class="bi bi-check-circle me-1"></i> Aprovadas
-                                        </a></li>
-                                    </ul>
-                                </div>
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-book text-info me-2"></i>
+                                    Publicações Recentes
+                                </h5>
+                                <a href="{{ route('admin.publicacoes.index') }}" class="btn btn-sm btn-outline-info">
+                                    Ver Todas
+                                </a>
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive">
@@ -580,129 +319,254 @@
                     </div>
                 </div>
                 
-                <!-- Latest Institutions -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">
-                                    <i class="bi bi-building me-2"></i>
-                                    Instituições Mais Recentes
-                                </h5>
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                        Ações
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{ route('admin.instituicoes.index') }}">
-                                            <i class="bi bi-list me-1"></i> Ver Todas
-                                        </a></li>
-                                        <li><a class="dropdown-item" href="{{ route('admin.instituicoes.create') }}">
-                                            <i class="bi bi-plus-circle me-1"></i> Nova Instituição
-                                        </a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="{{ route('admin.instituicoes.index', ['tipo' => 'superior']) }}">
-                                            <i class="bi bi-mortarboard me-1"></i> Ensino Superior
-                                        </a></li>
-                                        <li><a class="dropdown-item" href="{{ route('admin.instituicoes.index', ['tipo' => 'técnico']) }}">
-                                            <i class="bi bi-gear me-1"></i> Ensino Técnico
-                                        </a></li>
-                                    </ul>
-                                </div>
+                <!-- Institutions Table -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-building text-success me-2"></i>
+                            Instituições Mais Recentes
+                        </h5>
+                        <div>
+                            <a href="{{ route('admin.instituicoes.create') }}" class="btn btn-sm btn-success me-1">
+                                <i class="bi bi-plus-circle me-1"></i> Nova
+                            </a>
+                            <a href="{{ route('admin.instituicoes.index') }}" class="btn btn-sm btn-outline-success">
+                                Ver Todas
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Tipo</th>
+                                        <th>Localização</th>
+                                        <th>Usuários</th>
+                                        <th>Criada em</th>
+                                        <th class="text-center">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(\App\Models\Instituicao::with('users')->latest()->take(5)->get() as $instituicao)
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-initial bg-primary bg-opacity-10 rounded me-2">
+                                                    <i class="bi bi-building text-primary"></i>
+                                                </div>
+                                                <strong>{{ Str::limit($instituicao->nome, 40) }}</strong>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-{{ $instituicao->tipo == 'superior' ? 'primary' : ($instituicao->tipo == 'técnico' ? 'success' : 'info') }}">
+                                                <i class="bi bi-{{ $instituicao->tipo == 'superior' ? 'mortarboard' : ($instituicao->tipo == 'técnico' ? 'gear' : 'book') }} me-1"></i>
+                                                {{ ucfirst($instituicao->tipo) }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <i class="bi bi-geo-alt text-muted me-1"></i>
+                                            {{ Str::limit($instituicao->localizacao, 25) }}
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-light text-dark">
+                                                {{ $instituicao->users->count() }} usuários
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <small class="text-muted">{{ $instituicao->created_at->format('d/m/Y') }}</small>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                <a href="{{ route('admin.instituicoes.show', $instituicao) }}" 
+                                                   class="btn btn-outline-info btn-sm" 
+                                                   title="Ver Detalhes">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a href="{{ route('admin.instituicoes.edit', $instituicao) }}" 
+                                                   class="btn btn-outline-primary btn-sm"
+                                                   title="Editar">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <button type="button" 
+                                                        class="btn btn-outline-danger btn-sm" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#deleteModal-{{ $instituicao->id }}"
+                                                        title="Excluir">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                            
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" id="deleteModal-{{ $instituicao->id }}" tabindex="-1">
+                                                <div class="modal-dialog modal-sm">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h6 class="modal-title">Confirmar Exclusão</h6>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="mb-0">Excluir <strong>{{ $instituicao->nome }}</strong>?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                            <form action="{{ route('admin.instituicoes.destroy', $instituicao) }}" method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Quick Actions Card -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h5 class="mb-0">
+                            <i class="bi bi-lightning-charge me-2"></i>
+                            Ações Rápidas
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <a href="{{ route('admin.instituicoes.create') }}" class="card border-0 bg-light text-center p-3 h-100 text-decoration-none hover-shadow">
+                                    <div class="mb-2"><i class="bi bi-building-add text-primary fs-3"></i></div>
+                                    <h6 class="mb-0">Nova Instituição</h6>
+                                </a>
                             </div>
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-hover mb-0">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Nome</th>
-                                                <th>Tipo</th>
-                                                <th>Localização</th>
-                                                <th>Usuários</th>
-                                                <th>Criada em</th>
-                                                <th class="text-center">Ações</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach(\App\Models\Instituicao::with('users')->latest()->take(5)->get() as $instituicao)
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar-initial bg-primary bg-opacity-10 rounded me-2">
-                                                            <i class="bi bi-building text-primary"></i>
-                                                        </div>
-                                                        <strong>{{ Str::limit($instituicao->nome, 40) }}</strong>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-{{ $instituicao->tipo == 'superior' ? 'primary' : ($instituicao->tipo == 'técnico' ? 'success' : 'info') }}">
-                                                        <i class="bi bi-{{ $instituicao->tipo == 'superior' ? 'mortarboard' : ($instituicao->tipo == 'técnico' ? 'gear' : 'book') }} me-1"></i>
-                                                        {{ ucfirst($instituicao->tipo) }}
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <i class="bi bi-geo-alt text-muted me-1"></i>
-                                                    {{ Str::limit($instituicao->localizacao, 25) }}
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-light text-dark">
-                                                        {{ $instituicao->users->count() }} usuários
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <small class="text-muted">{{ $instituicao->created_at->format('d/m/Y') }}</small>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" role="group">
-                                                        <a href="{{ route('admin.instituicoes.show', $instituicao) }}" 
-                                                           class="btn btn-outline-info btn-sm" 
-                                                           title="Ver Detalhes">
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>
-                                                        <a href="{{ route('admin.instituicoes.edit', $instituicao) }}" 
-                                                           class="btn btn-outline-primary btn-sm"
-                                                           title="Editar">
-                                                            <i class="bi bi-pencil"></i>
-                                                        </a>
-                                                        <button type="button" 
-                                                                class="btn btn-outline-danger btn-sm" 
-                                                                data-bs-toggle="modal" 
-                                                                data-bs-target="#deleteModal-{{ $instituicao->id }}"
-                                                                title="Excluir">
-                                                            <i class="bi bi-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                    
-                                                    <!-- Delete Modal -->
-                                                    <div class="modal fade" id="deleteModal-{{ $instituicao->id }}" tabindex="-1">
-                                                        <div class="modal-dialog modal-sm">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h6 class="modal-title">Confirmar Exclusão</h6>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <p class="mb-0">Excluir <strong>{{ $instituicao->nome }}</strong>?</p>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                                    <form action="{{ route('admin.instituicoes.destroy', $instituicao) }}" method="POST" class="d-inline">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="col-6">
+                                <a href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}" class="card border-0 bg-light text-center p-3 h-100 text-decoration-none hover-shadow">
+                                    <div class="mb-2"><i class="bi bi-folder-check text-warning fs-3"></i></div>
+                                    <h6 class="mb-0">Aprovar Projetos</h6>
+                                    @if($projetosPendentes = \App\Models\Projeto::where('aprovado', false)->count())
+                                    <span class="badge bg-warning text-dark mt-1">{{ $projetosPendentes }}</span>
+                                    @endif
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="card border-0 bg-light text-center p-3 h-100 text-decoration-none hover-shadow">
+                                    <div class="mb-2"><i class="bi bi-journal-check text-info fs-3"></i></div>
+                                    <h6 class="mb-0">Aprovar Publicações</h6>
+                                    @if($publicacoesPendentes = \App\Models\Publicacao::where('aprovado', false)->count())
+                                    <span class="badge bg-info text-dark mt-1">{{ $publicacoesPendentes }}</span>
+                                    @endif
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="{{ route('admin.users.index') }}" class="card border-0 bg-light text-center p-3 h-100 text-decoration-none hover-shadow">
+                                    <div class="mb-2"><i class="bi bi-people-fill text-success fs-3"></i></div>
+                                    <h6 class="mb-0">Gerir Usuários</h6>
+                                </a>
                             </div>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- System Status Card -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-success text-white py-3">
+                        <h5 class="mb-0">
+                            <i class="bi bi-shield-check me-2"></i>
+                            Status do Sistema
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">Sistema</span>
+                            <span class="badge bg-success">Online</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">Database</span>
+                            <span class="badge bg-success">Conectada</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">Laravel</span>
+                            <span class="badge bg-info">{{ app()->version() }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-muted">PHP</span>
+                            <span class="badge bg-info">{{ PHP_VERSION }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Approval Summary -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-warning bg-opacity-75 text-dark py-3">
+                        <h5 class="mb-0">
+                            <i class="bi bi-clock-history me-2"></i>
+                            Pendências
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <h6 class="mb-0">Projetos pendentes</h6>
+                                <span class="badge bg-warning text-dark">
+                                    {{ \App\Models\Projeto::where('aprovado', false)->count() }}
+                                </span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                @php
+                                    $totalProjetos = \App\Models\Projeto::count();
+                                    $projetosPendentes = \App\Models\Projeto::where('aprovado', false)->count();
+                                    $percentualProjetos = $totalProjetos > 0 ? ($projetosPendentes / $totalProjetos) * 100 : 0;
+                                @endphp
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $percentualProjetos }}%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-0">
+                            <div class="d-flex justify-content-between mb-2">
+                                <h6 class="mb-0">Publicações pendentes</h6>
+                                <span class="badge bg-info text-dark">
+                                    {{ \App\Models\Publicacao::where('aprovado', false)->count() }}
+                                </span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                @php
+                                    $totalPublicacoes = \App\Models\Publicacao::count();
+                                    $publicacoesPendentes = \App\Models\Publicacao::where('aprovado', false)->count();
+                                    $percentualPublicacoes = $totalPublicacoes > 0 ? ($publicacoesPendentes / $totalPublicacoes) * 100 : 0;
+                                @endphp
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $percentualPublicacoes }}%"></div>
+                            </div>
+                        </div>
+                        
+                        @if($projetosPendentes > 0 || $publicacoesPendentes > 0)
+                        <div class="mt-3 d-grid">
+                            @if($projetosPendentes > 0)
+                            <a href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-warning mb-2">
+                                <i class="bi bi-folder-check me-1"></i> Aprovar Projetos
+                            </a>
+                            @endif
+                            
+                            @if($publicacoesPendentes > 0)
+                            <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-journal-check me-1"></i> Aprovar Publicações
+                            </a>
+                            @endif
+                        </div>
+                        @else
+                        <div class="alert alert-success mt-3 mb-0 d-flex align-items-center">
+                            <i class="bi bi-check-circle me-2 fs-5"></i>
+                            <div>Não há itens pendentes de aprovação!</div>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -799,8 +663,28 @@
                             }
                         }
                     }
-                }
+                });
+            
+            // Efeito hover para os cards de ação rápida
+            document.querySelectorAll('.hover-shadow').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.classList.add('shadow-sm', 'bg-light');
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.classList.remove('shadow-sm', 'bg-light');
+                });
             });
         });
     </script>
+    
+    <style>
+        .hover-shadow {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-shadow:hover {
+            transform: translateY(-3px);
+            background-color: #f8f9fa !important;
+        }
+    </style>
 </x-app-layout>

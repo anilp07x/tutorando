@@ -1,8 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-centered {{ auth()->check() && auth()->user()->role === 'admin' ? 'navbar-admin-minimal navbar-dark' : 'navbar-minimal navbar-light' }}">
     <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand" href="{{ route('dashboard') }}">
-            <span class="fs-4 fw-bold text-primary">Tutorando</span>
+        <a class="navbar-brand" href="{{ auth()->check() && auth()->user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}">
+            <span class="fs-4 fw-bold {{ auth()->check() && auth()->user()->role === 'admin' ? 'text-white' : 'text-primary' }}">
+                @if(auth()->check() && auth()->user()->role === 'admin')
+                    <i class="bi bi-shield"></i> Tutorando
+                    <span class="admin-badge">Admin</span>
+                @else
+                    <i class="bi bi-mortarboard"></i> Tutorando
+                @endif
+            </span>
         </a>
         
         <!-- Mobile Toggle Button -->
@@ -13,111 +20,188 @@
 
         <!-- Navigation Menu -->
         <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                        <i class="bi bi-speedometer2 me-1"></i> Dashboard
-                    </a>
-                </li>
-                
-                <!-- Exibir conforme o papel do usuário -->
-                @auth
+            <ul class="navbar-nav align-items-center mx-auto">
+                @if(auth()->check() && auth()->user()->role === 'admin')
+                    <!-- Menu de navegação para Administradores -->
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('projetos.*') ? 'active' : '' }}" href="{{ route('projetos.index') }}">
-                            <i class="bi bi-folder me-1"></i> Meus Projetos
+                        <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" 
+                           href="{{ route('admin.dashboard') }}">
+                            <i class="bi bi-grid navbar-icon"></i>Dashboard
                         </a>
                     </li>
                     
-                    @if(auth()->user()->role === 'tutor')
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('publicacoes.*') ? 'active' : '' }}" href="{{ route('publicacoes.index') }}">
-                                <i class="bi bi-journal-text me-1"></i> Minhas Publicações
-                            </a>
-                        </li>
-                    @endif
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.instituicoes.*') ? 'active' : '' }}" 
+                           href="{{ route('admin.instituicoes.index') }}">
+                            <i class="bi bi-building navbar-icon"></i>Instituições
+                        </a>
+                    </li>
                     
-                    @if(auth()->user()->role === 'admin')
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle {{ request()->routeIs('admin.*') ? 'active' : '' }}" href="#" id="adminDropdown" role="button" 
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-gear me-1"></i> Administração
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.projetos.*') ? 'active' : '' }}" 
+                           href="{{ route('admin.projetos.index') }}">
+                            <i class="bi bi-folder navbar-icon"></i>Projetos
+                            @if($projetosPendentes = \App\Models\Projeto::where('aprovado', false)->count())
+                                <span class="badge bg-warning text-dark ms-1 rounded-pill small">{{ $projetosPendentes }}</span>
+                            @endif
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.publicacoes.*') ? 'active' : '' }}" 
+                           href="{{ route('admin.publicacoes.index') }}">
+                            <i class="bi bi-journal navbar-icon"></i>Publicações
+                            @if($publicacoesPendentes = \App\Models\Publicacao::where('aprovado', false)->count())
+                                <span class="badge bg-info text-dark ms-1 rounded-pill small">{{ $publicacoesPendentes }}</span>
+                            @endif
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" 
+                           href="{{ route('admin.users.index') }}">
+                            <i class="bi bi-people navbar-icon"></i>Usuários
+                        </a>
+                    </li>
+                @else
+                    <!-- Menu de navegação para usuários normais -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                            <i class="bi bi-speedometer2 navbar-icon"></i>Painel Principal
+                        </a>
+                    </li>
+                    
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('projetos.*') ? 'active' : '' }}" href="{{ route('projetos.index') }}">
+                                <i class="bi bi-folder navbar-icon"></i>Meus Projetos
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-                                <li><h6 class="dropdown-header"><i class="bi bi-speedometer2 me-1"></i> Dashboard</h6></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-                                    <i class="bi bi-graph-up me-2"></i> Dashboard Admin
-                                </a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                
-                                <li><h6 class="dropdown-header"><i class="bi bi-building me-1"></i> Instituições</h6></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.instituicoes.index') }}">
-                                    <i class="bi bi-list me-2"></i> Listar Todas
-                                </a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.instituicoes.create') }}">
-                                    <i class="bi bi-plus-circle me-2"></i> Nova Instituição
-                                </a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                
-                                <li><h6 class="dropdown-header"><i class="bi bi-folder me-1"></i> Projetos</h6></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.projetos.index') }}">
-                                    <i class="bi bi-list me-2"></i> Todos os Projetos
-                                </a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}">
-                                    <i class="bi bi-clock me-2"></i> Projetos Pendentes
-                                </a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.projetos.index', ['status' => 'aprovado']) }}">
-                                    <i class="bi bi-check-circle me-2"></i> Projetos Aprovados
-                                </a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                
-                                <li><h6 class="dropdown-header"><i class="bi bi-book me-1"></i> Publicações</h6></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.publicacoes.index') }}">
-                                    <i class="bi bi-list me-2"></i> Todas as Publicações
-                                </a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}">
-                                    <i class="bi bi-clock me-2"></i> Publicações Pendentes
-                                </a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.publicacoes.index', ['status' => 'aprovado']) }}">
-                                    <i class="bi bi-check-circle me-2"></i> Publicações Aprovadas
-                                </a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                
-                                <li><h6 class="dropdown-header"><i class="bi bi-people me-1"></i> Usuários</h6></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">
-                                    <i class="bi bi-person-lines-fill me-2"></i> Gerir Usuários
-                                </a></li>
-                            </ul>
                         </li>
-                    @endif
-                @endauth
+                        
+                        @if(auth()->user()->role === 'tutor')
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('publicacoes.*') ? 'active' : '' }}" href="{{ route('publicacoes.index') }}">
+                                    <i class="bi bi-journal-text navbar-icon"></i>Minhas Publicações
+                                </a>
+                            </li>
+                        @endif
+                    @endauth
+                @endif
             </ul>
             
             <!-- User Menu -->
             <ul class="navbar-nav ms-auto">
                 @guest
-                    <li class="nav-item me-2">
-                        <a class="nav-link btn btn-outline-primary px-3" href="{{ route('login') }}">
+                    <li class="nav-item me-2 d-flex align-items-center">
+                        <a class="btn btn-sm nav-btn btn-login" href="{{ route('login') }}">
                             <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white px-3" href="{{ route('register') }}">
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="btn btn-sm nav-btn btn-signup" href="{{ route('register') }}">
                             <i class="bi bi-person-plus me-1"></i> Cadastrar
                         </a>
                     </li>
                 @else
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
+                    @if(auth()->user()->role === 'admin')
+                        <!-- Menu rápido para ações administrativas -->
+                        <li class="nav-item me-2 d-flex align-items-center">
+                            <a href="{{ route('admin.instituicoes.create') }}" class="btn btn-sm btn-light btn-action-admin">
+                                <i class="bi bi-plus"></i> Nova
+                            </a>
+                        </li>
+                        
+                        <!-- Contador de itens pendentes -->
+                        @php
+                            $totalPendentes = \App\Models\Projeto::where('aprovado', false)->count() + 
+                                              \App\Models\Publicacao::where('aprovado', false)->count();
+                        @endphp
+                        
+                        @if($totalPendentes > 0)
+                            <li class="nav-item me-2 d-flex align-items-center">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light position-relative btn-notification" type="button" 
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-bell"></i>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ $totalPendentes }}
+                                        </span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                                        <li><h6 class="dropdown-header">Pendentes</h6></li>
+                                        @if($projetosPendentes = \App\Models\Projeto::where('aprovado', false)->count())
+                                        <li>
+                                            <a class="dropdown-item d-flex justify-content-between align-items-center" 
+                                               href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}">
+                                                <span><i class="bi bi-folder me-2 text-warning"></i> Projetos</span>
+                                                <span class="badge bg-warning text-dark rounded-pill">{{ $projetosPendentes }}</span>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        
+                                        @if($publicacoesPendentes = \App\Models\Publicacao::where('aprovado', false)->count())
+                                        <li>
+                                            <a class="dropdown-item d-flex justify-content-between align-items-center" 
+                                               href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}">
+                                                <span><i class="bi bi-journal me-2 text-info"></i> Publicações</span>
+                                                <span class="badge bg-info text-dark rounded-pill">{{ $publicacoesPendentes }}</span>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item small text-center" href="{{ route('admin.dashboard') }}">
+                                                <i class="bi bi-grid me-1"></i> Dashboard
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
+                    @endif
+                    
+                    <li class="nav-item dropdown d-flex align-items-center">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center {{ auth()->user()->role === 'admin' ? 'text-white' : '' }}" 
+                           href="#" id="userDropdown" role="button" 
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle me-1"></i> {{ Auth::user()->name }}
+                            <div class="navbar-avatar">
+                                <span class="avatar-initial">{{ substr(Auth::user()->name, 0, 1) }}</span>
+                            </div>
+                            <span class="d-none d-md-inline">{{ Str::limit(Auth::user()->name, 15) }}</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Meu Perfil</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="userDropdown">
+                            <li class="px-3 py-2 d-flex flex-column">
+                                <span class="fw-bold">{{ Auth::user()->name }}</span>
+                                <span class="text-muted small">{{ Auth::user()->email }}</span>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                <i class="bi bi-person me-2"></i> Meu Perfil
+                            </a></li>
+                            
+                            @if(auth()->user()->role === 'admin')
+                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">
+                                    <i class="bi bi-house me-2"></i> Área de Usuário
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <div class="dropdown-item d-flex justify-content-between align-items-center">
+                                        <span class="me-3"><i class="bi bi-shield me-2"></i> Modo Admin</span>
+                                        <div class="toggle-admin-mode on" id="adminModeToggle">
+                                            <span class="small me-1">ON</span>
+                                            <span class="toggle-icon"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endif
+                            
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="dropdown-item">Sair</button>
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="bi bi-box-arrow-right me-2"></i> Sair
+                                    </button>
                                 </form>
                             </li>
                         </ul>
@@ -127,3 +211,7 @@
         </div>
     </div>
 </nav>
+
+@if(auth()->check() && auth()->user()->role === 'admin')
+<!-- A barra de status foi removida conforme solicitado -->
+@endif
