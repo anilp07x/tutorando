@@ -20,12 +20,12 @@ class InstituicaoSeeder extends Seeder
             ],
             [
                 'nome' => 'Instituto Técnico de Luanda',
-                'tipo' => 'técnico',
+                'tipo' => 'tecnico',
                 'localizacao' => 'Luanda, Angola',
             ],
             [
                 'nome' => 'Escola Média de Tecnologia',
-                'tipo' => 'médio',
+                'tipo' => 'medio',
                 'localizacao' => 'Benguela, Angola',
             ],
             [
