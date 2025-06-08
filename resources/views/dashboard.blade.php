@@ -2,8 +2,8 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12 mb-4">
-                <h1 class="fw-bold text-primary">{{ __('Dashboard') }}</h1>
-                <p class="text-muted">{{ __('Welcome back') }}, {{ Auth::user()->name }}!</p>
+                <h1 class="fw-bold text-primary">Painel de Controlo</h1>
+                <p class="text-muted">Bem-vindo de volta, {{ Auth::user()->name }}!</p>
             </div>
         </div>
 
@@ -29,13 +29,13 @@
                                 <div class="col-md-2 col-sm-4 col-6">
                                     <a href="{{ route('admin.users.index') }}" class="btn btn-outline-success w-100 h-100 d-flex flex-column align-items-center justify-content-center text-decoration-none">
                                         <i class="bi bi-people fs-3 mb-2"></i>
-                                        <span class="small">Usuários</span>
+                                        <span class="small">Utilizadores</span>
                                     </a>
                                 </div>
                                 <div class="col-md-2 col-sm-4 col-6">
                                     <a href="{{ route('admin.projetos.index') }}" class="btn btn-outline-warning w-100 h-100 d-flex flex-column align-items-center justify-content-center text-decoration-none">
                                         <i class="bi bi-folder fs-3 mb-2"></i>
-                                        <span class="small">Projetos</span>
+                                        <span class="small">Projectos</span>
                                     </a>
                                 </div>
                                 <div class="col-md-2 col-sm-4 col-6">
@@ -68,7 +68,7 @@
                 <div class="col-md-3 mb-4">
                     <div class="card bg-primary text-white">
                         <div class="card-body">
-                            <h5 class="card-title">{{ __('Total Users') }}</h5>
+                            <h5 class="card-title">Total de Utilizadores</h5>
                             <h2 class="display-4">{{ \App\Models\User::count() }}</h2>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                 <div class="col-md-3 mb-4">
                     <div class="card bg-success text-white">
                         <div class="card-body">
-                            <h5 class="card-title">{{ __('Tutors') }}</h5>
+                            <h5 class="card-title">Tutores</h5>
                             <h2 class="display-4">{{ \App\Models\User::where('role', 'tutor')->count() }}</h2>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                 <div class="col-md-3 mb-4">
                     <div class="card bg-info text-white">
                         <div class="card-body">
-                            <h5 class="card-title">{{ __('Tutorandos') }}</h5>
+                            <h5 class="card-title">Tutorandos</h5>
                             <h2 class="display-4">{{ \App\Models\User::where('role', 'tutorando')->count() }}</h2>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                 <div class="col-md-3 mb-4">
                     <div class="card bg-warning text-white">
                         <div class="card-body">
-                            <h5 class="card-title">{{ __('Projects') }}</h5>
+                            <h5 class="card-title">Projectos</h5>
                             <h2 class="display-4">{{ \App\Models\Projeto::count() }}</h2>
                         </div>
                     </div>
@@ -103,17 +103,17 @@
                 <div class="col-md-6 mb-4">
                     <div class="card">
                         <div class="card-header bg-white">
-                            <h5 class="card-title mb-0">{{ __('Recent Users') }}</h5>
+                            <h5 class="card-title mb-0">Utilizadores Recentes</h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('Name') }}</th>
-                                            <th>{{ __('Email') }}</th>
-                                            <th>{{ __('Role') }}</th>
-                                            <th>{{ __('Date') }}</th>
+                                            <th>Nome</th>
+                                            <th>E-mail</th>
+                                            <th>Função</th>
+                                            <th>Data</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -138,15 +138,15 @@
                 <div class="col-md-6 mb-4">
                     <div class="card">
                         <div class="card-header bg-white">
-                            <h5 class="card-title mb-0">{{ __('Pending Approvals') }}</h5>
+                            <h5 class="card-title mb-0">Aprovações Pendentes</h5>
                         </div>
                         <div class="card-body">
                             <ul class="nav nav-tabs" id="approvalsTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects-tab-pane" type="button" role="tab" aria-controls="projects-tab-pane" aria-selected="true">{{ __('Projects') }}</button>
+                                    <button class="nav-link active" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects-tab-pane" type="button" role="tab" aria-controls="projects-tab-pane" aria-selected="true">Projectos</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="publications-tab" data-bs-toggle="tab" data-bs-target="#publications-tab-pane" type="button" role="tab" aria-controls="publications-tab-pane" aria-selected="false">{{ __('Publications') }}</button>
+                                    <button class="nav-link" id="publications-tab" data-bs-toggle="tab" data-bs-target="#publications-tab-pane" type="button" role="tab" aria-controls="publications-tab-pane" aria-selected="false">Publicações</button>
                                 </li>
                             </ul>
                             <div class="tab-content" id="approvalsTabContent">
@@ -155,10 +155,10 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>{{ __('Title') }}</th>
-                                                    <th>{{ __('Author') }}</th>
-                                                    <th>{{ __('Date') }}</th>
-                                                    <th>{{ __('Actions') }}</th>
+                                                    <th>Título</th>
+                                                    <th>Autor</th>
+                                                    <th>Data</th>
+                                                    <th>Acções</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -169,8 +169,8 @@
                                                         <td>{{ $projeto->created_at->format('d/m/Y') }}</td>
                                                         <td>
                                                             <div class="btn-group" role="group">
-                                                                <a href="#" class="btn btn-sm btn-success">{{ __('Approve') }}</a>
-                                                                <a href="#" class="btn btn-sm btn-danger">{{ __('Reject') }}</a>
+                                                                <a href="#" class="btn btn-sm btn-success">Aprovar</a>
+                                                                <a href="#" class="btn btn-sm btn-danger">Rejeitar</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -184,10 +184,10 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>{{ __('Title') }}</th>
-                                                    <th>{{ __('Type') }}</th>
-                                                    <th>{{ __('Author') }}</th>
-                                                    <th>{{ __('Actions') }}</th>
+                                                    <th>Título</th>
+                                                    <th>Tipo</th>
+                                                    <th>Autor</th>
+                                                    <th>Acções</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -198,8 +198,8 @@
                                                         <td>{{ $publicacao->user->name }}</td>
                                                         <td>
                                                             <div class="btn-group" role="group">
-                                                                <a href="#" class="btn btn-sm btn-success">{{ __('Approve') }}</a>
-                                                                <a href="#" class="btn btn-sm btn-danger">{{ __('Reject') }}</a>
+                                                                <a href="#" class="btn btn-sm btn-success">Aprovar</a>
+                                                                <a href="#" class="btn btn-sm btn-danger">Rejeitar</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -214,15 +214,15 @@
                 </div>
             </div>
         @elseif(Auth::user()->role == 'tutor')
-            <!-- Tutor Dashboard -->
+            <!-- Painel do Tutor -->
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ __('My Projects') }}</h5>
+                            <h5 class="card-title">Os Meus Projectos</h5>
                             <div class="d-flex justify-content-between align-items-center mt-3">
                                 <h2 class="display-6">{{ \App\Models\Projeto::where('user_id', Auth::id())->count() }}</h2>
-                                <a href="#" class="btn btn-primary">{{ __('View All') }}</a>
+                                <a href="#" class="btn btn-primary">Ver Todos</a>
                             </div>
                         </div>
                     </div>
@@ -230,10 +230,10 @@
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ __('My Publications') }}</h5>
+                            <h5 class="card-title">As Minhas Publicações</h5>
                             <div class="d-flex justify-content-between align-items-center mt-3">
                                 <h2 class="display-6">{{ \App\Models\Publicacao::where('user_id', Auth::id())->count() }}</h2>
-                                <a href="#" class="btn btn-primary">{{ __('View All') }}</a>
+                                <a href="#" class="btn btn-primary">Ver Todas</a>
                             </div>
                         </div>
                     </div>
@@ -241,10 +241,10 @@
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ __('Quick Actions') }}</h5>
+                            <h5 class="card-title">Acções Rápidas</h5>
                             <div class="d-grid gap-2 mt-3">
-                                <a href="#" class="btn btn-outline-primary">{{ __('New Project') }}</a>
-                                <a href="#" class="btn btn-outline-primary">{{ __('New Publication') }}</a>
+                                <a href="#" class="btn btn-outline-primary">Novo Projecto</a>
+                                <a href="#" class="btn btn-outline-primary">Nova Publicação</a>
                             </div>
                         </div>
                     </div>
@@ -255,17 +255,17 @@
                 <div class="col-12 mb-4">
                     <div class="card">
                         <div class="card-header bg-white">
-                            <h5 class="card-title mb-0">{{ __('Recent Projects') }}</h5>
+                            <h5 class="card-title mb-0">Projectos Recentes</h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('Title') }}</th>
-                                            <th>{{ __('Date') }}</th>
-                                            <th>{{ __('Status') }}</th>
-                                            <th>{{ __('Actions') }}</th>
+                                            <th>Título</th>
+                                            <th>Data</th>
+                                            <th>Estado</th>
+                                            <th>Acções</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -275,13 +275,13 @@
                                                 <td>{{ $projeto->created_at->format('d/m/Y') }}</td>
                                                 <td>
                                                     <span class="badge bg-{{ $projeto->aprovado ? 'success' : 'warning' }}">
-                                                        {{ $projeto->aprovado ? __('Approved') : __('Pending') }}
+                                                        {{ $projeto->aprovado ? 'Aprovado' : 'Pendente' }}
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="#" class="btn btn-sm btn-info">{{ __('View') }}</a>
-                                                        <a href="#" class="btn btn-sm btn-primary">{{ __('Edit') }}</a>
+                                                        <a href="#" class="btn btn-sm btn-info">Ver</a>
+                                                        <a href="#" class="btn btn-sm btn-primary">Editar</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -294,15 +294,15 @@
                 </div>
             </div>
         @else
-            <!-- Tutorando Dashboard -->
+            <!-- Painel do Tutorando -->
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ __('My Projects') }}</h5>
+                            <h5 class="card-title">Os Meus Projectos</h5>
                             <div class="d-flex justify-content-between align-items-center mt-3">
                                 <h2 class="display-6">{{ \App\Models\Projeto::where('user_id', Auth::id())->count() }}</h2>
-                                <a href="#" class="btn btn-primary">{{ __('View All') }}</a>
+                                <a href="#" class="btn btn-primary">Ver Todos</a>
                             </div>
                         </div>
                     </div>
@@ -310,10 +310,10 @@
                 <div class="col-md-6 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ __('Quick Actions') }}</h5>
+                            <h5 class="card-title">Acções Rápidas</h5>
                             <div class="d-grid gap-2 mt-3">
-                                <a href="#" class="btn btn-outline-primary">{{ __('New Project') }}</a>
-                                <a href="#" class="btn btn-outline-primary">{{ __('Find Tutors') }}</a>
+                                <a href="#" class="btn btn-outline-primary">Novo Projecto</a>
+                                <a href="#" class="btn btn-outline-primary">Encontrar Tutores</a>
                             </div>
                         </div>
                     </div>
@@ -324,17 +324,17 @@
                 <div class="col-12 mb-4">
                     <div class="card">
                         <div class="card-header bg-white">
-                            <h5 class="card-title mb-0">{{ __('Recent Projects') }}</h5>
+                            <h5 class="card-title mb-0">Projectos Recentes</h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('Title') }}</th>
-                                            <th>{{ __('Date') }}</th>
-                                            <th>{{ __('Status') }}</th>
-                                            <th>{{ __('Actions') }}</th>
+                                            <th>Título</th>
+                                            <th>Data</th>
+                                            <th>Estado</th>
+                                            <th>Acções</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -344,13 +344,13 @@
                                                 <td>{{ $projeto->created_at->format('d/m/Y') }}</td>
                                                 <td>
                                                     <span class="badge bg-{{ $projeto->aprovado ? 'success' : 'warning' }}">
-                                                        {{ $projeto->aprovado ? __('Approved') : __('Pending') }}
+                                                        {{ $projeto->aprovado ? 'Aprovado' : 'Pendente' }}
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="#" class="btn btn-sm btn-info">{{ __('View') }}</a>
-                                                        <a href="#" class="btn btn-sm btn-primary">{{ __('Edit') }}</a>
+                                                        <a href="#" class="btn btn-sm btn-info">Ver</a>
+                                                        <a href="#" class="btn btn-sm btn-primary">Editar</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -367,7 +367,7 @@
                 <div class="col-12 mb-4">
                     <div class="card">
                         <div class="card-header bg-white">
-                            <h5 class="card-title mb-0">{{ __('Featured Tutors') }}</h5>
+                            <h5 class="card-title mb-0">Tutores em Destaque</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -380,7 +380,7 @@
                                                 </div>
                                                 <h5 class="card-title">{{ $tutor->name }}</h5>
                                                 <p class="card-text text-muted">{{ $tutor->curso }}</p>
-                                                <a href="#" class="btn btn-sm btn-outline-primary">{{ __('View Profile') }}</a>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">Ver Perfil</a>
                                             </div>
                                         </div>
                                     </div>

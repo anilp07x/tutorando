@@ -67,6 +67,63 @@
         </div>
     </form>
 
+    <div class="mt-5 pt-4 border-top">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: linear-gradient(45deg, #ff7609, #ff9039);">
+                            <i class="bi bi-people text-white"></i>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-1">Comunidade Ativa</h6>
+                        <small class="text-muted">Mais de 4.700 utilizadores registados</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: linear-gradient(45deg, #ff7609, #ff9039);">
+                            <i class="bi bi-shield-check text-white"></i>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-1">Seguro e Confiável</h6>
+                        <small class="text-muted">Dados protegidos e verificados</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: linear-gradient(45deg, #ff7609, #ff9039);">
+                            <i class="bi bi-clock text-white"></i>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-1">Disponível 24/7</h6>
+                        <small class="text-muted">Acesso sempre que precisar</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: linear-gradient(45deg, #ff7609, #ff9039);">
+                            <i class="bi bi-award text-white"></i>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-1">Qualidade Garantida</h6>
+                        <small class="text-muted">Tutores qualificados e avaliados</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="mt-5 pt-2 text-center">
         <p class="text-muted mb-0">Novo no Tutorando?</p>
         <a href="{{ route('register') }}" class="text-decoration-none">

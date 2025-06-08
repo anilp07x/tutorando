@@ -40,7 +40,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.projetos.*') ? 'active' : '' }}" 
                            href="{{ route('admin.projetos.index') }}">
-                            <i class="bi bi-folder navbar-icon"></i>Projetos
+                            <i class="bi bi-folder navbar-icon"></i>Projectos
                             @if($projetosPendentes = \App\Models\Projeto::where('aprovado', false)->count())
                                 <span class="badge bg-warning text-dark ms-1 rounded-pill small">{{ $projetosPendentes }}</span>
                             @endif
@@ -60,11 +60,11 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" 
                            href="{{ route('admin.users.index') }}">
-                            <i class="bi bi-people navbar-icon"></i>Usuários
+                            <i class="bi bi-people navbar-icon"></i>Utilizadores
                         </a>
                     </li>
                 @else
-                    <!-- Menu de navegação para usuários normais -->
+                    <!-- Menu de navegação para utilizadores normais -->
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                             <i class="bi bi-speedometer2 navbar-icon"></i>Painel Principal
@@ -74,14 +74,14 @@
                     @auth
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('projetos.*') ? 'active' : '' }}" href="{{ route('projetos.index') }}">
-                                <i class="bi bi-folder navbar-icon"></i>Meus Projetos
+                                <i class="bi bi-folder navbar-icon"></i>Os Meus Projectos
                             </a>
                         </li>
                         
                         @if(auth()->user()->role === 'tutor')
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('publicacoes.*') ? 'active' : '' }}" href="{{ route('publicacoes.index') }}">
-                                    <i class="bi bi-journal-text navbar-icon"></i>Minhas Publicações
+                                    <i class="bi bi-journal-text navbar-icon"></i>As Minhas Publicações
                                 </a>
                             </li>
                         @endif
@@ -99,7 +99,7 @@
                     </li>
                     <li class="nav-item d-flex align-items-center">
                         <a class="btn btn-sm nav-btn btn-signup" href="{{ route('register') }}">
-                            <i class="bi bi-person-plus me-1"></i> Cadastrar
+                            <i class="bi bi-person-plus me-1"></i> Registar
                         </a>
                     </li>
                 @else

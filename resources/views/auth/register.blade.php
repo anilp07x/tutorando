@@ -141,6 +141,71 @@
         </div>
     </form>
 
+    <!-- Benefits Section -->
+    <div class="mt-5 pt-4 border-top">
+        <div class="text-center mb-4">
+            <h6 class="fw-bold mb-2">Benefícios de se juntar ao Tutorando</h6>
+            <p class="text-muted small">Descubra tudo o que pode fazer com a sua conta</p>
+        </div>
+        
+        <div class="row g-3">
+            <div class="col-lg-4">
+                <div class="text-center p-3 rounded border-0 h-100" style="background: rgba(255, 118, 9, 0.05);">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #ff7609, #ff9039);">
+                        <i class="bi bi-people text-white fs-5"></i>
+                    </div>
+                    <h6 class="fw-bold">Conecte-se</h6>
+                    <small class="text-muted">Encontre tutores ou tutorandos na sua área de interesse</small>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="text-center p-3 rounded border-0 h-100" style="background: rgba(255, 118, 9, 0.05);">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #ff7609, #ff9039);">
+                        <i class="bi bi-journal-richtext text-white fs-5"></i>
+                    </div>
+                    <h6 class="fw-bold">Publique</h6>
+                    <small class="text-muted">Partilhe projetos, artigos e materiais académicos</small>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="text-center p-3 rounded border-0 h-100" style="background: rgba(255, 118, 9, 0.05);">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #ff7609, #ff9039);">
+                        <i class="bi bi-graph-up text-white fs-5"></i>
+                    </div>
+                    <h6 class="fw-bold">Cresça</h6>
+                    <small class="text-muted">Desenvolva suas competências académicas e profissionais</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row g-3 mt-2">
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill me-2" style="color: #ff7609;"></i>
+                    <small class="text-muted">Acesso gratuito para sempre</small>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill me-2" style="color: #ff7609;"></i>
+                    <small class="text-muted">Sem taxas ou comissões</small>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill me-2" style="color: #ff7609;"></i>
+                    <small class="text-muted">Suporte técnico 24/7</small>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill me-2" style="color: #ff7609;"></i>
+                    <small class="text-muted">Comunidade ativa e segura</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Toggle password visibility

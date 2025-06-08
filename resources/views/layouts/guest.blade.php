@@ -14,13 +14,15 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Bootstrap Icons -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+        <!-- Guest Theme CSS -->
+        <link href="{{ asset('css/guest.css') }}" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
         <style>
             body {
-                background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+                background: linear-gradient(135deg, #ff7609 0%, #ff9039 100%);
                 height: 100vh;
                 font-family: 'Nunito', sans-serif;
             }
@@ -37,7 +39,7 @@
             .brand-logo {
                 font-size: 2.5rem;
                 font-weight: 700;
-                background: linear-gradient(45deg, #6a11cb, #2575fc);
+                background: linear-gradient(45deg, #ff7609, #ff9039);
                 -webkit-background-clip: text;
                 background-clip: text;
                 -webkit-text-fill-color: transparent;
@@ -56,9 +58,9 @@
                 position: relative;
             }
             .nav-tabs .nav-link.active {
-                color: #2575fc;
+                color: #ff7609;
                 background: transparent;
-                border-bottom: 3px solid #2575fc;
+                border-bottom: 3px solid #ff7609;
             }
             .nav-tabs .nav-link.active:after {
                 content: '';
@@ -68,7 +70,7 @@
                 transform: translateX(-50%);
                 width: 20px;
                 height: 3px;
-                background: #2575fc;
+                background: #ff7609;
                 border-radius: 3px;
             }
             .input-group-text {
@@ -82,26 +84,26 @@
                 border-color: #ced4da;
             }
             .input-group:focus-within {
-                box-shadow: 0 0 0 0.25rem rgba(37, 117, 252, 0.15);
+                box-shadow: 0 0 0 0.25rem rgba(255, 118, 9, 0.15);
             }
             .btn-primary {
-                background: linear-gradient(45deg, #6a11cb, #2575fc);
+                background: linear-gradient(45deg, #ff7609, #ff9039);
                 border: none;
-                box-shadow: 0 4px 15px rgba(37, 117, 252, 0.2);
+                box-shadow: 0 4px 15px rgba(255, 118, 9, 0.2);
                 font-weight: 600;
             }
             .btn-primary:hover {
-                background: linear-gradient(45deg, #5b0fb0, #1e68e6);
-                box-shadow: 0 8px 25px rgba(37, 117, 252, 0.3);
+                background: linear-gradient(45deg, #e56508, #ff7609);
+                box-shadow: 0 8px 25px rgba(255, 118, 9, 0.3);
             }
             .alert-info {
-                background-color: rgba(37, 117, 252, 0.1);
-                border-color: rgba(37, 117, 252, 0.2);
-                color: #2575fc;
+                background-color: rgba(255, 118, 9, 0.1);
+                border-color: rgba(255, 118, 9, 0.2);
+                color: #ff7609;
             }
             .form-check-input:checked {
-                background-color: #2575fc;
-                border-color: #2575fc;
+                background-color: #ff7609;
+                border-color: #ff7609;
             }
             .form-text {
                 color: #6c757d;
@@ -122,7 +124,7 @@
             }
         </style>
     </head>
-    <body>
+    <body class="guest-theme">
         <div class="d-flex justify-content-center align-items-center min-vh-100 py-5">
             <div class="container">
                 <div class="row justify-content-center">

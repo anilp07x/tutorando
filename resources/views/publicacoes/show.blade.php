@@ -6,11 +6,11 @@
                     <h1 class="fw-bold text-primary">{{ $publicacao->titulo }}</h1>
                     <div>
                         <a href="{{ route('publicacoes.index') }}" class="btn btn-secondary me-2">
-                            <i class="bi bi-arrow-left me-1"></i> {{ __('Back to Publications') }}
+                            <i class="bi bi-arrow-left me-1"></i> Voltar às Publicações
                         </a>
                         @if(Auth::id() === $publicacao->user_id || Auth::user()->role === 'admin')
                             <a href="{{ route('publicacoes.edit', $publicacao) }}" class="btn btn-primary">
-                                <i class="bi bi-pencil me-1"></i> {{ __('Edit') }}
+                                <i class="bi bi-pencil me-1"></i> Editar
                             </a>
                         @endif
                     </div>
@@ -26,9 +26,9 @@
                 <div class="card mb-4">
                     <div class="card-header bg-white">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">{{ __('Publication Details') }}</h5>
+                            <h5 class="mb-0">Detalhes da Publicação</h5>
                             <span class="badge bg-{{ $publicacao->aprovado ? 'success' : 'warning' }}">
-                                {{ $publicacao->aprovado ? __('Approved') : __('Pending Approval') }}
+                                {{ $publicacao->aprovado ? 'Aprovado' : 'Pendente de Aprovação' }}
                             </span>
                         </div>
                     </div>
@@ -54,12 +54,12 @@
                                 </div>
                                 
                                 <div class="mb-4">
-                                    <h5>{{ __('Description') }}</h5>
+                                    <h5>Descrição</h5>
                                     <p>{{ $publicacao->descricao }}</p>
                                 </div>
                                 
                                 <div class="mb-4">
-                                    <h5>{{ __('Access Content') }}</h5>
+                                    <h5>Aceder ao Conteúdo</h5>
                                     @if(filter_var($publicacao->conteudo_url, FILTER_VALIDATE_URL))
                                         <!-- External URL Content -->
                                         @if(str_contains($publicacao->conteudo_url, 'youtube.com') || str_contains($publicacao->conteudo_url, 'youtu.be'))
@@ -72,7 +72,7 @@
                                             </div>
                                         @endif
                                         <a href="{{ $publicacao->conteudo_url }}" target="_blank" class="btn btn-primary">
-                                            <i class="bi bi-box-arrow-up-right me-1"></i> {{ __('Open External Content') }}
+                                            <i class="bi bi-box-arrow-up-right me-1"></i> Abrir Conteúdo Externo
                                         </a>
                                     @else
                                         <!-- File Content -->
@@ -87,7 +87,7 @@
                                         @endif
                                         
                                         <a href="{{ Storage::url($publicacao->conteudo_url) }}" target="_blank" class="btn btn-primary">
-                                            <i class="bi bi-download me-1"></i> {{ __('Download Content') }}
+                                            <i class="bi bi-download me-1"></i> Descarregar Conteúdo
                                         </a>
                                     @endif
                                 </div>
@@ -96,7 +96,7 @@
                             <div class="col-md-4">
                                 <div class="card mb-3">
                                     <div class="card-header bg-light">
-                                        <h6 class="mb-0">{{ __('Author Information') }}</h6>
+                                        <h6 class="mb-0">Informações do Autor</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex align-items-center mb-3">
@@ -115,18 +115,18 @@
                                         </div>
                                         
                                         <div class="mb-2">
-                                            <strong>{{ __('Course') }}:</strong> {{ $publicacao->user->curso }}
+                                            <strong>Curso:</strong> {{ $publicacao->user->curso }}
                                         </div>
                                         
                                         <div>
-                                            <strong>{{ __('Institution') }}:</strong> {{ $publicacao->user->instituicao->nome ?? 'N/A' }}
+                                            <strong>Instituição:</strong> {{ $publicacao->user->instituicao->nome ?? 'N/A' }}
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="card">
                                     <div class="card-header bg-light">
-                                        <h6 class="mb-0">{{ __('Publication Type') }}</h6>
+                                        <h6 class="mb-0">Tipo de Publicação</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
@@ -147,15 +147,15 @@
                                                 <h5 class="mb-0">{{ ucfirst($publicacao->tipo) }}</h5>
                                                 <p class="text-muted mb-0">
                                                     @if($publicacao->tipo == 'livro')
-                                                        {{ __('Academic book or e-book') }}
+                                                        Livro académico ou e-book
                                                     @elseif($publicacao->tipo == 'artigo')
-                                                        {{ __('Research or academic article') }}
+                                                        Artigo de investigação ou académico
                                                     @elseif($publicacao->tipo == 'vídeo')
-                                                        {{ __('Educational video content') }}
+                                                        Conteúdo de vídeo educacional
                                                     @elseif($publicacao->tipo == 'curso')
-                                                        {{ __('Online course material') }}
+                                                        Material de curso online
                                                     @else
-                                                        {{ __('Study guide or notes') }}
+                                                        Guia de estudo ou apontamentos
                                                     @endif
                                                 </p>
                                             </div>
@@ -170,17 +170,17 @@
                 @if(Auth::user()->role === 'admin' && !$publicacao->aprovado)
                     <div class="card">
                         <div class="card-body">
-                            <h5>{{ __('Administrative Actions') }}</h5>
+                            <h5>Ações Administrativas</h5>
                             <form action="{{ route('admin.publicacoes.approve', $publicacao) }}" method="POST" class="d-inline-block">
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit" class="btn btn-success">
-                                    <i class="bi bi-check-circle me-1"></i> {{ __('Approve Publication') }}
+                                    <i class="bi bi-check-circle me-1"></i> Aprovar Publicação
                                 </button>
                             </form>
                             
                             <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                <i class="bi bi-trash me-1"></i> {{ __('Delete Publication') }}
+                                <i class="bi bi-trash me-1"></i> Excluir Publicação
                             </button>
                         </div>
                     </div>
@@ -190,18 +190,18 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteModalLabel">{{ __('Confirm Deletion') }}</h5>
+                                    <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    {{ __('Are you sure you want to delete this publication?') }}
+                                    Tem certeza de que deseja excluir esta publicação?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                     <form action="{{ route('publicacoes.destroy', $publicacao) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                                        <button type="submit" class="btn btn-danger">Excluir</button>
                                     </form>
                                 </div>
                             </div>

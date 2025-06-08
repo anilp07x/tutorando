@@ -1,0 +1,254 @@
+/* Guest area specific styles with orange theme */
+.guest-theme {
+    --primary-color: #ff7609;
+    --primary-dark: #e56508;
+    --primary-light: #ff9039;
+    --primary-rgba: rgba(255, 118, 9, 0.1);
+}
+
+/* Override Bootstrap primary color for guest areas */
+.guest-theme .btn-primary {
+    background: linear-gradient(45deg, #ff7609, #ff9039);
+    border-color: #ff7609;
+    box-shadow: 0 4px 15px rgba(255, 118, 9, 0.2);
+}
+
+.guest-theme .btn-primary:hover {
+    background: linear-gradient(45deg, #e56508, #ff7609);
+    box-shadow: 0 8px 25px rgba(255, 118, 9, 0.3);
+    border-color: #e56508;
+}
+
+.guest-theme .btn-outline-primary {
+    color: #ff7609;
+    border-color: #ff7609;
+}
+
+.guest-theme .btn-outline-primary:hover {
+    background-color: #ff7609;
+    border-color: #ff7609;
+}
+
+.guest-theme .text-primary {
+    color: #ff7609 !important;
+}
+
+.guest-theme .bg-primary {
+    background-color: #ff7609 !important;
+}
+
+.guest-theme .border-primary {
+    border-color: #ff7609 !important;
+}
+
+/* Guest navbar brand styling */
+.guest-theme .navbar-brand {
+    background: linear-gradient(45deg, #ff7609, #ff9039);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Guest form focus states */
+.guest-theme .form-control:focus {
+    border-color: #ff9039;
+    box-shadow: 0 0 0 0.25rem rgba(255, 118, 9, 0.15);
+}
+
+/* Guest badge styling */
+.guest-theme .badge.bg-primary {
+    background-color: #ff7609 !important;
+}
+
+/* Guest alert styling */
+.guest-theme .alert-primary {
+    color: #ff7609;
+    background-color: rgba(255, 118, 9, 0.1);
+    border-color: rgba(255, 118, 9, 0.2);
+}
+
+/* Guest link styling */
+.guest-theme a.text-primary {
+    color: #ff7609 !important;
+}
+
+.guest-theme a.text-primary:hover {
+    color: #e56508 !important;
+}
+
+/* Hero image styling */
+.guest-theme .hero-section img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px !important;
+    box-shadow: 0 20px 40px rgba(255, 118, 9, 0.2) !important;
+}
+
+.guest-theme .hero-section img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(255, 118, 9, 0.3) !important;
+}
+
+/* Hero section enhancements */
+.guest-theme .hero-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.guest-theme .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 118, 9, 0.1) 0%, rgba(255, 144, 57, 0.1) 100%);
+    pointer-events: none;
+}
+
+/* Hero content styling */
+.guest-theme .hero-section .display-4 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.guest-theme .hero-section .lead {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Animations and effects */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Statistics section styling */
+.guest-theme .stats-number {
+    color: #ff7609;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+/* Testimonials styling */
+.guest-theme .testimonial-stars {
+    color: #ffc107;
+}
+
+/* FAQ accordion styling */
+.guest-theme .accordion-button {
+    background-color: rgba(255, 118, 9, 0.05);
+    border-color: rgba(255, 118, 9, 0.1);
+    color: #333;
+}
+
+.guest-theme .accordion-button:not(.collapsed) {
+    background-color: rgba(255, 118, 9, 0.1);
+    color: #ff7609;
+    font-weight: 600;
+}
+
+.guest-theme .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 118, 9, 0.25);
+}
+
+/* Features section icons */
+.features-gradient-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #ff7609, #ff9039);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(255, 118, 9, 0.2);
+}
+
+/* Footer enhancements */
+.guest-theme footer a:hover {
+    color: #ff7609 !important;
+    transition: color 0.3s ease;
+}
+
+/* Badge styling */
+.guest-theme .badge {
+    background-color: rgba(255, 118, 9, 0.1) !important;
+    color: #ff7609 !important;
+}
+
+/* Newsletter button */
+.newsletter-btn {
+    background: linear-gradient(45deg, #ff7609, #ff9039);
+    border: none;
+    color: white;
+}
+
+.newsletter-btn:hover {
+    background: linear-gradient(45deg, #e56508, #ff7609);
+}
+
+/* Responsive hero image */
+@media (max-width: 991.98px) {
+    .guest-theme .hero-section {
+        text-align: center;
+        padding: 4rem 0;
+    }
+    
+    .guest-theme .hero-section img {
+        margin-top: 2rem;
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .guest-theme .hero-section {
+        padding: 3rem 0;
+    }
+    
+    .guest-theme .hero-section img {
+        max-width: 90%;
+        margin-top: 1.5rem;
+    }
+    
+    .guest-theme .hero-section .display-4 {
+        font-size: 2rem;
+    }
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .features-icon {
+        font-size: 2rem;
+    }
+    
+    .hero-section {
+        padding: 4rem 0;
+    }
+    
+    .hero-section .display-4 {
+        font-size: 2rem;
+    }
+}
+
+/* Scroll animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}

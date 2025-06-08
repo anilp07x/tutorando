@@ -9,8 +9,93 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::get('/', function () {
-    return view('welcome');
+    // Real statistics for the welcome page
+    $stats = [
+        'total_tutors' => \App\Models\User::where('role', 'tutor')->count(),
+        'total_students' => \App\Models\User::where('role', 'tutorando')->count(),
+        'total_projects' => \App\Models\Projeto::where('aprovado', true)->count(),
+        'total_publications' => \App\Models\Publicacao::where('aprovado', true)->count(),
+        
+        // Statistics by academic areas (based on course field)
+        'tech_tutors' => \App\Models\User::where('role', 'tutor')
+            ->where(function($query) {
+                $query->where('curso', 'like', '%informática%')
+                      ->orWhere('curso', 'like', '%software%')
+                      ->orWhere('curso', 'like', '%sistemas%')
+                      ->orWhere('curso', 'like', '%tecnologia%')
+                      ->orWhere('curso', 'like', '%computação%');
+            })->count(),
+        'tech_projects' => \App\Models\Projeto::where('aprovado', true)
+            ->whereHas('user', function($query) {
+                $query->where('curso', 'like', '%informática%')
+                      ->orWhere('curso', 'like', '%software%')
+                      ->orWhere('curso', 'like', '%sistemas%')
+                      ->orWhere('curso', 'like', '%tecnologia%')
+                      ->orWhere('curso', 'like', '%computação%');
+            })->count(),
+            
+        'health_tutors' => \App\Models\User::where('role', 'tutor')
+            ->where(function($query) {
+                $query->where('curso', 'like', '%medicina%')
+                      ->orWhere('curso', 'like', '%enfermagem%')
+                      ->orWhere('curso', 'like', '%fisioterapia%')
+                      ->orWhere('curso', 'like', '%farmácia%')
+                      ->orWhere('curso', 'like', '%saúde%');
+            })->count(),
+        'health_projects' => \App\Models\Projeto::where('aprovado', true)
+            ->whereHas('user', function($query) {
+                $query->where('curso', 'like', '%medicina%')
+                      ->orWhere('curso', 'like', '%enfermagem%')
+                      ->orWhere('curso', 'like', '%fisioterapia%')
+                      ->orWhere('curso', 'like', '%farmácia%')
+                      ->orWhere('curso', 'like', '%saúde%');
+            })->count(),
+            
+        'engineering_tutors' => \App\Models\User::where('role', 'tutor')
+            ->where(function($query) {
+                $query->where('curso', 'like', '%engenharia%')
+                      ->orWhere('curso', 'like', '%civil%')
+                      ->orWhere('curso', 'like', '%mecânica%')
+                      ->orWhere('curso', 'like', '%elétrica%')
+                      ->orWhere('curso', 'like', '%química%');
+            })->count(),
+        'engineering_projects' => \App\Models\Projeto::where('aprovado', true)
+            ->whereHas('user', function($query) {
+                $query->where('curso', 'like', '%engenharia%')
+                      ->orWhere('curso', 'like', '%civil%')
+                      ->orWhere('curso', 'like', '%mecânica%')
+                      ->orWhere('curso', 'like', '%elétrica%')
+                      ->orWhere('curso', 'like', '%química%');
+            })->count(),
+            
+        'exact_tutors' => \App\Models\User::where('role', 'tutor')
+            ->where(function($query) {
+                $query->where('curso', 'like', '%matemática%')
+                      ->orWhere('curso', 'like', '%física%')
+                      ->orWhere('curso', 'like', '%química%')
+                      ->orWhere('curso', 'like', '%estatística%')
+                      ->orWhere('curso', 'like', '%exatas%');
+            })->count(),
+        'exact_projects' => \App\Models\Projeto::where('aprovado', true)
+            ->whereHas('user', function($query) {
+                $query->where('curso', 'like', '%matemática%')
+                      ->orWhere('curso', 'like', '%física%')
+                      ->orWhere('curso', 'like', '%química%')
+                      ->orWhere('curso', 'like', '%estatística%')
+                      ->orWhere('curso', 'like', '%exatas%');
+            })->count(),
+    ];
+    
+    return view('welcome', compact('stats'));
 });
+
+Route::get('/sobre', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
 
 // Authentication routes (handled by auth.php)
 require __DIR__.'/auth.php';

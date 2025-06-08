@@ -4,7 +4,9 @@
 
 /* Custom styles */
 :root {
-    --primary-color: #007bff;
+    --primary-color: #ff7609;
+    --primary-dark: #e56508;
+    --primary-light: #ff9039;
     --secondary-color: #f8f9fa;
     --text-color: #212529;
 }
