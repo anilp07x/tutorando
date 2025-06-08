@@ -197,25 +197,14 @@
     font-weight: 700;
 }
 
-/* Estilo para o dropdown de usuário */
+/* Dropdown styling - sem interferência no comportamento */
 .dropdown-menu {
     padding: 0.4rem 0;
     margin-top: 0.6rem;
     border: none;
     border-radius: 0.4rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    animation: dropdownFadeIn 0.2s ease;
-}
-
-@keyframes dropdownFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    z-index: 1050;
 }
 
 .dropdown-item {
@@ -232,6 +221,8 @@
     width: 1.2rem;
     text-align: center;
 }
+
+
 
 /* Estilo para os badges */
 .badge {

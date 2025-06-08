@@ -90,20 +90,18 @@
             </button>
         </div>
         
-        <!-- Bootstrap Bundle JS (inclui Popper.js) -->
+        <!-- Bootstrap Bundle (inclui Popper.js) -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         
-        <!-- Scripts customizados -->
+        <!-- Custom navbar script -->
+        <script src="/js/navbar.js"></script>
+        
+        <!-- Custom Scripts sem interferência nos dropdowns -->
         <script>
+            // Script para efeito de scroll na navbar
             document.addEventListener('DOMContentLoaded', function() {
-                console.log('Bootstrap carregado:', typeof bootstrap !== 'undefined');
-                
-                // Verificar se os dropdowns estão sendo inicializados corretamente
-                const dropdowns = document.querySelectorAll('[data-bs-toggle="dropdown"]');
-                console.log('Dropdowns encontrados:', dropdowns.length);
-                
-                // Navbar scroll effect
                 const navbar = document.querySelector('.navbar');
+                
                 window.addEventListener('scroll', function() {
                     if (window.scrollY > 30) {
                         navbar.classList.add('scrolled');
@@ -112,8 +110,23 @@
                     }
                 });
                 
-                // Back to top button
+                // Toggle do modo administrador
+                const adminModeToggle = document.getElementById('adminModeToggle');
+                if (adminModeToggle) {
+                    adminModeToggle.addEventListener('click', function() {
+                        this.classList.toggle('on');
+                    });
+                }
+            });
+        </script>
+        
+        <!-- Funcionalidade Voltar ao Topo -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Botão Voltar ao Topo
                 const backToTopBtn = document.getElementById('backToTop');
+                
+                // Mostrar o botão quando rolar para baixo
                 window.addEventListener('scroll', function() {
                     if (window.scrollY > 300) {
                         backToTopBtn.classList.remove('d-none');
@@ -124,6 +137,7 @@
                     }
                 });
                 
+                // Rolar para o topo quando clicar no botão
                 backToTopBtn.addEventListener('click', function() {
                     window.scrollTo({
                         top: 0,
@@ -140,10 +154,22 @@
                 const toggle = document.getElementById('adminModeToggle');
                 if (toggle) {
                     toggle.addEventListener('click', function() {
+                        // Se estiver no modo admin, redireciona para o dashboard normal
                         if (toggle.classList.contains('on')) {
                             window.location.href = '{{ route('dashboard') }}';
-                        } else {
+                        } 
+                        // Se estiver no modo usuário, redireciona para o dashboard admin
+                        else {
                             window.location.href = '{{ route('admin.dashboard') }}';
+                        }
+                        
+                        // Toggle da classe (embora possa não ser visto devido ao redirecionamento)
+                        toggle.classList.toggle('on');
+                        
+                        // Alterna o texto
+                        const statusText = toggle.querySelector('.small');
+                        if (statusText) {
+                            statusText.textContent = toggle.classList.contains('on') ? 'ON' : 'OFF';
                         }
                     });
                 }

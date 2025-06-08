@@ -1,9 +1,12 @@
-// Script para gerenciar a barra de navegação
+// Script minimalista para gerenciar a barra de navegação
+// Sem interferência nos dropdowns do Bootstrap
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Navbar script carregado');
+    console.log('Bootstrap disponível:', typeof bootstrap !== 'undefined');
+    
     const navbar = document.querySelector('.navbar');
-    // A barra de status do admin foi removida
 
-    // Adiciona efeito de scroll à barra de navegação
+    // Efeito de scroll na navbar
     window.addEventListener('scroll', function() {
         if (window.scrollY > 30) {
             navbar.classList.add('scrolled');
@@ -12,32 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Toggle do modo administrador (se existir)
-    const adminModeToggle = document.getElementById('adminModeToggle');
-    if (adminModeToggle) {
-        adminModeToggle.addEventListener('click', function() {
-            this.classList.toggle('on');
-            // Aqui você pode adicionar código para alternar entre os modos
-            // Por exemplo, redirecionar para uma rota específica
+    // Verificar dropdowns após carregamento completo
+    setTimeout(() => {
+        const dropdowns = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+        console.log(`${dropdowns.length} dropdowns encontrados na página`);
+        
+        dropdowns.forEach((dropdown, index) => {
+            console.log(`Dropdown ${index + 1}:`, dropdown);
         });
-    }
-
-    // Adicionar evento de hover aos dropdowns para dispositivos desktop
-    if (window.innerWidth >= 992) {
-        const dropdowns = document.querySelectorAll('.dropdown');
-        dropdowns.forEach(dropdown => {
-            dropdown.addEventListener('mouseenter', function() {
-                const dropdownMenu = this.querySelector('.dropdown-menu');
-                if (dropdownMenu) {
-                    dropdownMenu.classList.add('show');
-                }
-            });
-            dropdown.addEventListener('mouseleave', function() {
-                const dropdownMenu = this.querySelector('.dropdown-menu');
-                if (dropdownMenu) {
-                    dropdownMenu.classList.remove('show');
-                }
-            });
-        });
-    }
+    }, 100);
 });
