@@ -312,8 +312,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Acções Rápidas</h5>
                             <div class="d-grid gap-2 mt-3">
-                                <a href="#" class="btn btn-outline-primary">Novo Projecto</a>
-                                <a href="#" class="btn btn-outline-primary">Encontrar Tutores</a>
+                                <a href="{{ route('projetos.create') }}" class="btn btn-outline-primary">Novo Projecto</a>
+                                <a href="{{ route('tutores.index') }}" class="btn btn-outline-primary">Encontrar Tutores</a>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjetoController;
 use App\Http\Controllers\PublicacaoController;
+use App\Http\Controllers\TutorProfileController;
 use App\Http\Controllers\Admin\InstituicaoController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -108,6 +109,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     // Profile
+    Route::get('/perfil', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -122,6 +124,10 @@ Route::middleware(['auth'])->group(function () {
     // Publications - Only tutors can create and manage publications
     Route::resource('publicacoes', PublicacaoController::class)->middleware('tutor');
     Route::get('/publicacoes-publicas', [PublicacaoController::class, 'all'])->name('publicacoes.all');
+    
+    // Tutor browsing - Available for all authenticated users
+    Route::get('/tutores', [TutorProfileController::class, 'index'])->name('tutores.index');
+    Route::get('/tutores/{tutor}', [TutorProfileController::class, 'show'])->name('tutores.show');
     
     // Admin routes
     Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {

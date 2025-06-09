@@ -12,6 +12,36 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
+     * Display the user's profile (view only).
+     */
+    public function show(Request $request): View
+    {
+        $user = $request->user();
+        
+        // Get user statistics
+        $stats = [];
+        
+        if ($user->role === 'tutor' || $user->role === 'tutorando') {
+            $stats = [
+                'total_projetos' => $user->projetos()->count(),
+                'projetos_aprovados' => $user->projetos()->where('aprovado', true)->count(),
+                'projetos_pendentes' => $user->projetos()->where('aprovado', false)->count(),
+            ];
+            
+            if ($user->role === 'tutor') {
+                $stats['total_publicacoes'] = $user->publicacoes()->count();
+                $stats['publicacoes_aprovadas'] = $user->publicacoes()->where('aprovado', true)->count();
+                $stats['publicacoes_pendentes'] = $user->publicacoes()->where('aprovado', false)->count();
+            }
+        }
+        
+        return view('profile.show', [
+            'user' => $user,
+            'stats' => $stats,
+        ]);
+    }
+
+    /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View

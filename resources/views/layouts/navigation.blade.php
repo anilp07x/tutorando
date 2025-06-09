@@ -78,6 +78,12 @@
                             </a>
                         </li>
                         
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('tutores.*') ? 'active' : '' }}" href="{{ route('tutores.index') }}">
+                                <i class="bi bi-people navbar-icon"></i>Encontrar Tutores
+                            </a>
+                        </li>
+                        
                         @if(auth()->user()->role === 'tutor')
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('publicacoes.*') ? 'active' : '' }}" href="{{ route('publicacoes.index') }}">
@@ -175,8 +181,11 @@
                                 <span class="text-muted small">{{ Auth::user()->email }}</span>
                             </li>
                             <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ route('profile.show') }}">
+                                <i class="bi bi-eye me-2"></i> Ver Perfil
+                            </a></li>
                             <li><a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                <i class="bi bi-person me-2"></i> Meu Perfil
+                                <i class="bi bi-pencil-square me-2"></i> Editar Perfil
                             </a></li>
                             
                             @if(auth()->user()->role === 'admin')

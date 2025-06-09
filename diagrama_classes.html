@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama de Classes - Projeto Tutorando</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .diagram-container {
+            padding: 40px;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            min-width: 1200px;
+            position: relative;
+        }
+
+        .class-box {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .class-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .class-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .class-content {
+            padding: 20px;
+        }
+
+        .attributes {
+            margin-bottom: 20px;
+        }
+
+        .attributes h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        .attributes ul, .methods ul {
+            list-style: none;
+        }
+
+        .attributes li, .methods li {
+            padding: 5px 0;
+            color: #34495e;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            border-left: 3px solid #3498db;
+            padding-left: 10px;
+            margin-bottom: 3px;
+            background: #f8f9fa;
+            border-radius: 3px;
+        }
+
+        .methods h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 5px;
+        }
+
+        .methods li {
+            border-left-color: #e74c3c;
+        }
+
+        /* Posicionamento específico das classes */
+        .user-class {
+            grid-row: 1 / 3;
+            grid-column: 1;
+        }
+
+        .instituicao-class {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .publicacao-class {
+            grid-column: 3;
+            grid-row: 1;
+        }
+
+        .projeto-class {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        .plano-class {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .audit-class {
+            grid-column: 1;
+            grid-row: 3;
+        }
+
+        /* Linhas de relacionamento */
+        .relationship-line {
+            position: absolute;
+            background: #7f8c8d;
+            z-index: 1;
+        }
+
+        .relationship-label {
+            position: absolute;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #2c3e50;
+            border: 1px solid #bdc3c7;
+            z-index: 2;
+            font-weight: bold;
+        }
+
+        .legend {
+            margin-top: 40px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .legend h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 3px;
+            margin-right: 15px;
+            border-radius: 2px;
+        }
+
+        .belongsto { background: #e74c3c; }
+        .hasmany { background: #3498db; }
+        .hasone { background: #2ecc71; }
+
+        @media print {
+            body { 
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .class-box:hover {
+                transform: none;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+        }
+
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .print-button:hover {
+            transform: scale(1.1);
+        }
+
+        @media print {
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Diagrama de Classes</h1>
+            <p>Sistema de Gestão Educacional - Projeto Tutorando</p>
+        </div>
+
+        <div class="diagram-container">
+            <div class="classes-grid">
+                <!-- Classe User -->
+                <div class="class-box user-class">
+                    <div class="class-header">👤 User</div>
+                    <div class="class-content">
+                        <div class="attributes">
+                            <h4>🔹 Atributos</h4>
+                            <ul>
+                                <li>id: int</li>
+                                <li>name: string</li>
+                                <li>email: string</li>
+                                <li>password: string</li>
+                                <li>role: string</li>
+                                <li>curso: string</li>
+                                <li>instituicao_id: int</li>
+                                <li>email_verified_at: datetime</li>
+                                <li>created_at: datetime</li>
+                                <li>updated_at: datetime</li>
+                            </ul>
+                        </div>
+                        <div class="methods">
+                            <h4>🔸 Métodos</h4>
+                            <ul>
+                                <li>instituicao()</li>
+                                <li>projetos()</li>
+                                <li>publicacoes()</li>
+                                <li>plano()</li>
+                                <li>isAdmin()</li>
+                                <li>isTutor()</li>
+                                <li>isTutorando()</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classe Instituicao -->
+                <div class="class-box instituicao-class">
+                    <div class="class-header">🏛️ Instituicao</div>
+                    <div class="class-content">
+                        <div class="attributes">
+                            <h4>🔹 Atributos</h4>
+                            <ul>
+                                <li>id: int</li>
+                                <li>nome: string</li>
+                                <li>tipo: string</li>
+                                <li>localizacao: string</li>
+                                <li>created_at: datetime</li>
+                                <li>updated_at: datetime</li>
+                            </ul>
+                        </div>
+                        <div class="methods">
+                            <h4>🔸 Métodos</h4>
+                            <ul>
+                                <li>users()</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classe Publicacao -->
+                <div class="class-box publicacao-class">
+                    <div class="class-header">📚 Publicacao</div>
+                    <div class="class-content">
+                        <div class="attributes">
+                            <h4>🔹 Atributos</h4>
+                            <ul>
+                                <li>id: int</li>
+                                <li>titulo: string</li>
+                                <li>tipo: string</li>
+                                <li>conteudo_url: string</li>
+                                <li>descricao: text</li>
+                                <li>user_id: int</li>
+                                <li>aprovado: boolean</li>
+                                <li>created_at: datetime</li>
+                                <li>updated_at: datetime</li>
+                            </ul>
+                        </div>
+                        <div class="methods">
+                            <h4>🔸 Métodos</h4>
+                            <ul>
+                                <li>user()</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classe Projeto -->
+                <div class="class-box projeto-class">
+                    <div class="class-header">🚀 Projeto</div>
+                    <div class="class-content">
+                        <div class="attributes">
+                            <h4>🔹 Atributos</h4>
+                            <ul>
+                                <li>id: int</li>
+                                <li>titulo: string</li>
+                                <li>descricao: text</li>
+                                <li>imagens: array</li>
+                                <li>youtube_link: string</li>
+                                <li>arquivo_pdf: string</li>
+                                <li>user_id: int</li>
+                                <li>aprovado: boolean</li>
+                                <li>created_at: datetime</li>
+                                <li>updated_at: datetime</li>
+                            </ul>
+                        </div>
+                        <div class="methods">
+                            <h4>🔸 Métodos</h4>
+                            <ul>
+                                <li>user()</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classe PlanoUser -->
+                <div class="class-box plano-class">
+                    <div class="class-header">💳 PlanoUser</div>
+                    <div class="class-content">
+                        <div class="attributes">
+                            <h4>🔹 Atributos</h4>
+                            <ul>
+                                <li>id: int</li>
+                                <li>user_id: int</li>
+                                <li>tipo_plano: string</li>
+                                <li>valor_pago: decimal</li>
+                                <li>data_expiracao: date</li>
+                                <li>status: string</li>
+                                <li>created_at: datetime</li>
+                                <li>updated_at: datetime</li>
+                            </ul>
+                        </div>
+                        <div class="methods">
+                            <h4>🔸 Métodos</h4>
+                            <ul>
+                                <li>user()</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classe AuditLog -->
+                <div class="class-box audit-class">
+                    <div class="class-header">📋 AuditLog</div>
+                    <div class="class-content">
+                        <div class="attributes">
+                            <h4>🔹 Atributos</h4>
+                            <ul>
+                                <li>id: int</li>
+                                <li>admin_user_id: int</li>
+                                <li>admin_user_name: string</li>
+                                <li>action: string</li>
+                                <li>resource_type: string</li>
+                                <li>resource_id: int</li>
+                                <li>resource_title: string</li>
+                                <li>affected_count: int</li>
+                                <li>metadata: array</li>
+                                <li>ip_address: string</li>
+                                <li>user_agent: string</li>
+                            </ul>
+                        </div>
+                        <div class="methods">
+                            <h4>🔸 Métodos</h4>
+                            <ul>
+                                <li>adminUser()</li>
+                                <li>createLog()</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legend">
+                <h3>🔗 Relacionamentos</h3>
+                <div class="legend-item">
+                    <div class="legend-color belongsto"></div>
+                    <span><strong>belongsTo:</strong> User pertence a uma Instituição (N:1)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color hasmany"></div>
+                    <span><strong>hasMany:</strong> User possui muitas Publicações e Projetos (1:N)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color hasone"></div>
+                    <span><strong>hasOne:</strong> User possui um Plano (1:1)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color hasmany"></div>
+                    <span><strong>hasMany:</strong> Instituição possui muitos Users (1:N)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color hasmany"></div>
+                    <span><strong>hasMany:</strong> User possui muitos AuditLogs (1:N)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="print-button" onclick="window.print()" title="Imprimir ou Salvar como PDF">
+        🖨️ Salvar PDF
+    </button>
+
+    <script>
+        // Adicionar animação de entrada
+        document.addEventListener('DOMContentLoaded', function() {
+            const classBoxes = document.querySelectorAll('.class-box');
+            classBoxes.forEach((box, index) => {
+                box.style.opacity = '0';
+                box.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    box.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    box.style.opacity = '1';
+                    box.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Melhorar a experiência de impressão
+        window.addEventListener('beforeprint', function() {
+            document.body.style.transform = 'scale(0.8)';
+            document.body.style.transformOrigin = 'top left';
+        });
+
+        window.addEventListener('afterprint', function() {
+            document.body.style.transform = 'none';
+        });
+    </script>
+</body>
+</html>
