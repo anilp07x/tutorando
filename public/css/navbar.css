@@ -141,13 +141,13 @@
 
 /* Versão administrador do navbar */
 .navbar-admin-minimal {
-    background: linear-gradient(135deg, #0d6efd 0%, #0855bf 100%) !important;
-    box-shadow: 0 2px 8px rgba(10, 88, 202, 0.12);
-    border-bottom: none;
+    background: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #dee2e6;
 }
 
 .navbar-admin-minimal .nav-link {
-    color: rgba(255, 255, 255, 0.85);
+    color: #495057;
     font-weight: 500;
     padding: 0.45rem 0.9rem;
     margin: 0 0.4rem;
@@ -159,15 +159,15 @@
 }
 
 .navbar-admin-minimal .nav-link:hover {
-    color: white;
-    background-color: rgba(255, 255, 255, 0.12);
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
     transform: translateY(-1px);
 }
 
 .navbar-admin-minimal .nav-link.active {
-    color: white;
+    color: #0d6efd;
     font-weight: 600;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(13, 110, 253, 0.15);
 }
 
 .navbar-admin-minimal .nav-link.active::after {
@@ -178,8 +178,18 @@
     transform: translateX(-50%);
     width: 15px;
     height: 2px;
-    background-color: white;
+    background-color: #0d6efd;
     border-radius: 10px;
+}
+
+/* Navbar brand color for admin */
+.navbar-admin-minimal .navbar-brand {
+    color: #0d6efd !important;
+    font-weight: 700;
+}
+
+.navbar-admin-minimal .navbar-brand:hover {
+    color: #0a58ca !important;
 }
 
 /* Status badge para admin */
@@ -187,7 +197,7 @@
     font-size: 0.62rem;
     padding: 0.12rem 0.4rem;
     border-radius: 50rem;
-    background-color: rgba(255, 255, 255, 0.18);
+    background-color: #0d6efd;
     color: white;
     display: inline-block;
     margin-left: 0.4rem;
@@ -366,10 +376,12 @@ footer.footer {
     }
     
     .navbar-admin-minimal .navbar-collapse {
-        background-color: #0a58ca;
+        background-color: #ffffff;
         padding: 1rem;
         border-radius: 0.5rem;
         margin-top: 0.5rem;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     
     /* Barra de status admin removida */
@@ -441,4 +453,18 @@ footer.footer {
 .navbar-admin-minimal .navbar-avatar .avatar-initial {
     color: white;
     font-size: 0.9rem;
+}
+
+/* Navbar toggler for admin */
+.navbar-admin-minimal .navbar-toggler {
+    border-color: rgba(13, 110, 253, 0.3);
+    padding: 0.25rem 0.5rem;
+}
+
+.navbar-admin-minimal .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.navbar-admin-minimal .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(13, 110, 253, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }

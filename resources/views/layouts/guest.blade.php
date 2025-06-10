@@ -131,8 +131,8 @@
                     <div class="col-md-10 col-lg-8">
                         <div class="auth-card card border-0">
                             <div class="auth-header text-center py-4">
-                                <a href="/" class="text-decoration-none">
-                                    <div class="brand-logo">Tutorando</div>
+                                <a href="/" class="text-decoration-none d-flex align-items-center justify-content-center">
+                                    <img src="{{ asset('img/logo.png') }}" alt="Tutorando" height="40">
                                 </a>
                                 <p class="text-muted mt-2">Plataforma de conexão entre tutores e tutorandos</p>
                             </div>

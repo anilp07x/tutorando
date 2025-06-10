@@ -20,9 +20,31 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::with('instituicao')->latest()->paginate(10);
+        $query = User::with('instituicao');
+
+        // Filtro por busca (nome ou email)
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                  ->orWhere('email', 'LIKE', "%{$search}%");
+            });
+        }
+
+        // Filtro por role
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        }
+
+        // Filtro por instituição
+        if ($request->filled('instituicao_id')) {
+            $query->where('instituicao_id', $request->instituicao_id);
+        }
+
+        $users = $query->latest()->paginate(10);
+        
         return view('admin.users.index', compact('users'));
     }
 

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama de Atividade - Sistema Tutorando</title>    <script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        .diagram-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .mermaid {
+            text-align: center;
+        }
+        .description {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        .legend {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+        }
+        .nav-buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .nav-buttons button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .nav-buttons button:hover {
+            background: #2980b9;
+        }
+        .nav-buttons button.active {
+            background: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Diagrama de Atividade - Sistema Tutorando</h1>
+        
+        <div class="description">
+            <strong>Sistema de Interação entre Tutores e Tutorandos</strong><br>
+            Plataforma acadêmica com três tipos de usuários: Admin, Tutor e Tutorando.
+            Sistema de aprovação de conteúdo e gestão institucional.
+        </div>
+
+        <div class="legend">
+            <strong>📋 Legenda de Cores:</strong><br>
+            🔵 Azul Claro - Início do Sistema | 🔴 Vermelho - Admin | 🟢 Verde - Tutor | 🟠 Laranja - Tutorando<br>
+            ✅ Verde Escuro - Sucesso/Aprovado | ❌ Vermelho Escuro - Erro/Rejeitado
+        </div>
+
+        <div class="nav-buttons">
+            <button onclick="showDiagram('main')" class="active" id="btn-main">Diagrama Principal</button>
+            <button onclick="showDiagram('registro')" id="btn-registro">Processo de Registro</button>
+            <button onclick="showDiagram('aprovacao')" id="btn-aprovacao">Aprovação de Conteúdo</button>
+            <button onclick="showDiagram('projeto')" id="btn-projeto">Criação de Projeto</button>
+            <button onclick="showDiagram('busca')" id="btn-busca">Busca de Tutores</button>
+        </div>
+
+        <!-- Diagrama Principal -->
+        <div id="diagram-main" class="diagram-container">
+            <h2>🏠 Fluxo Principal do Sistema</h2>
+            <div class="mermaid">
+flowchart TB
+    A[Usuário Acessa Sistema] --> B{Usuário Autenticado?}
+    
+    B -->|Não| C[Página Inicial Pública]
+    C --> D[Login/Registro]
+    D --> E{Tipo de Registro}
+    E -->|Tutor| F[Registro como Tutor]
+    E -->|Tutorando| G[Registro como Tutorando]
+    F --> H[Seleciona Instituição]
+    G --> H
+    H --> I[Validação de Dados]
+    I --> J[Conta Criada]
+    J --> K[Dashboard]
+    
+    B -->|Sim| L{Qual o Papel?}
+    
+    L -->|Admin| M[Dashboard Admin]
+    L -->|Tutor| N[Dashboard Tutor]
+    L -->|Tutorando| O[Dashboard Tutorando]
+    
+    %% Fluxo Admin
+    M --> P[Gerenciar Sistema]
+    P --> Q{Ação Admin}
+    Q -->|Instituições| R[CRUD Instituições]
+    Q -->|Usuários| S[Gerenciar Usuários]
+    Q -->|Aprovações| T[Aprovar/Rejeitar Conteúdo]
+    Q -->|Relatórios| U[Visualizar Estatísticas]
+    
+    T --> V{Tipo de Conteúdo}
+    V -->|Projeto| W[Revisar Projeto]
+    V -->|Publicação| X[Revisar Publicação]
+    W --> Y{Decisão}
+    X --> Y
+    Y -->|Aprovar| Z[Conteúdo Aprovado]
+    Y -->|Rejeitar| AA[Conteúdo Rejeitado]
+    Z --> BB[Notificar Usuário]
+    AA --> BB
+    
+    %% Fluxo Tutor
+    N --> CC[Ações do Tutor]
+    CC --> DD{Ação Tutor}
+    DD -->|Criar Projeto| EE[Formulário Projeto]
+    DD -->|Criar Publicação| FF[Formulário Publicação]
+    DD -->|Ver Projetos| GG[Lista Meus Projetos]
+    DD -->|Ver Publicações| HH[Lista Minhas Publicações]
+    DD -->|Perfil| II[Gerenciar Perfil]
+    DD -->|Explorar| JJ[Ver Conteúdo Público]
+    
+    EE --> KK[Preencher Dados do Projeto]
+    KK --> LL[Upload de Arquivos]
+    LL --> MM[Submeter para Aprovação]
+    MM --> NN[Aguardar Aprovação Admin]
+    NN --> OO{Status}
+    OO -->|Aprovado| Z
+    OO -->|Rejeitado| AA
+    
+    FF --> PP[Preencher Dados da Publicação]
+    PP --> QQ[Upload de Arquivos/Links]
+    QQ --> RR[Submeter para Aprovação]
+    RR --> SS[Aguardar Aprovação Admin]
+    SS --> TT{Status}
+    TT -->|Aprovado| Z
+    TT -->|Rejeitado| AA
+    
+    %% Fluxo Tutorando
+    O --> UU[Ações do Tutorando]
+    UU --> VV{Ação Tutorando}
+    VV -->|Criar Projeto| EE
+    VV -->|Procurar Tutores| WW[Lista de Tutores]
+    VV -->|Ver Projetos| XX[Projetos Públicos]
+    VV -->|Ver Publicações| YY[Publicações Públicas]
+    VV -->|Perfil| II
+    
+    WW --> ZZ[Filtrar/Pesquisar Tutores]
+    ZZ --> AAA[Ver Perfil do Tutor]
+    AAA --> BBB[Contatar Tutor]
+    
+    XX --> CCC[Filtrar Projetos]
+    CCC --> DDD[Ver Detalhes do Projeto]
+    
+    YY --> EEE[Filtrar Publicações]
+    EEE --> FFF[Ver Detalhes da Publicação]
+    
+    %% Ações Comuns
+    II --> GGG[Editar Informações Pessoais]
+    GGG --> HHH[Atualizar Dados]
+    HHH --> III[Dados Salvos]
+    
+    JJ --> XXX{Tipo de Conteúdo}
+    XXX -->|Projetos| XX
+    XXX -->|Publicações| YY
+    XXX -->|Tutores| WW
+    
+    %% Fim dos fluxos
+    BB --> JJJ[Retornar ao Dashboard]
+    III --> JJJ
+    BBB --> JJJ
+    DDD --> JJJ
+    FFF --> JJJ
+    
+    style A fill:#e1f5fe
+    style M fill:#ffebee
+    style N fill:#e8f5e8
+    style O fill:#fff3e0
+    style Z fill:#c8e6c9
+    style AA fill:#ffcdd2
+            </div>
+        </div>
+
+        <!-- Diagrama de Registro -->
+        <div id="diagram-registro" class="diagram-container" style="display:none;">
+            <h2>📝 Processo de Registro de Usuário</h2>
+            <div class="mermaid">
+flowchart TB
+    A[Usuário Acessa Registro] --> B[Seleciona Tipo de Conta]
+    B --> C{Tutor ou Tutorando?}
+    
+    C -->|Tutor| D[Formulário Registro Tutor]
+    C -->|Tutorando| E[Formulário Registro Tutorando]
+    
+    D --> F[Preencher Dados Pessoais]
+    E --> F
+    F --> G[Selecionar Instituição]
+    G --> H[Definir Curso/Área]
+    H --> I[Upload Documento Opcional]
+    I --> J[Submeter Formulário]
+    
+    J --> K[Validação de Dados]
+    K --> L{Dados Válidos?}
+    L -->|Não| M[Mostrar Erros]
+    M --> F
+    L -->|Sim| N[Criar Conta]
+    N --> O[Enviar Email de Verificação]
+    O --> P[Login Automático]
+    P --> Q[Redirecionar para Dashboard]
+    
+    style N fill:#c8e6c9
+    style M fill:#ffcdd2
+            </div>
+        </div>
+
+        <!-- Diagrama de Aprovação -->
+        <div id="diagram-aprovacao" class="diagram-container" style="display:none;">
+            <h2>✅ Processo de Aprovação de Conteúdo (Admin)</h2>
+            <div class="mermaid">
+flowchart TB
+    A[Admin Acessa Painel] --> B{Tipo de Conteúdo}
+    B -->|Projetos| C[Lista Projetos Pendentes]
+    B -->|Publicações| D[Lista Publicações Pendentes]
+    
+    C --> E[Selecionar Projeto]
+    D --> F[Selecionar Publicação]
+    
+    E --> G[Visualizar Detalhes do Projeto]
+    F --> H[Visualizar Detalhes da Publicação]
+    
+    G --> I[Revisar Conteúdo]
+    H --> I
+    I --> J[Verificar Qualidade]
+    J --> K[Verificar Adequação]
+    K --> L{Decisão de Aprovação}
+    
+    L -->|Aprovar| M[Clicar em Aprovar]
+    L -->|Rejeitar| N[Clicar em Rejeitar]
+    L -->|Solicitar Alterações| O[Adicionar Comentários]
+    
+    M --> P[Confirmar Aprovação]
+    N --> Q[Confirmar Rejeição]
+    O --> R[Enviar de Volta para Autor]
+    
+    P --> S[Conteúdo Torna-se Público]
+    Q --> T[Conteúdo Permanece Privado]
+    R --> U[Autor Recebe Notificação]
+    
+    S --> V[Notificar Autor - Aprovado]
+    T --> W[Notificar Autor - Rejeitado]
+    U --> X[Aguardar Reenvio]
+    
+    style S fill:#c8e6c9
+    style T fill:#ffcdd2
+    style U fill:#fff3e0
+            </div>
+        </div>
+
+        <!-- Diagrama de Criação de Projeto -->
+        <div id="diagram-projeto" class="diagram-container" style="display:none;">
+            <h2>📁 Criação de Projeto (Tutor/Tutorando)</h2>
+            <div class="mermaid">
+flowchart TB
+    A[Usuário Quer Criar Projeto] --> B[Acessar Formulário de Projeto]
+    B --> C[Preencher Título]
+    C --> D[Preencher Descrição]
+    D --> E[Definir Categoria/Tags]
+    E --> F{Tem Arquivos?}
+    
+    F -->|Sim| G[Upload de Arquivos]
+    F -->|Não| H[Preencher Links Externos]
+    G --> H
+    
+    H --> I{Tem Vídeo YouTube?}
+    I -->|Sim| J[Adicionar Link do YouTube]
+    I -->|Não| K[Revisar Informações]
+    J --> K
+    
+    K --> L[Submeter Projeto]
+    L --> M[Validação de Dados]
+    M --> N{Dados Válidos?}
+    
+    N -->|Não| O[Mostrar Erros]
+    O --> C
+    N -->|Sim| P[Salvar Projeto]
+    P --> Q[Status: Pendente Aprovação]
+    Q --> R[Notificar Admin]
+    R --> S[Aguardar Aprovação]
+    
+    S --> T{Resultado da Aprovação}
+    T -->|Aprovado| U[Projeto Publicado]
+    T -->|Rejeitado| V[Projeto Rejeitado]
+    T -->|Alterações Solicitadas| W[Editar e Reenviar]
+    
+    style U fill:#c8e6c9
+    style V fill:#ffcdd2
+    style W fill:#fff3e0
+            </div>
+        </div>
+
+        <!-- Diagrama de Busca de Tutores -->
+        <div id="diagram-busca" class="diagram-container" style="display:none;">
+            <h2>🔍 Busca e Contato com Tutores</h2>
+            <div class="mermaid">
+flowchart TB
+    A[Tutorando Busca Tutores] --> B[Acessar Lista de Tutores]
+    B --> C[Aplicar Filtros]
+    C --> D{Tem Filtros?}
+    
+    D -->|Sim| E[Filtrar por Curso]
+    D -->|Não| F[Ver Todos os Tutores]
+    E --> G[Filtrar por Área]
+    G --> H[Pesquisar por Nome]
+    H --> F
+    
+    F --> I[Visualizar Lista de Tutores]
+    I --> J[Selecionar Tutor de Interesse]
+    J --> K[Ver Perfil Completo]
+    K --> L[Ver Projetos do Tutor]
+    L --> M[Ver Publicações do Tutor]
+    M --> N[Ver Informações de Contato]
+    
+    N --> O{Decidir Contato}
+    O -->|Sim| P[Copiar Informações de Contato]
+    O -->|Não| Q[Voltar à Lista]
+    O -->|Ver Outro| R[Voltar ao Perfil]
+    
+    P --> S[Contatar Externamente]
+    Q --> I
+    R --> K
+    
+    style P fill:#c8e6c9
+            </div>
+        </div>
+
+        <div class="description">
+            <strong>💡 Funcionalidades Principais:</strong><br>
+            • <strong>Sistema de Papéis:</strong> Admin, Tutor, Tutorando com permissões específicas<br>
+            • <strong>Aprovação de Conteúdo:</strong> Projetos e publicações passam por moderação<br>
+            • <strong>Gestão Institucional:</strong> Todos os usuários vinculados a instituições<br>
+            • <strong>Descoberta de Tutores:</strong> Sistema de busca e filtros avançados<br>
+            • <strong>Upload de Arquivos:</strong> Suporte a imagens, PDFs e vídeos do YouTube
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        function showDiagram(diagramType) {
+            // Esconder todos os diagramas
+            const diagrams = ['main', 'registro', 'aprovacao', 'projeto', 'busca'];
+            diagrams.forEach(type => {
+                document.getElementById('diagram-' + type).style.display = 'none';
+                document.getElementById('btn-' + type).classList.remove('active');
+            });
+
+            // Mostrar o diagrama selecionado
+            document.getElementById('diagram-' + diagramType).style.display = 'block';
+            document.getElementById('btn-' + diagramType).classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Título</th>
@@ -50,7 +50,7 @@
                                                             @if($publicacao->tipo == 'livro')
                                                                 <i class="bi bi-book text-primary fs-4"></i>
                                                             @elseif($publicacao->tipo == 'artigo')
-                                                                <i class="bi bi-file-text text-info fs-4"></i>
+                                                                <i class="bi bi-file-text text-primary fs-4"></i>
                                                             @elseif($publicacao->tipo == 'vídeo')
                                                                 <i class="bi bi-camera-video text-danger fs-4"></i>
                                                             @elseif($publicacao->tipo == 'curso')
@@ -66,15 +66,15 @@
                                                 <td>{{ $publicacao->created_at->format('d/m/Y') }}</td>
                                                 <td>
                                                     <span class="badge bg-{{ $publicacao->aprovado ? 'success' : 'warning' }}">
-                                                        {{ $publicacao->aprovado ? __('Approved') : __('Pending') }}
+                                                        {{ $publicacao->aprovado ? 'Aprovado' : 'Pendente' }}
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="{{ route('publicacoes.show', $publicacao) }}" class="btn btn-sm btn-info">
+                                                        <a href="{{ route('publicacoes.show', $publicacao) }}" class="btn btn-sm btn-primary">
                                                             <i class="bi bi-eye"></i>
                                                         </a>
-                                                        <a href="{{ route('publicacoes.edit', $publicacao) }}" class="btn btn-sm btn-primary">
+                                                        <a href="{{ route('publicacoes.edit', $publicacao) }}" class="btn btn-sm btn-outline-primary">
                                                             <i class="bi bi-pencil"></i>
                                                         </a>
                                                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $publicacao->id }}">

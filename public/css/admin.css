@@ -1,25 +1,28 @@
 /* Transições entre modo admin e usuário */
 .navbar-admin {
-    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    background: #ffffff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    border-bottom: 1px solid #dee2e6;
 }
 
 /* Toggle entre modo admin e usuário */
 .toggle-admin-mode {
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(13, 110, 253, 0.1);
     border-radius: 20px;
     padding: 0.3rem 0.8rem;
     font-size: 0.8rem;
-    color: #fff;
+    color: #0d6efd;
     display: flex;
     align-items: center;
     transition: all 0.2s ease;
+    border: 1px solid rgba(13, 110, 253, 0.2);
 }
 
 .toggle-admin-mode:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(13, 110, 253, 0.2);
+    color: #0a58ca;
 }
 
 .toggle-admin-mode .toggle-icon {
@@ -49,20 +52,20 @@
 
 /* Admin Navbar styles */
 .navbar-admin .nav-link {
-    color: rgba(255, 255, 255, 0.85);
+    color: #495057;
     padding-left: 1rem;
     padding-right: 1rem;
     transition: all 0.2s ease;
 }
 
 .navbar-admin .nav-link:hover {
-    color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.1);
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
 }
 
 .navbar-admin .nav-link.active {
-    color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.2);
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
     font-weight: 500;
 }
 
@@ -73,6 +76,7 @@
 .navbar-admin .navbar-brand {
     font-weight: 700;
     letter-spacing: -0.5px;
+    color: #0d6efd;
 }
 
 /* Status bar admin removida */
@@ -84,11 +88,12 @@
 /* Responsive styles for admin navbar */
 @media (max-width: 991.98px) {
     .navbar-admin .navbar-collapse {
-        background-color: #0a58ca;
+        background-color: #ffffff;
         padding: 1rem;
         border-radius: 0.5rem;
         margin-top: 0.5rem;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 1px solid #dee2e6;
     }
     
     /* Status bar admin removida */
@@ -97,14 +102,15 @@
         padding: 0.5rem 1rem;
         border-radius: 0.25rem;
         margin-bottom: 0.25rem;
+        color: #495057;
     }
     
     .navbar-admin .navbar-toggler {
-        border-color: rgba(255, 255, 255, 0.5);
+        border-color: rgba(13, 110, 253, 0.5);
     }
     
     .navbar-admin .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(13, 110, 253, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
 }
 
@@ -433,4 +439,98 @@
 @keyframes spin {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Admin dropdown fixes - ensure visibility */
+body.admin-theme .dropdown-menu,
+.navbar-admin-minimal .dropdown-menu {
+    z-index: 9999 !important;
+    position: absolute !important;
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 0.375rem !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    min-width: 10rem !important;
+    margin: 0 !important;
+    padding: 0.5rem 0 !important;
+}
+
+body.admin-theme .dropdown-menu.show,
+.navbar-admin-minimal .dropdown-menu.show {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+body.admin-theme .dropdown-item,
+.navbar-admin-minimal .dropdown-item,
+.navbar-admin-minimal .dropdown-menu .dropdown-item {
+    color: #212529 !important;
+    padding: 0.375rem 1rem !important;
+    background-color: transparent !important;
+    text-decoration: none !important;
+    display: block !important;
+    width: 100% !important;
+    clear: both !important;
+    white-space: nowrap !important;
+}
+
+body.admin-theme .dropdown-item:hover,
+body.admin-theme .dropdown-item:focus,
+.navbar-admin-minimal .dropdown-item:hover,
+.navbar-admin-minimal .dropdown-item:focus {
+    background-color: rgba(13, 110, 253, 0.1) !important;
+    color: #0d6efd !important;
+}
+
+/* Override any text-white inheritance in admin dropdowns */
+.navbar-admin-minimal .dropdown-menu .dropdown-item.text-white,
+.navbar-admin-minimal .dropdown-item.text-white {
+    color: #212529 !important;
+}
+
+.navbar-admin-minimal .dropdown-menu .dropdown-item.text-white:hover,
+.navbar-admin-minimal .dropdown-item.text-white:hover {
+    color: #0d6efd !important;
+}
+
+/* Fix for navbar positioning */
+.navbar-admin-minimal {
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+.navbar-admin-minimal .nav-item.dropdown {
+    position: relative !important;
+}
+
+/* Ensure container doesn't clip admin dropdowns */
+body.admin-theme .container,
+body.admin-theme .container-fluid,
+.navbar-admin-minimal .container,
+.navbar-admin-minimal .container-fluid {
+    overflow: visible !important;
+}
+
+body.admin-theme .navbar,
+.navbar-admin-minimal {
+    overflow: visible !important;
+    position: relative !important;
+}
+
+/* Fix for any potential Bootstrap conflicts */
+.navbar-admin-minimal .navbar-nav {
+    overflow: visible !important;
+}
+
+.navbar-admin-minimal .nav-item {
+    overflow: visible !important;
+    position: relative !important;
+}
+
+/* Force visibility of dropdown menu */
+.navbar-admin-minimal .dropdown-menu {
+    visibility: visible !important;
+    transform: none !important;
+    will-change: auto !important;
 }

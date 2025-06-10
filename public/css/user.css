@@ -1,0 +1,922 @@
+/* User dashboard theme with orange primary color */
+:root {
+    --primary-color: #ff7906;
+    --primary-dark: #e56905;
+    --primary-light: #ff8b2a;
+    --primary-rgba: rgba(255, 121, 6, 0.1);
+    --primary-rgba-light: rgba(255, 121, 6, 0.05);
+}
+
+/* Override Bootstrap primary colors */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.border-primary {
+    border-color: var(--primary-color) !important;
+}
+
+/* Header styling */
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+/* Navigation active states */
+.nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Card hover effects - REMOVED */
+
+/* Badge colors */
+.badge.bg-primary {
+    background: var(--primary-color) !important;
+}
+
+/* Alert primary */
+.alert-primary {
+    background-color: var(--primary-rgba-light);
+    border-color: var(--primary-color);
+    color: var(--primary-dark);
+}
+
+/* Progress bars */
+.progress-bar {
+    background-color: var(--primary-color);
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+/* Form controls focus */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(255, 121, 6, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(255, 121, 6, 0.25);
+}
+
+/* Dropdown menu */
+.dropdown-item:hover {
+    background-color: var(--primary-rgba-light);
+    color: var(--primary-color);
+}
+
+/* Tab navigation */
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* Pagination */
+.page-link {
+    color: var(--primary-color);
+}
+
+.page-link:hover {
+    color: var(--primary-dark);
+    background-color: var(--primary-rgba-light);
+    border-color: var(--primary-color);
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Stats cards */
+.stats-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Icon colors */
+.text-primary i {
+    color: var(--primary-color) !important;
+}
+
+/* Custom animations */
+@keyframes pulse-orange {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 121, 6, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 121, 6, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 121, 6, 0);
+    }
+}
+
+.pulse-orange {
+    animation: pulse-orange 2s infinite;
+}
+
+/* Special styling for admin badge */
+.admin-badge {
+    background-color: #dc3545;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Specific styling for tutor and tutorando dashboard panels */
+.dashboard-panel {
+    border: 1px solid #e9ecef;
+}
+
+.dashboard-panel .card-title {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.dashboard-panel .display-6 {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+/* Stats cards for dashboard */
+.stats-card-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.stats-card-primary .card-title {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.stats-card-primary .display-4,
+.stats-card-primary .display-6 {
+    color: white;
+}
+
+/* Featured tutors section */
+.featured-tutor-card {
+    border: 1px solid #e9ecef;
+}
+
+.featured-tutor-card .card-title {
+    color: var(--primary-color);
+}
+
+/* Quick actions styling */
+.quick-actions .btn-outline-primary {
+    border-width: 2px;
+    font-weight: 500;
+}
+
+/* Table hover effects - REMOVED */
+
+/* Header gradient styling */
+.card-header.bg-gradient-primary {
+    background-color: var(--primary-color) !important;
+    border-bottom: none;
+}
+
+/* Status badges with primary color theme */
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+}
+
+.badge.bg-success {
+    background-color: #198754 !important;
+}
+
+/* Action buttons in tables */
+.btn-group .btn-sm {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.btn-info {
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+}
+
+.btn-info:hover {
+    background-color: #0aa2c0;
+    border-color: #0aa2c0;
+}
+
+/* Tutor cards styling */
+.tutor-card {
+    border: 1px solid #e9ecef;
+}
+
+.tutor-card .card-title {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.tutor-card .text-primary {
+    color: var(--primary-color) !important;
+}
+
+.tutor-card .text-success {
+    color: #198754 !important;
+}
+
+.tutor-card .card-footer {
+    background-color: var(--primary-rgba-light) !important;
+}
+
+/* Profile page styling */
+.profile-stats {
+    background: linear-gradient(135deg, var(--primary-rgba-light) 0%, transparent 100%);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.profile-stats .stat-item {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.profile-stats .stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.profile-stats .stat-label {
+    font-size: 0.875rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Bio section styling */
+.bio-section {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Tab styling */
+.nav-tabs {
+    border-bottom: 2px solid #e9ecef;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #6c757d;
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom-color: var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+/* Search form styling */
+.search-form {
+    background-color: var(--primary-rgba-light);
+    border-radius: 0.5rem;
+}
+
+.search-form .form-control:focus,
+.search-form .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(255, 121, 6, 0.25);
+}
+
+/* Profile page specific styles */
+.bg-primary-soft {
+    background-color: rgba(255, 121, 6, 0.1) !important;
+}
+
+.bg-success-soft {
+    background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+.bg-info-soft {
+    background-color: rgba(255, 121, 6, 0.1) !important;
+}
+
+.bg-warning-soft {
+    background-color: rgba(255, 193, 7, 0.1) !important;
+}
+
+.stat-card {
+    border-radius: 15px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+}
+
+.info-item {
+    border-bottom: 1px solid #f1f3f4;
+    padding-bottom: 0.75rem;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.stat-icon {
+    opacity: 0.7;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.btn {
+    border-radius: 8px;
+}
+
+.badge {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+/* Override all info color variants to use primary color */
+.btn-info,
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-info {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-info:hover,
+.btn-outline-info:focus,
+.btn-outline-info:active {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.text-info {
+    color: var(--primary-color) !important;
+}
+
+.bg-info {
+    background-color: var(--primary-color) !important;
+}
+
+.border-info {
+    border-color: var(--primary-color) !important;
+}
+
+/* Garantir que todas as variantes de cores azuis sejam substituídas pela cor primária */
+.bg-info.bg-opacity-10 {
+    background-color: rgba(255, 121, 6, 0.1) !important;
+}
+
+.bg-info.bg-opacity-25 {
+    background-color: rgba(255, 121, 6, 0.25) !important;
+}
+
+.bg-info.bg-opacity-50 {
+    background-color: rgba(255, 121, 6, 0.5) !important;
+}
+
+.bg-info.bg-opacity-75 {
+    background-color: rgba(255, 121, 6, 0.75) !important;
+}
+
+.progress-bar.bg-info {
+    background-color: var(--primary-color) !important;
+}
+
+/* Cores específicas para admin dashboard */
+.card-header.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.badge.bg-info {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+/* Sobrescrever cores específicas do dashboard */
+.progress-bar.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+/* Garantir consistência nos botões outline */
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled).active {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.btn-outline-info:not(:disabled):not(.disabled):active,
+.btn-outline-info:not(:disabled):not(.disabled).active {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+/* Sobrescrever cores do gráfico e estatísticas */
+.system-info-bar {
+    border-left-color: var(--primary-color) !important;
+}
+
+/* Garantir que todas as cores primárias do Bootstrap sejam consistentes */
+.btn-primary.disabled,
+.btn-primary:disabled {
+    background-color: rgba(255, 121, 6, 0.5) !important;
+    border-color: rgba(255, 121, 6, 0.5) !important;
+}
+
+/* Remove all Bootstrap hover effects and transitions for tutor/tutorando interfaces */
+body.user-theme * {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+/* Specifically disable Bootstrap card animations */
+body.user-theme .card,
+body.user-theme .card:hover,
+body.user-theme .dashboard-panel,
+body.user-theme .dashboard-panel:hover,
+body.user-theme .tutor-card,
+body.user-theme .tutor-card:hover,
+body.user-theme .featured-tutor-card,
+body.user-theme .featured-tutor-card:hover,
+body.user-theme .stat-card,
+body.user-theme .stat-card:hover {
+    transition: none !important;
+    transform: none !important;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    animation: none !important;
+}
+
+/* Disable table hover effects */
+body.user-theme .table tbody tr,
+body.user-theme .table tbody tr:hover,
+body.user-theme .table-hover tbody tr:hover {
+    background-color: transparent !important;
+    transition: none !important;
+}
+
+/* Disable button animations but keep color changes */
+body.user-theme .btn,
+body.user-theme .btn:hover,
+body.user-theme .btn:focus,
+body.user-theme .btn:active {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+/* Disable link animations */
+body.user-theme a,
+body.user-theme a:hover {
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Disable Bootstrap modal animations */
+body.user-theme .modal,
+body.user-theme .modal-dialog {
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Disable dropdown animations */
+body.user-theme .dropdown-menu {
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Override any Bootstrap utilities */
+body.user-theme .shadow,
+body.user-theme .shadow-sm,
+body.user-theme .shadow-lg {
+    transition: none !important;
+}
+
+/* Force override all Bootstrap CDN transitions for user theme */
+body.user-theme *,
+body.user-theme *:before,
+body.user-theme *:after {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+    
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -o-transform: none !important;
+    transform: none !important;
+    
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -ms-animation: none !important;
+    -o-animation: none !important;
+    animation: none !important;
+}
+
+/* Specifically target Bootstrap classes that commonly have transitions */
+body.user-theme .btn,
+body.user-theme .card,
+body.user-theme .nav-link,
+body.user-theme .dropdown-item,
+body.user-theme .alert,
+body.user-theme .badge,
+body.user-theme .list-group-item {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+/* Force override all blue colors with orange */
+body.user-theme .btn-primary,
+body.user-theme .bg-primary,
+body.user-theme .text-primary,
+body.user-theme .border-primary {
+    background-color: #ff7906 !important;
+    border-color: #ff7906 !important;
+    color: #ff7906 !important;
+}
+
+body.user-theme .btn-primary {
+    color: white !important;
+}
+
+body.user-theme .btn-primary:hover,
+body.user-theme .btn-primary:focus,
+body.user-theme .btn-primary:active {
+    background-color: #e56905 !important;
+    border-color: #e56905 !important;
+    color: white !important;
+}
+
+body.user-theme .btn-outline-primary {
+    color: #ff7906 !important;
+    border-color: #ff7906 !important;
+    background-color: transparent !important;
+}
+
+body.user-theme .btn-outline-primary:hover,
+body.user-theme .btn-outline-primary:focus,
+body.user-theme .btn-outline-primary:active {
+    background-color: #ff7906 !important;
+    border-color: #ff7906 !important;
+    color: white !important;
+}
+
+/* Override all Bootstrap blue variants */
+body.user-theme .text-info,
+body.user-theme .bg-info,
+body.user-theme .border-info,
+body.user-theme .btn-info {
+    color: #ff7906 !important;
+    background-color: #ff7906 !important;
+    border-color: #ff7906 !important;
+}
+
+body.user-theme .btn-info {
+    color: white !important;
+}
+
+body.user-theme .btn-outline-info {
+    color: #ff7906 !important;
+    border-color: #ff7906 !important;
+    background-color: transparent !important;
+}
+
+body.user-theme .btn-outline-info:hover {
+    background-color: #ff7906 !important;
+    color: white !important;
+}
+
+/* Badge colors */
+body.user-theme .badge.bg-primary,
+body.user-theme .badge.bg-info {
+    background-color: #ff7906 !important;
+    color: white !important;
+}
+
+/* Link colors */
+body.user-theme a {
+    color: #ff7906 !important;
+}
+
+body.user-theme a:hover {
+    color: #e56905 !important;
+}
+
+/* Progress bars */
+body.user-theme .progress-bar,
+body.user-theme .progress-bar.bg-primary {
+    background-color: #ff7906 !important;
+}
+
+/* Form focus states */
+body.user-theme .form-control:focus,
+body.user-theme .form-select:focus {
+    border-color: #ff7906 !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 121, 6, 0.25) !important;
+}
+
+/* Nav tabs */
+body.user-theme .nav-tabs .nav-link.active,
+body.user-theme .nav-tabs .nav-link:hover {
+    color: #ff7906 !important;
+    border-bottom-color: #ff7906 !important;
+}
+
+/* Pagination */
+body.user-theme .page-link {
+    color: #ff7906 !important;
+}
+
+body.user-theme .page-link:hover {
+    color: #e56905 !important;
+    background-color: rgba(255, 121, 6, 0.1) !important;
+    border-color: #ff7906 !important;
+}
+
+body.user-theme .page-item.active .page-link {
+    background-color: #ff7906 !important;
+    border-color: #ff7906 !important;
+    color: white !important;
+}
+
+/* Icons */
+body.user-theme .text-primary i,
+body.user-theme .text-info i {
+    color: #ff7906 !important;
+}
+
+/* Card headers with primary background */
+body.user-theme .card-header.bg-primary {
+    background-color: #ff7906 !important;
+    color: white !important;
+}
+
+/* Dropdown items */
+body.user-theme .dropdown-item:hover {
+    background-color: rgba(255, 121, 6, 0.1) !important;
+    color: #ff7906 !important;
+}
+
+/* Alert primary */
+body.user-theme .alert-primary {
+    background-color: rgba(255, 121, 6, 0.1) !important;
+    border-color: #ff7906 !important;
+    color: #e56905 !important;
+}
+
+/* Override any remaining Bootstrap blue colors */
+body.user-theme [class*="bg-primary"],
+body.user-theme [class*="text-primary"],
+body.user-theme [class*="border-primary"],
+body.user-theme [class*="bg-info"],
+body.user-theme [class*="text-info"],
+body.user-theme [class*="border-info"] {
+    background-color: #ff7906 !important;
+    color: #ff7906 !important;
+    border-color: #ff7906 !important;
+}
+
+/* Ensure buttons with primary/info classes have white text */
+body.user-theme .btn[class*="bg-primary"],
+body.user-theme .btn[class*="bg-info"],
+body.user-theme .btn.btn-primary,
+body.user-theme .btn.btn-info {
+    color: white !important;
+}
+
+/* Page headers and titles styling - HIGH SPECIFICITY */
+body.user-theme header,
+body.user-theme header.py-3,
+body.user-theme header.border-bottom {
+    background-color: transparent !important;
+    background: transparent !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+body.user-theme header h1,
+body.user-theme header h2,
+body.user-theme header h3,
+body.user-theme header h4,
+body.user-theme header h5,
+body.user-theme header h6,
+body.user-theme header .text-primary,
+body.user-theme .card-header h5.text-primary,
+body.user-theme .card-header .text-primary {
+    color: #ff7906 !important;
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* Card headers with proper text styling - HIGH SPECIFICITY */
+body.user-theme .card-header,
+body.user-theme .card-header.bg-white,
+body.user-theme .card-header.border-bottom {
+    background-color: #fff !important;
+    background: #fff !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+body.user-theme .card-header.bg-white .text-primary,
+body.user-theme .card-header .text-primary h5,
+body.user-theme .card-header h5.text-primary {
+    color: #ff7906 !important;
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* FORÇA BRUTA - Sobrescrita de todos os headers e títulos */
+body.user-theme header h1,
+body.user-theme header h2, 
+body.user-theme header h3,
+body.user-theme header h4,
+body.user-theme header h5,
+body.user-theme header h6,
+body.user-theme h1.text-primary,
+body.user-theme h2.text-primary,
+body.user-theme h3.text-primary,
+body.user-theme h4.text-primary,
+body.user-theme h5.text-primary,
+body.user-theme h6.text-primary,
+body.user-theme .text-primary {
+    color: #ff7906 !important;
+    background-color: transparent !important;
+    background: none !important;
+}
+
+/* Força bruta para headers */
+body.user-theme header {
+    background: #fff !important;
+    background-color: #fff !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/* Força bruta para card headers */
+body.user-theme .card-header {
+    background: #fff !important;
+    background-color: #fff !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/* Remover qualquer fundo azul ou laranja desnecessário */
+body.user-theme .bg-primary:not(.admin-keep):not(.badge):not(.btn):not(.stat-card) {
+    background: #fff !important;
+    background-color: #fff !important;
+    color: #ff7906 !important;
+}
+
+/* Fix dropdown positioning issues in dashboard */
+.navbar .dropdown-menu {
+    position: absolute !important;
+    z-index: 1055 !important;
+    top: 100% !important;
+    left: auto !important;
+    right: 0 !important;
+    margin-top: 0.125rem !important;
+}
+
+.navbar .dropdown {
+    position: relative !important;
+}
+
+.navbar-nav .nav-item.dropdown {
+    position: static !important;
+}
+
+.navbar-nav .dropdown-menu {
+    position: absolute !important;
+    z-index: 1055 !important;
+    margin-top: 0.5rem !important;
+    min-width: 200px !important;
+}
+
+/* Ensure no overflow hidden on navbar */
+.navbar,
+.navbar-collapse,
+.navbar-nav {
+    overflow: visible !important;
+}
+
+/* Fix for dashboard container not interfering with dropdown */
+body.user-theme .container,
+body.user-theme .container-fluid {
+    overflow: visible !important;
+}
+
+/* Card containers should not clip dropdown */
+body.user-theme .card,
+body.user-theme .card-body {
+    overflow: visible !important;
+}
+
+/* Quick actions container should not interfere */
+body.user-theme .quick-actions {
+    overflow: visible !important;
+    position: relative !important;
+}
+
+/* Additional dropdown fixes for Bootstrap conflicts */
+.navbar-nav .dropdown-menu {
+    transform: none !important;
+    will-change: auto !important;
+}
+
+.dropdown-menu.show {
+    display: block !important;
+    position: absolute !important;
+    inset: auto 0px auto auto !important;
+    margin: 0px !important;
+    transform: none !important;
+}
+
+/* Force correct positioning for user dropdown */
+#userDropdown + .dropdown-menu {
+    position: absolute !important;
+    top: calc(100% + 0.5rem) !important;
+    right: 0 !important;
+    left: auto !important;
+    z-index: 1060 !important;
+    margin-top: 0 !important;
+}
+
+/* Ensure navbar positioning doesn't interfere */
+.navbar {
+    position: relative !important;
+    z-index: 1030 !important;
+}
+
+.navbar-nav {
+    position: static !important;
+}
+
+.navbar-nav .nav-item {
+    position: relative !important;
+}

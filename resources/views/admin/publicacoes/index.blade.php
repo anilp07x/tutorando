@@ -163,7 +163,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="{{ route('admin.publicacoes.show', $publicacao) }}" class="btn btn-sm btn-info" title="{{ __('View Details') }}">
+                                                        <a href="{{ route('admin.publicacoes.show', $publicacao) }}" class="btn btn-sm btn-primary" title="{{ __('View Details') }}">
                                                             <i class="bi bi-eye"></i>
                                                         </a>
                                                         

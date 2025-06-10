@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="fw-bold text-primary">{{ __('My Projects') }}</h1>
+                    <h1 class="fw-bold text-primary">Meus Projetos</h1>
                     <a href="{{ route('projetos.create') }}" class="btn btn-primary">
-                        <i class="bi bi-plus-circle me-1"></i> {{ __('New Project') }}
+                        <i class="bi bi-plus-circle me-1"></i> Novo Projeto
                     </a>
                 </div>
 
@@ -20,10 +20,10 @@
                     <div class="card">
                         <div class="card-body text-center py-5">
                             <i class="bi bi-folder-x display-1 text-muted"></i>
-                            <h3 class="mt-3">{{ __('No projects yet') }}</h3>
-                            <p class="text-muted">{{ __('Start by creating your first project') }}</p>
+                            <h3 class="mt-3">Nenhum projeto ainda</h3>
+                            <p class="text-muted">Comece criando seu primeiro projeto</p>
                             <a href="{{ route('projetos.create') }}" class="btn btn-primary mt-3">
-                                <i class="bi bi-plus-circle me-1"></i> {{ __('Create Project') }}
+                                <i class="bi bi-plus-circle me-1"></i> Criar Projeto
                             </a>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                                     <div class="card-header bg-light d-flex justify-content-between align-items-center">
                                         <h5 class="card-title mb-0">{{ $projeto->titulo }}</h5>
                                         <span class="badge bg-{{ $projeto->aprovado ? 'success' : 'warning' }}">
-                                            {{ $projeto->aprovado ? __('Approved') : __('Pending') }}
+                                            {{ $projeto->aprovado ? 'Aprovado' : 'Pendente' }}
                                         </span>
                                     </div>
                                     
@@ -53,11 +53,11 @@
                                             @if(count($projeto->imagens) > 1)
                                                 <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ $projeto->id }}" data-bs-slide="prev">
                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Previous</span>
+                                                    <span class="visually-hidden">Anterior</span>
                                                 </button>
                                                 <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ $projeto->id }}" data-bs-slide="next">
                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Next</span>
+                                                    <span class="visually-hidden">Próximo</span>
                                                 </button>
                                             @endif
                                         </div>
@@ -88,10 +88,10 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <small class="text-muted">{{ $projeto->created_at->format('d/m/Y') }}</small>
                                             <div class="btn-group">
-                                                <a href="{{ route('projetos.show', $projeto) }}" class="btn btn-sm btn-info">
-                                                    <i class="bi bi-eye"></i>
+                                                <a href="{{ route('projetos.show', $projeto) }}" class="btn btn-sm btn-primary">
+                                                    <i class="bi bi-eye me-1"></i> Ver
                                                 </a>
-                                                <a href="{{ route('projetos.edit', $projeto) }}" class="btn btn-sm btn-primary">
+                                                <a href="{{ route('projetos.edit', $projeto) }}" class="btn btn-sm btn-outline-primary">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $projeto->id }}">
@@ -107,18 +107,18 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteModalLabel-{{ $projeto->id }}">{{ __('Confirm Deletion') }}</h5>
+                                                <h5 class="modal-title" id="deleteModalLabel-{{ $projeto->id }}">Confirmar Exclusão</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                {{ __('Are you sure you want to delete this project?') }} <strong>{{ $projeto->titulo }}</strong>?
+                                                Tem certeza de que deseja excluir este projeto? <strong>{{ $projeto->titulo }}</strong>?
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                 <form action="{{ route('projetos.destroy', $projeto) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger">Excluir</button>
                                                 </form>
                                             </div>
                                         </div>

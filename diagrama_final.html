@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramas de Atividade - Sistema Tutorando</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .diagram-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .diagram {
+            display: none;
+            width: 100%;
+        }
+        
+        .diagram.active {
+            display: block;
+        }
+        
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 18px;
+        }
+        
+        .diagram-title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Diagramas de Atividade - Sistema Tutorando</h1>
+        
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showDiagram('principal')">🏠 Fluxo Principal</button>
+            <button class="nav-btn" onclick="showDiagram('registro')">📝 Registro de Usuário</button>
+            <button class="nav-btn" onclick="showDiagram('aprovacao')">✅ Aprovação de Conteúdo</button>
+            <button class="nav-btn" onclick="showDiagram('projeto')">🚀 Criação de Projeto</button>
+            <button class="nav-btn" onclick="showDiagram('busca')">🔍 Busca de Tutor</button>
+        </div>
+        
+        <div class="diagram-container">
+            <!-- Diagrama Principal -->
+            <div id="principal" class="diagram active">
+                <div class="diagram-title">Fluxo Principal do Sistema</div>
+                <div class="mermaid">
+                    flowchart TD
+                        A[👤 Usuário Acessa Sistema] --> B{🔐 Usuário Autenticado?}
+                        B -->|Não| C[📝 Tela de Login/Registro]
+                        B -->|Sim| D{👥 Tipo de Usuário?}
+                        
+                        C --> E[🔑 Login/Registro]
+                        E --> F{✅ Credenciais Válidas?}
+                        F -->|Não| C
+                        F -->|Sim| D
+                        
+                        D -->|Admin| G[⚙️ Dashboard Admin]
+                        D -->|Tutor| H[👨‍🏫 Dashboard Tutor]
+                        D -->|Tutorando| I[👨‍🎓 Dashboard Tutorando]
+                        
+                        G --> J[📊 Gerenciar Sistema]
+                        J --> K[✅ Aprovar Conteúdo]
+                        J --> L[🏫 Gerenciar Instituições]
+                        J --> M[👥 Gerenciar Usuários]
+                        
+                        H --> N[📚 Criar/Gerenciar Projetos]
+                        H --> O[📝 Criar Publicações]
+                        H --> P[💬 Responder Mensagens]
+                        
+                        I --> Q[🔍 Buscar Tutores]
+                        I --> R[📩 Enviar Mensagens]
+                        I --> S[📚 Ver Projetos Disponíveis]
+                        
+                        K --> T[🔄 Sistema Atualizado]
+                        L --> T
+                        M --> T
+                        N --> T
+                        O --> T
+                        P --> T
+                        Q --> T
+                        R --> T
+                        S --> T
+                        
+                        T --> U[🏠 Retornar ao Dashboard]
+                        U --> D
+                </div>
+            </div>
+            
+            <!-- Diagrama de Registro -->
+            <div id="registro" class="diagram">
+                <div class="diagram-title">Processo de Registro de Usuário</div>
+                <div class="mermaid">
+                    flowchart TD
+                        A[👤 Novo Usuário] --> B[📝 Acessar Formulário de Registro]
+                        B --> C[✍️ Preencher Dados Básicos]
+                        C --> D[👥 Selecionar Tipo de Usuário]
+                        
+                        D --> E{🔍 Tipo Selecionado?}
+                        E -->|Tutor| F[👨‍🏫 Preencher Dados de Tutor]
+                        E -->|Tutorando| G[👨‍🎓 Preencher Dados de Tutorando]
+                        
+                        F --> H[📋 Especialidades e Experiência]
+                        G --> I[🎯 Áreas de Interesse]
+                        
+                        H --> J[📤 Enviar Solicitação]
+                        I --> J
+                        
+                        J --> K{✅ Dados Válidos?}
+                        K -->|Não| L[❌ Mostrar Erros]
+                        L --> C
+                        
+                        K -->|Sim| M[💾 Criar Conta]
+                        M --> N[📧 Enviar Email de Confirmação]
+                        N --> O[⏳ Aguardar Confirmação]
+                        
+                        O --> P{📨 Email Confirmado?}
+                        P -->|Não| Q[⏰ Timeout/Reenvio]
+                        Q --> N
+                        
+                        P -->|Sim| R{👥 Tipo de Usuário?}
+                        R -->|Tutor| S[⏳ Status: Pendente Aprovação]
+                        R -->|Tutorando| T[✅ Status: Ativo]
+                        
+                        S --> U[📧 Notificar Admin]
+                        T --> V[🔑 Login Liberado]
+                        U --> V
+                        V --> W[🏠 Acessar Dashboard]
+                </div>
+            </div>
+            
+            <!-- Diagrama de Aprovação -->
+            <div id="aprovacao" class="diagram">
+                <div class="diagram-title">Fluxo de Aprovação de Conteúdo</div>
+                <div class="mermaid">
+                    flowchart TD
+                        A[⚙️ Admin no Dashboard] --> B[📋 Ver Itens Pendentes]
+                        B --> C{📝 Há Conteúdo Pendente?}
+                        
+                        C -->|Não| D[✨ Nenhum Item Pendente]
+                        C -->|Sim| E[👀 Revisar Item]
+                        
+                        E --> F{🔍 Tipo de Item?}
+                        F -->|Tutor| G[👨‍🏫 Revisar Perfil do Tutor]
+                        F -->|Projeto| H[📚 Revisar Projeto]
+                        F -->|Publicação| I[📝 Revisar Publicação]
+                        
+                        G --> J[🔍 Verificar Qualificações]
+                        H --> K[📖 Verificar Conteúdo]
+                        I --> L[📄 Verificar Texto]
+                        
+                        J --> M{✅ Decisão?}
+                        K --> M
+                        L --> M
+                        
+                        M -->|Aprovar| N[✅ Marcar como Aprovado]
+                        M -->|Rejeitar| O[❌ Marcar como Rejeitado]
+                        M -->|Solicitar Revisão| P[🔄 Solicitar Alterações]
+                        
+                        N --> Q[📧 Notificar Usuário - Aprovado]
+                        O --> R[📧 Notificar Usuário - Rejeitado]
+                        P --> S[📧 Notificar Usuário - Revisão]
+                        
+                        Q --> T[💾 Atualizar Status no Sistema]
+                        R --> T
+                        S --> T
+                        
+                        T --> U[📊 Atualizar Dashboard]
+                        U --> B
+                        
+                        D --> V[🔄 Verificar Novamente Mais Tarde]
+                        V --> B
+                </div>
+            </div>
+            
+            <!-- Diagrama de Projeto -->
+            <div id="projeto" class="diagram">
+                <div class="diagram-title">Criação de Projeto</div>
+                <div class="mermaid">
+                    flowchart TD
+                        A[👨‍🏫 Tutor Logado] --> B[🚀 Acessar Criação de Projeto]
+                        B --> C[📝 Preencher Formulário]
+                        
+                        C --> D[📋 Informações Básicas]
+                        D --> E[📖 Título e Descrição]
+                        E --> F[🎯 Categoria e Tags]
+                        F --> G[⏰ Duração e Cronograma]
+                        G --> H[💰 Preço (se aplicável)]
+                        H --> I[📎 Anexar Materiais]
+                        
+                        I --> J[👀 Revisar Informações]
+                        J --> K{✅ Dados Corretos?}
+                        
+                        K -->|Não| L[✏️ Editar Informações]
+                        L --> C
+                        
+                        K -->|Sim| M[📤 Submeter Projeto]
+                        M --> N{🔍 Validação Sistema?}
+                        
+                        N -->|Erro| O[❌ Mostrar Erros]
+                        O --> C
+                        
+                        N -->|Sucesso| P[💾 Salvar no Banco]
+                        P --> Q[⏳ Status: Pendente Aprovação]
+                        Q --> R[📧 Notificar Admin]
+                        
+                        R --> S[✅ Confirmação para Tutor]
+                        S --> T[📊 Retornar ao Dashboard]
+                        
+                        T --> U[👁️ Acompanhar Status]
+                        U --> V{📋 Status Atual?}
+                        
+                        V -->|Pendente| W[⏳ Aguardar Aprovação]
+                        V -->|Aprovado| X[🎉 Projeto Ativo]
+                        V -->|Rejeitado| Y[❌ Revisar e Resubmeter]
+                        
+                        W --> Z[🔄 Verificar Status Novamente]
+                        Z --> V
+                        
+                        X --> AA[👥 Disponível para Tutorandos]
+                        Y --> L
+                </div>
+            </div>
+            
+            <!-- Diagrama de Busca -->
+            <div id="busca" class="diagram">
+                <div class="diagram-title">Busca e Contato com Tutor</div>
+                <div class="mermaid">
+                    flowchart TD
+                        A[👨‍🎓 Tutorando Logado] --> B[🔍 Acessar Busca de Tutores]
+                        B --> C[🎯 Definir Critérios de Busca]
+                        
+                        C --> D[📚 Área de Conhecimento]
+                        D --> E[📍 Localização/Modalidade]
+                        E --> F[💰 Faixa de Preço]
+                        F --> G[⭐ Avaliação Mínima]
+                        G --> H[⏰ Disponibilidade]
+                        
+                        H --> I[🔍 Executar Busca]
+                        I --> J{📋 Resultados Encontrados?}
+                        
+                        J -->|Não| K[😞 Nenhum Tutor Encontrado]
+                        K --> L[🔄 Refinar Critérios]
+                        L --> C
+                        
+                        J -->|Sim| M[📊 Exibir Lista de Tutores]
+                        M --> N[👀 Visualizar Perfis]
+                        
+                        N --> O{💡 Tutor de Interesse?}
+                        O -->|Não| P[➡️ Ver Próximo Tutor]
+                        P --> N
+                        
+                        O -->|Sim| Q[📖 Ver Perfil Completo]
+                        Q --> R[📚 Ver Projetos do Tutor]
+                        R --> S[⭐ Ver Avaliações]
+                        
+                        S --> T{📞 Deseja Contatar?}
+                        T -->|Não| U[⬅️ Voltar à Lista]
+                        U --> M
+                        
+                        T -->|Sim| V[✍️ Escrever Mensagem]
+                        V --> W[📤 Enviar Mensagem]
+                        
+                        W --> X{✅ Mensagem Enviada?}
+                        X -->|Erro| Y[❌ Erro no Envio]
+                        Y --> V
+                        
+                        X -->|Sucesso| Z[📧 Notificar Tutor]
+                        Z --> AA[✅ Confirmação para Tutorando]
+                        AA --> BB[⏳ Aguardar Resposta do Tutor]
+                        
+                        BB --> CC{📨 Tutor Respondeu?}
+                        CC -->|Não| DD[⏰ Timeout/Lembrete]
+                        DD --> BB
+                        
+                        CC -->|Sim| EE[💬 Iniciar Conversa]
+                        EE --> FF[🤝 Negociar Detalhes]
+                        FF --> GG[✅ Acordo Fechado]
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inicialização do Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#3498db',
+                primaryTextColor: '#2c3e50',
+                primaryBorderColor: '#2980b9',
+                lineColor: '#34495e',
+                sectionBkgColor: '#ecf0f1',
+                altSectionBkgColor: '#bdc3c7',
+                gridColor: '#95a5a6',
+                secondaryColor: '#e74c3c',
+                tertiaryColor: '#f39c12'
+            },
+            flowchart: {
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20
+            },
+            securityLevel: 'loose'
+        });
+
+        function showDiagram(diagramId) {
+            // Esconder todos os diagramas
+            const diagrams = document.querySelectorAll('.diagram');
+            diagrams.forEach(diagram => diagram.classList.remove('active'));
+            
+            // Remover classe active de todos os botões
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Mostrar diagrama selecionado
+            document.getElementById(diagramId).classList.add('active');
+            
+            // Ativar botão correspondente
+            event.target.classList.add('active');
+            
+            // Re-renderizar o Mermaid para o diagrama ativo
+            setTimeout(() => {
+                mermaid.init(undefined, `#${diagramId} .mermaid`);
+            }, 100);
+        }
+
+        // Inicialização quando a página carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                mermaid.init();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

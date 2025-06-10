@@ -24,6 +24,9 @@ class User extends Authenticatable
         'role',
         'curso',
         'instituicao_id',
+        'bio',
+        'telefone',
+        'pais',
     ];
 
     /**

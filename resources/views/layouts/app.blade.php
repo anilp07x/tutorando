@@ -9,9 +9,7 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700&display=swap" rel="stylesheet" />
-
-        <!-- Bootstrap CSS -->
+        <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700&display=swap" rel="stylesheet" />        <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Bootstrap Icons -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -19,22 +17,21 @@
         <link href="/css/admin.css" rel="stylesheet">
         <!-- Custom Navbar CSS -->
         <link href="/css/navbar.css" rel="stylesheet">
+        <!-- Custom User Theme CSS -->
+        <link href="/css/user.css" rel="stylesheet">
         
         <!-- Scripts -->
-        @vite(['resources/css/app.css'])
-    </head>
-    <body class="{{ auth()->check() && auth()->user()->role === 'admin' && request()->is('admin*') ? 'admin-body' : '' }}">
+        @vite(['resources/css/app.css'])    </head>
+    <body class="{{ auth()->check() && auth()->user()->role === 'admin' && request()->is('admin*') ? 'admin-theme' : 'user-theme' }}">
         <div class="d-flex flex-column min-vh-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
+            @include('layouts.navigation')            <!-- Page Heading -->
             @isset($header)
-                <header class="bg-primary text-white py-3">
+                <header class="py-3 border-bottom">
                     <div class="container">
                         {{ $header }}
                     </div>
                 </header>
-            @endisset            <!-- Page Content -->
+            @endisset<!-- Page Content -->
             <main class="flex-grow-1 py-4">
                 <div class="container">
                     <!-- System Information Bar -->
@@ -316,6 +313,22 @@
                         }
                     }, 5000);
                 });
+                  // Force dropdown positioning fix
+                dropdowns.forEach(function(dropdown) {
+                    dropdown.addEventListener('show.bs.dropdown', function (e) {
+                        // Force correct positioning
+                        const menu = e.target.nextElementSibling;
+                        if (menu && menu.classList.contains('dropdown-menu')) {
+                            menu.style.position = 'absolute';
+                            // Higher z-index for admin theme
+                            const isAdmin = document.body.classList.contains('admin-theme');
+                            menu.style.zIndex = isAdmin ? '9999' : '1060';
+                            menu.style.transform = 'none';
+                            menu.style.visibility = 'visible';
+                            menu.style.opacity = '1';
+                        }
+                    });
+                });
             });
 
             // Admin widget functions
@@ -376,5 +389,28 @@
             });
         </script>
         @endif
+
+        <!-- Additional dropdown initialization for admin -->
+            @if(auth()->check() && auth()->user()->role === 'admin')
+                // Force proper dropdown initialization in admin area
+                setTimeout(function() {
+                    const adminDropdowns = document.querySelectorAll('.navbar-admin-minimal [data-bs-toggle="dropdown"]');
+                    adminDropdowns.forEach(function(dropdownToggle) {
+                        if (!bootstrap.Dropdown.getInstance(dropdownToggle)) {
+                            new bootstrap.Dropdown(dropdownToggle, {
+                                autoClose: true,
+                                boundary: 'viewport'
+                            });
+                        }
+                        
+                        // Force dropdown menu styling
+                        const menu = dropdownToggle.nextElementSibling;
+                        if (menu && menu.classList.contains('dropdown-menu')) {
+                            menu.style.zIndex = '9999';
+                            menu.style.position = 'absolute';
+                        }
+                    });
+                }, 100);
+            @endif
     </body>
 </html>

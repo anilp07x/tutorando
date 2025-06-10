@@ -141,7 +141,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="{{ route('admin.projetos.show', $projeto) }}" class="btn btn-sm btn-info" title="Ver Detalhes">
+                                                        <a href="{{ route('admin.projetos.show', $projeto) }}" class="btn btn-sm btn-primary" title="Ver Detalhes">
                                                             <i class="bi bi-eye"></i>
                                                         </a>
                                                         

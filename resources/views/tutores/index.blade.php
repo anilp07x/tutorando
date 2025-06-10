@@ -6,9 +6,8 @@
         </h2>
     </x-slot>
 
-    <div class="container py-4">
-        <!-- Filtros de Pesquisa -->
-        <div class="card mb-4">
+    <div class="container py-4">        <!-- Filtros de Pesquisa -->
+        <div class="card mb-4 search-form">
             <div class="card-body">
                 <form method="GET" action="{{ route('tutores.index') }}" class="row g-3">
                     <div class="col-md-5">
@@ -67,10 +66,8 @@
                 @foreach($tutors as $tutor)
                     <div class="col-lg-4 col-md-6">
                         <div class="card h-100 shadow-sm border-0 tutor-card">
-                            <div class="card-body p-4">
-                                <!-- Avatar e Info Básica -->
-                                <div class="text-center mb-3">
-                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($tutor->name) }}&size=80&background=007bff&color=fff" 
+                            <div class="card-body p-4">                                <!-- Avatar e Info Básica -->
+                                <div class="text-center mb-3">                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($tutor->name) }}&size=80&background=ff7906&color=fff" 
                                          class="rounded-circle mb-3" width="80" height="80" alt="{{ $tutor->name }}">
                                     <h5 class="card-title mb-1">{{ $tutor->name }}</h5>
                                     <p class="text-muted small mb-2">{{ $tutor->curso }}</p>
@@ -146,25 +143,14 @@
                 @endif
             </div>
         @endif
-    </div>
-
-    <style>
-        .tutor-card {
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-        
-        .tutor-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
-        }
-        
+    </div>    <style>
         .btn-primary {
-            background: linear-gradient(45deg, #007bff, #0056b3);
+            background-color: #ff7906;
             border: none;
         }
         
         .btn-primary:hover {
-            background: linear-gradient(45deg, #0056b3, #004085);
+            background-color: #e56905;
         }
     </style>
 </x-app-layout>

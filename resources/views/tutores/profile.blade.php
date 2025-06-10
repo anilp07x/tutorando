@@ -16,9 +16,8 @@
             <!-- Coluna Principal - Perfil do Tutor -->
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <!-- Avatar -->
-                        <img src="https://ui-avatars.com/api/?name={{ urlencode($tutor->name) }}&size=120&background=007bff&color=fff" 
+                    <div class="card-body text-center p-4">                        <!-- Avatar -->
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($tutor->name) }}&size=120&background=ff7906&color=fff" 
                              class="rounded-circle mb-3" width="120" height="120" alt="{{ $tutor->name }}">
                         
                         <!-- Informações Básicas -->
@@ -71,7 +70,7 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="text-center">
-                                        <div class="h5 mb-0 text-info">{{ $stats['membro_desde']->diffInMonths(now()) }}</div>
+                                        <div class="h5 mb-0 text-primary">{{ $stats['membro_desde']->diffInMonths(now()) }}</div>
                                         <small class="text-muted">Meses ativo</small>
                                     </div>
                                 </div>
@@ -213,9 +212,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <style>
+    </div>    <style>
         .nav-tabs .nav-link {
             border: none;
             border-bottom: 3px solid transparent;
@@ -223,25 +220,15 @@
             color: #6c757d;
             padding: 0.75rem 1rem;
         }
-        
-        .nav-tabs .nav-link.active {
-            color: #007bff;
-            border-bottom-color: #007bff;
+          .nav-tabs .nav-link.active {
+            color: #ff7906;
+            border-bottom-color: #ff7906;
             background: none;
         }
         
         .nav-tabs .nav-link:hover {
-            color: #007bff;
-            border-bottom-color: #007bff;
-        }
-        
-        .card {
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-        
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+            color: #ff7906;
+            border-bottom-color: #ff7906;
         }
     </style>
 </x-app-layout>

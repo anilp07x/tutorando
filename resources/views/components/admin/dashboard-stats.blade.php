@@ -49,16 +49,16 @@
                 <div class="d-flex align-items-start">
                     <div>
                         <h6 class="card-title mb-1">Usuários</h6>
-                        <h2 class="mb-0 fw-bold text-info">{{ $stats['users']['total'] }}</h2>
+                        <h2 class="mb-0 fw-bold text-primary">{{ $stats['users']['total'] }}</h2>
                         <div class="small text-muted mt-2">
                             <span class="badge bg-danger">{{ $stats['users']['admin'] }} admin</span>
                             <span class="badge bg-success ms-1">{{ $stats['users']['tutor'] }} tutores</span>
-                            <span class="badge bg-info ms-1">{{ $stats['users']['aluno'] }} alunos</span>
+                            <span class="badge bg-primary ms-1">{{ $stats['users']['aluno'] }} alunos</span>
                         </div>
                     </div>
                     <div class="ms-auto">
-                        <div class="bg-info bg-opacity-10 p-3 rounded">
-                            <i class="bi bi-people fs-3 text-info"></i>
+                        <div class="bg-primary bg-opacity-10 p-3 rounded">
+                            <i class="bi bi-people fs-3 text-primary"></i>
                         </div>
                     </div>
                 </div>

@@ -91,7 +91,7 @@
                                             <td>{{ $user->created_at->format('d/m/Y') }}</td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="{{ route('admin.users.show', $user) }}" class="btn btn-sm btn-info">
+                                                    <a href="{{ route('admin.users.show', $user) }}" class="btn btn-sm btn-primary">
                                                         <i class="bi bi-eye"></i>
                                                     </a>
                                                     <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-primary">

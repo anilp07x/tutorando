@@ -1,15 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-centered {{ auth()->check() && auth()->user()->role === 'admin' ? 'navbar-admin-minimal navbar-dark' : 'navbar-minimal navbar-light' }}">
+<nav class="navbar navbar-expand-lg navbar-centered {{ auth()->check() && auth()->user()->role === 'admin' ? 'navbar-admin-minimal navbar-light' : 'navbar-minimal navbar-light' }}">
     <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand" href="{{ auth()->check() && auth()->user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}">
-            <span class="fs-4 fw-bold {{ auth()->check() && auth()->user()->role === 'admin' ? 'text-white' : 'text-primary' }}">
-                @if(auth()->check() && auth()->user()->role === 'admin')
-                    <i class="bi bi-shield"></i> Tutorando
-                    <span class="admin-badge">Admin</span>
-                @else
-                    <i class="bi bi-mortarboard"></i> Tutorando
-                @endif
-            </span>
+        <a class="navbar-brand d-flex align-items-center" href="{{ auth()->check() && auth()->user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}">
+            <img src="{{ asset('img/logo.png') }}" alt="Tutorando" height="32">
+            @if(auth()->check() && auth()->user()->role === 'admin')
+                <span class="admin-badge ms-2">Admin</span>
+            @endif
         </a>
         
         <!-- Mobile Toggle Button -->
@@ -52,7 +48,7 @@
                            href="{{ route('admin.publicacoes.index') }}">
                             <i class="bi bi-journal navbar-icon"></i>Publicações
                             @if($publicacoesPendentes = \App\Models\Publicacao::where('aprovado', false)->count())
-                                <span class="badge bg-info text-dark ms-1 rounded-pill small">{{ $publicacoesPendentes }}</span>
+                                <span class="badge bg-primary text-white ms-1 rounded-pill small">{{ $publicacoesPendentes }}</span>
                             @endif
                         </a>
                     </li>
@@ -149,8 +145,8 @@
                                         <li>
                                             <a class="dropdown-item d-flex justify-content-between align-items-center" 
                                                href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}">
-                                                <span><i class="bi bi-journal me-2 text-info"></i> Publicações</span>
-                                                <span class="badge bg-info text-dark rounded-pill">{{ $publicacoesPendentes }}</span>
+                                                <span><i class="bi bi-journal me-2 text-primary"></i> Publicações</span>
+                                                <span class="badge bg-primary text-white rounded-pill">{{ $publicacoesPendentes }}</span>
                                             </a>
                                         </li>
                                         @endif

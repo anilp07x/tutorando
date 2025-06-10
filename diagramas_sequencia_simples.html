@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramas de Sequência - Sistema Tutorando (Simplificado)</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            justify-content: center;
+        }
+        
+        .nav-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,123,255,0.2);
+        }
+        
+        .nav-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+        }
+        
+        .nav-btn.active {
+            background: #28a745;
+            box-shadow: 0 4px 8px rgba(40,167,69,0.3);
+        }
+        
+        .diagram-section {
+            display: none;
+            padding: 30px;
+            background: white;
+        }
+        
+        .diagram-section.active {
+            display: block;
+        }
+        
+        .diagram-title {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 300;
+        }
+        
+        .diagram-description {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .mermaid-container {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .info-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .info-box h4 {
+            color: #856404;
+            margin: 0 0 10px 0;
+        }
+        
+        .info-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-btn {
+                margin: 5px 0;
+            }
+            
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔄 Diagramas de Sequência</h1>
+            <p>Sistema Tutorando - Fluxos Simplificados</p>
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showDiagram('login')">🔐 Login</button>
+            <button class="nav-btn" onclick="showDiagram('registro')">📝 Cadastro</button>
+            <button class="nav-btn" onclick="showDiagram('projeto')">📋 Criar Projeto</button>
+            <button class="nav-btn" onclick="showDiagram('aprovacao')">✅ Aprovar Projeto</button>
+            <button class="nav-btn" onclick="showDiagram('busca')">🔍 Buscar Tutor</button>
+            <button class="nav-btn" onclick="showDiagram('contato')">💬 Contatar Tutor</button>
+        </div>
+        
+        <!-- Login -->
+        <div id="login" class="diagram-section active">
+            <h2 class="diagram-title"><span class="emoji">🔐</span>Processo de Login</h2>
+            <div class="diagram-description">
+                <p>Fluxo simples de autenticação no sistema Tutorando.</p>
+            </div>
+            <div class="mermaid-container">
+                <div class="mermaid">
+sequenceDiagram
+    participant U as 👤 Usuário
+    participant S as 🖥️ Sistema
+    participant BD as 🗄️ Banco de Dados
+
+    U->>S: 1. Acessa página de login
+    S->>U: 2. Exibe formulário de login
+    
+    U->>S: 3. Insere email e senha
+    S->>BD: 4. Verifica credenciais
+    
+    alt ✅ Credenciais corretas
+        BD-->>S: 5. Usuário encontrado
+        S-->>U: 6. Redireciona para dashboard
+        Note over U,S: Login realizado com sucesso
+    else ❌ Credenciais incorretas
+        BD-->>S: 5. Usuário não encontrado
+        S-->>U: 6. Exibe mensagem de erro
+        Note over U,S: Usuário deve tentar novamente
+    end
+                </div>
+            </div>
+            <div class="info-box">
+                <h4>💡 Pontos Importantes:</h4>
+                <ul>
+                    <li>Sistema valida email e senha informados</li>
+                    <li>Usuário é direcionado para área específica conforme seu perfil</li>
+                    <li>Mensagens claras de erro em caso de falha</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Registro -->
+        <div id="registro" class="diagram-section">
+            <h2 class="diagram-title"><span class="emoji">📝</span>Processo de Cadastro</h2>
+            <div class="diagram-description">
+                <p>Como novos usuários se cadastram no sistema.</p>
+            </div>
+            <div class="mermaid-container">
+                <div class="mermaid">
+sequenceDiagram
+    participant U as 👤 Novo Usuário
+    participant S as 🖥️ Sistema
+    participant BD as 🗄️ Banco de Dados
+    participant E as 📧 Email
+
+    U->>S: 1. Acessa página de cadastro
+    S->>U: 2. Exibe formulário de registro
+    
+    U->>S: 3. Preenche dados pessoais
+    U->>S: 4. Seleciona tipo (Tutor/Tutorando)
+    U->>S: 5. Envia formulário
+    
+    S->>S: 6. Valida informações
+    
+    alt ✅ Dados válidos
+        S->>BD: 7. Salva novo usuário
+        BD-->>S: 8. Usuário criado
+        S->>E: 9. Envia email de confirmação
+        E-->>U: 10. Email recebido
+        S-->>U: 11. Conta criada com sucesso
+        
+        alt 👨‍🏫 Usuário é Tutor
+            Note over S: Status: Aguardando aprovação
+        else 👨‍🎓 Usuário é Tutorando  
+            Note over S: Status: Ativo imediatamente
+        end
+    else ❌ Dados inválidos
+        S-->>U: 7. Exibe erros de validação
+        Note over U,S: Usuário corrige e reenvia
+    end
+                </div>
+            </div>
+            <div class="info-box">
+                <h4>💡 Diferenças por Tipo:</h4>
+                <ul>
+                    <li><strong>Tutorando:</strong> Pode usar o sistema imediatamente</li>
+                    <li><strong>Tutor:</strong> Precisa aguardar aprovação do administrador</li>
+                    <li>Email de confirmação é enviado para todos</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Projeto -->
+        <div id="projeto" class="diagram-section">
+            <h2 class="diagram-title"><span class="emoji">📋</span>Criação de Projeto</h2>
+            <div class="diagram-description">
+                <p>Como tutores e tutorandos criam novos projetos no sistema.</p>
+            </div>
+            <div class="mermaid-container">
+                <div class="mermaid">
+sequenceDiagram
+    participant T as 👨‍🏫 Tutor/Tutorando
+    participant S as 🖥️ Sistema
+    participant BD as 🗄️ Banco de Dados
+    participant A as 👨‍💼 Admin
+
+    T->>S: 1. Acessa "Criar Projeto"
+    S->>T: 2. Exibe formulário
+    
+    T->>S: 3. Preenche informações do projeto
+    T->>S: 4. Adiciona descrição e objetivos
+    T->>S: 5. Anexa arquivos (opcional)
+    T->>S: 6. Envia projeto
+    
+    S->>S: 7. Valida dados do projeto
+    
+    alt ✅ Projeto válido
+        S->>BD: 8. Salva projeto
+        BD-->>S: 9. Projeto salvo
+        
+        alt 👨‍💼 Usuário é Admin
+            S->>BD: 10. Marca como aprovado
+            S-->>T: 11. Projeto ativo imediatamente
+        else 👤 Usuário comum
+            S->>BD: 10. Marca como pendente
+            S->>A: 11. Notifica admin
+            S-->>T: 12. Projeto aguardando aprovação
+        end
+    else ❌ Dados inválidos
+        S-->>T: 8. Exibe erros
+        Note over T,S: Usuário corrige informações
+    end
+                </div>
+            </div>
+        </div>
+
+        <!-- Aprovação -->
+        <div id="aprovacao" class="diagram-section">
+            <h2 class="diagram-title"><span class="emoji">✅</span>Aprovação de Projeto</h2>
+            <div class="diagram-description">
+                <p>Como o administrador analisa e aprova projetos pendentes.</p>
+            </div>
+            <div class="mermaid-container">
+                <div class="mermaid">
+sequenceDiagram
+    participant A as 👨‍💼 Admin
+    participant S as 🖥️ Sistema
+    participant BD as 🗄️ Banco de Dados
+    participant T as 👨‍🏫 Tutor/Tutorando
+    participant E as 📧 Email
+
+    A->>S: 1. Acessa painel admin
+    S->>BD: 2. Busca projetos pendentes
+    BD-->>S: 3. Lista projetos
+    S-->>A: 4. Exibe projetos para revisar
+    
+    A->>S: 5. Seleciona projeto
+    S-->>A: 6. Exibe detalhes completos
+    
+    A->>A: 7. Analisa conteúdo
+    
+    alt ✅ Decide aprovar
+        A->>S: 8. Clica "Aprovar"
+        S->>BD: 9. Atualiza status para aprovado
+        S->>E: 10. Envia notificação
+        E-->>T: 11. "Projeto aprovado!"
+        S-->>A: 12. Confirmação de aprovação
+    else ❌ Decide rejeitar
+        A->>S: 8. Clica "Rejeitar"
+        A->>S: 9. Adiciona motivo da rejeição
+        S->>BD: 10. Atualiza status para rejeitado
+        S->>E: 11. Envia notificação com motivo
+        E-->>T: 12. "Projeto rejeitado"
+        S-->>A: 13. Confirmação de rejeição
+    end
+                </div>
+            </div>
+            <div class="info-box">
+                <h4>🎯 Critérios de Aprovação:</h4>
+                <ul>
+                    <li>Conteúdo apropriado e educativo</li>
+                    <li>Informações claras e completas</li>
+                    <li>Objetivos bem definidos</li>
+                    <li>Adequação às normas da plataforma</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Busca -->
+        <div id="busca" class="diagram-section">
+            <h2 class="diagram-title"><span class="emoji">🔍</span>Busca de Tutores</h2>
+            <div class="diagram-description">
+                <p>Como tutorandos encontram tutores adequados às suas necessidades.</p>
+            </div>
+            <div class="mermaid-container">
+                <div class="mermaid">
+sequenceDiagram
+    participant TU as 👨‍🎓 Tutorando
+    participant S as 🖥️ Sistema
+    participant BD as 🗄️ Banco de Dados
+
+    TU->>S: 1. Acessa "Buscar Tutores"
+    S-->>TU: 2. Exibe filtros de busca
+    
+    TU->>S: 3. Define critérios
+    Note over TU: Área, preço, localização, etc.
+    
+    TU->>S: 4. Executa busca
+    S->>BD: 5. Consulta tutores disponíveis
+    BD-->>S: 6. Retorna resultados
+    
+    alt 📋 Tutores encontrados
+        S-->>TU: 7. Exibe lista de tutores
+        TU->>S: 8. Visualiza perfis
+        S-->>TU: 9. Mostra detalhes do tutor
+        TU->>S: 10. Vê projetos e avaliações
+        S-->>TU: 11. Exibe histórico completo
+    else 😞 Nenhum tutor encontrado
+        S-->>TU: 7. "Nenhum resultado"
+        S-->>TU: 8. Sugere ajustar filtros
+        Note over TU,S: Tutorando refina busca
+    end
+                </div>
+            </div>
+            <div class="info-box">
+                <h4>🎯 Filtros Disponíveis:</h4>
+                <ul>
+                    <li>Área de conhecimento</li>
+                    <li>Faixa de preço</li>
+                    <li>Modalidade (presencial/online)</li>
+                    <li>Avaliação dos tutores</li>
+                    <li>Disponibilidade de horário</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Contato -->
+        <div id="contato" class="diagram-section">
+            <h2 class="diagram-title"><span class="emoji">💬</span>Contato com Tutor</h2>
+            <div class="diagram-description">
+                <p>Processo de comunicação entre tutorando e tutor através da plataforma.</p>
+            </div>
+            <div class="mermaid-container">
+                <div class="mermaid">
+sequenceDiagram
+    participant TU as 👨‍🎓 Tutorando
+    participant S as 🖥️ Sistema
+    participant BD as 🗄️ Banco de Dados
+    participant E as 📧 Email
+    participant T as 👨‍🏫 Tutor
+
+    TU->>S: 1. Clica "Entrar em Contato"
+    S-->>TU: 2. Abre formulário de mensagem
+    
+    TU->>S: 3. Escreve mensagem
+    TU->>S: 4. Envia mensagem
+    
+    S->>BD: 5. Salva mensagem
+    BD-->>S: 6. Mensagem armazenada
+    
+    S->>E: 7. Notifica tutor por email
+    E-->>T: 8. "Nova mensagem recebida"
+    
+    S-->>TU: 9. "Mensagem enviada com sucesso"
+    
+    T->>S: 10. Acessa sistema
+    S-->>T: 11. Mostra mensagem recebida
+    
+    T->>S: 12. Responde mensagem
+    S->>BD: 13. Salva resposta
+    
+    S->>E: 14. Notifica tutorando
+    E-->>TU: 15. "Resposta recebida"
+    
+    Note over TU,T: Conversa estabelecida
+    
+    alt 🤝 Acordo fechado
+        TU->>T: Aceita proposta
+        T->>TU: Confirma detalhes
+        Note over TU,T: Sessão de tutoria agendada
+    else 🔄 Negociação continua
+        Note over TU,T: Troca de mensagens continua
+    end
+                </div>
+            </div>
+            <div class="info-box">
+                <h4>📋 Informações Típicas Trocadas:</h4>
+                <ul>
+                    <li>Objetivos do tutorando</li>
+                    <li>Disponibilidade de horários</li>
+                    <li>Modalidade preferida (online/presencial)</li>
+                    <li>Valores e forma de pagamento</li>
+                    <li>Duração e frequência das sessões</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inicializar Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            sequence: {
+                actorMargin: 50,
+                boxMargin: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35,
+                mirrorActors: false,
+                bottomMarginAdj: 1,
+                useMaxWidth: true,
+                rightAngles: false,
+                showSequenceNumbers: false
+            }
+        });
+
+        // Função para mostrar diagrama específico
+        function showDiagram(diagramId) {
+            // Ocultar todos os diagramas
+            const sections = document.querySelectorAll('.diagram-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remover classe active de todos os botões
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Mostrar diagrama selecionado
+            document.getElementById(diagramId).classList.add('active');
+            
+            // Ativar botão correspondente
+            event.target.classList.add('active');
+            
+            // Reprocessar diagramas
+            setTimeout(() => {
+                reprocessDiagrams();
+            }, 100);
+        }
+
+        // Reprocessar diagramas quando mudamos de seção
+        function reprocessDiagrams() {
+            const activeSection = document.querySelector('.diagram-section.active');
+            if (activeSection) {
+                const mermaidElements = activeSection.querySelectorAll('.mermaid');
+                mermaidElements.forEach((element, index) => {
+                    element.removeAttribute('data-processed');
+                    element.id = `mermaid-${Date.now()}-${index}`;
+                });
+                mermaid.init(undefined, activeSection.querySelectorAll('.mermaid'));
+            }
+        }
+
+        // Aguardar carregamento completo
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                reprocessDiagrams();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

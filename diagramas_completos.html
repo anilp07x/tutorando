@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramas Completos - Sistema Tutorando</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0 0 15px 0;
+            font-size: 3em;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            margin: 0;
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .tab-navigation {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #dee2e6;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 20px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+            position: relative;
+        }
+        
+        .tab-btn:hover {
+            background: #e9ecef;
+            color: #495057;
+        }
+        
+        .tab-btn.active {
+            background: white;
+            color: #007bff;
+            box-shadow: inset 0 -3px 0 #007bff;
+        }
+        
+        .tab-content {
+            display: none;
+            min-height: 80vh;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            justify-content: center;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,123,255,0.2);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,123,255,0.3);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+            box-shadow: 0 6px 12px rgba(40,167,69,0.3);
+        }
+        
+        .diagram-section {
+            display: none;
+            padding: 30px;
+            background: white;
+        }
+        
+        .diagram-section.active {
+            display: block;
+        }
+        
+        .diagram-title {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .diagram-description {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d6eaf8 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 5px solid #007bff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .mermaid-container {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            border: 1px solid #e9ecef;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .info-box h4 {
+            color: #856404;
+            margin: 0 0 15px 0;
+            font-size: 1.2em;
+        }
+        
+        .info-box ul {
+            margin: 0;
+            padding-left: 25px;
+        }
+        
+        .info-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+        
+        .back-to-top:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .tab-btn {
+                padding: 15px 10px;
+                font-size: 1em;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-btn {
+                margin: 5px 0;
+                text-align: center;
+            }
+            
+            .diagram-section {
+                padding: 20px;
+            }
+            
+            .diagram-title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Diagramas Sistema Tutorando</h1>
+            <p>Documentação Visual Completa - Diagramas de Atividade e Sequência</p>
+        </div>
+        
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="showTab('activity')">🔄 Diagramas de Atividade</button>
+            <button class="tab-btn" onclick="showTab('sequence')">📋 Diagramas de Sequência</button>
+        </div>
+        
+        <!-- Tab de Diagramas de Atividade -->
+        <div id="activity" class="tab-content active">
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showActivityDiagram('main')">🏠 Fluxo Principal</button>
+                <button class="nav-btn" onclick="showActivityDiagram('registro')">👤 Registro</button>
+                <button class="nav-btn" onclick="showActivityDiagram('aprovacao')">✅ Aprovação</button>
+                <button class="nav-btn" onclick="showActivityDiagram('projeto')">📋 Projeto</button>
+                <button class="nav-btn" onclick="showActivityDiagram('busca')">🔍 Busca</button>
+            </div>
+            
+            <!-- Fluxo Principal -->
+            <div id="main" class="diagram-section active">
+                <h2 class="diagram-title"><span class="emoji">🏠</span>Fluxo Principal do Sistema</h2>
+                <div class="diagram-description">
+                    <p>Este diagrama apresenta o fluxo principal de navegação do sistema Tutorando, mostrando as interações entre Admin, Tutor e Tutorando com os principais recursos da plataforma.</p>
+                </div>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+flowchart TD
+    A[👤 Usuário] --> B{🔐 Autenticado?}
+    B -->|Não| C[📝 Login/Registro]
+    B -->|Sim| D{👨‍💼 Tipo de Usuário}
+    
+    C --> E[✅ Validação]
+    E -->|✅ Sucesso| D
+    E -->|❌ Erro| C
+    
+    D -->|Admin| F[👨‍💼 Dashboard Admin]
+    D -->|Tutor| G[👨‍🏫 Dashboard Tutor]
+    D -->|Tutorando| H[👨‍🎓 Dashboard Tutorando]
+    
+    F --> I[📊 Gerenciar Usuários]
+    F --> J[✅ Aprovar Conteúdo]
+    F --> K[🏢 Gerenciar Instituições]
+    F --> L[📈 Relatórios]
+    
+    G --> M[📋 Criar Projeto]
+    G --> N[📄 Criar Publicação]
+    G --> O[👀 Ver Meus Projetos]
+    G --> P[📊 Estatísticas]
+    
+    H --> Q[🔍 Buscar Tutores]
+    H --> R[📋 Criar Projeto]
+    H --> S[👀 Ver Projetos]
+    H --> T[📞 Contatar Tutores]
+    
+    M --> U{👨‍💼 É Admin?}
+    N --> U
+    R --> U
+    
+    U -->|Sim| V[✅ Aprovado Automaticamente]
+    U -->|Não| W[⏳ Aguarda Aprovação]
+    
+    W --> X[📧 Notificação Admin]
+    X --> Y[👨‍💼 Admin Avalia]
+    Y --> Z{✅ Aprovado?}
+    Z -->|Sim| AA[📧 Notificação Usuário]
+    Z -->|Não| BB[❌ Rejeitado]
+    
+    V --> CC[🌐 Publicado no Site]
+    AA --> CC
+    
+    Q --> DD[📝 Lista de Resultados]
+    DD --> EE[👀 Ver Perfil Tutor]
+    EE --> FF[📞 Entrar em Contato]
+                    </div>
+                </div>
+                <div class="info-box">
+                    <h4>💡 Características Principais:</h4>
+                    <ul>
+                        <li><strong>Três tipos de usuário:</strong> Admin, Tutor e Tutorando</li>
+                        <li><strong>Aprovação de conteúdo:</strong> Admins aprovam automaticamente, outros usuários precisam de aprovação</li>
+                        <li><strong>Sistema de notificações:</strong> Emails automáticos para mudanças de status</li>
+                        <li><strong>Busca integrada:</strong> Tutores podem ser encontrados facilmente</li>
+                        <li><strong>Dashboard personalizado:</strong> Interface específica para cada tipo de usuário</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Registro -->
+            <div id="registro" class="diagram-section">
+                <h2 class="diagram-title"><span class="emoji">👤</span>Processo de Registro</h2>
+                <div class="diagram-description">
+                    <p>Fluxo detalhado do processo de registro de novos usuários no sistema.</p>
+                </div>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+flowchart TD
+    A[👤 Novo Usuário] --> B[📝 Formulário de Registro]
+    B --> C[✅ Validação de Dados]
+    
+    C -->|❌ Erro| D[🚨 Exibir Erros]
+    D --> B
+    
+    C -->|✅ Válido| E[🔐 Hash da Senha]
+    E --> F[💾 Salvar no Banco]
+    F --> G[📧 Email de Confirmação]
+    G --> H[🔐 Login Automático]
+    H --> I[🏠 Redirect Dashboard]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#ffebee
+    style E fill:#fff3e0
+    style F fill:#e0f2f1
+    style G fill:#f1f8e9
+    style H fill:#e3f2fd
+    style I fill:#e8f5e8
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aprovação -->
+            <div id="aprovacao" class="diagram-section">
+                <h2 class="diagram-title"><span class="emoji">✅</span>Processo de Aprovação</h2>
+                <div class="diagram-description">
+                    <p>Workflow de aprovação de conteúdo pelos administradores.</p>
+                </div>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+flowchart TD
+    A[📄 Novo Conteúdo] --> B{👨‍💼 Autor é Admin?}
+    
+    B -->|Sim| C[✅ Aprovado Automaticamente]
+    B -->|Não| D[⏳ Status: Pendente]
+    
+    D --> E[📧 Notificação para Admins]
+    E --> F[👨‍💼 Admin Visualiza]
+    
+    F --> G{🤔 Decisão do Admin}
+    G -->|✅ Aprovar| H[✅ Status: Aprovado]
+    G -->|❌ Rejeitar| I[❌ Status: Rejeitado]
+    G -->|📝 Solicitar Alterações| J[📝 Status: Revisão]
+    
+    H --> K[📧 Notificação de Aprovação]
+    I --> L[📧 Notificação de Rejeição]
+    J --> M[📧 Solicitação de Alterações]
+    
+    K --> N[🌐 Publicação no Site]
+    M --> O[👤 Usuário Edita]
+    O --> D
+    
+    C --> N
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style H fill:#e8f5e8
+    style I fill:#ffebee
+    style J fill:#e0f7fa
+    style N fill:#e8f5e8
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projeto -->
+            <div id="projeto" class="diagram-section">
+                <h2 class="diagram-title"><span class="emoji">📋</span>Criação de Projeto</h2>
+                <div class="diagram-description">
+                    <p>Processo completo de criação de projetos pelos usuários.</p>
+                </div>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+flowchart TD
+    A[👤 Usuário Logado] --> B[📋 Formulário Novo Projeto]
+    B --> C[📝 Preencher Dados]
+    C --> D[📎 Upload de Arquivos]
+    D --> E[✅ Validação]
+    
+    E -->|❌ Erro| F[🚨 Exibir Erros]
+    F --> C
+    
+    E -->|✅ Válido| G[💾 Salvar Projeto]
+    G --> H{👨‍💼 Usuário é Admin?}
+    
+    H -->|Sim| I[✅ Auto-aprovado]
+    H -->|Não| J[⏳ Aguarda Aprovação]
+    
+    I --> K[🌐 Projeto Publicado]
+    J --> L[📧 Notificação Admin]
+    L --> M[👨‍💼 Admin Avalia]
+    M --> N{✅ Aprovado?}
+    
+    N -->|Sim| O[✅ Projeto Aprovado]
+    N -->|Não| P[❌ Projeto Rejeitado]
+    
+    O --> Q[📧 Notificação Usuário]
+    P --> R[📧 Notificação Rejeição]
+    Q --> K
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#e0f2f1
+    style E fill:#e8f5e8
+    style F fill:#ffebee
+    style G fill:#e3f2fd
+    style I fill:#e8f5e8
+    style J fill:#fff3e0
+    style K fill:#e8f5e8
+    style O fill:#e8f5e8
+    style P fill:#ffebee
+                    </div>
+                </div>
+            </div>
+
+            <!-- Busca -->
+            <div id="busca" class="diagram-section">
+                <h2 class="diagram-title"><span class="emoji">🔍</span>Sistema de Busca</h2>
+                <div class="diagram-description">
+                    <p>Processo de busca de tutores e conteúdos na plataforma.</p>
+                </div>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+flowchart TD
+    A[👨‍🎓 Tutorando] --> B[🔍 Página de Busca]
+    B --> C[📝 Inserir Critérios]
+    C --> D[🎯 Executar Busca]
+    
+    D --> E[🗄️ Consulta no Banco]
+    E --> F[📋 Buscar Projetos]
+    E --> G[📄 Buscar Publicações]
+    E --> H[👨‍🏫 Buscar Tutores]
+    
+    F --> I[📊 Compilar Resultados]
+    G --> I
+    H --> I
+    
+    I --> J[📱 Exibir Resultados]
+    J --> K[👀 Selecionar Item]
+    
+    K --> L{📋 Tipo do Item}
+    L -->|Projeto| M[📋 Detalhes do Projeto]
+    L -->|Publicação| N[📄 Ver Publicação]
+    L -->|Tutor| O[👨‍🏫 Perfil do Tutor]
+    
+    O --> P[📞 Botão Contato]
+    P --> Q[📧 Enviar Mensagem]
+    
+    M --> R[👨‍🏫 Ver Autor]
+    N --> R
+    R --> O
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#e0f2f1
+    style I fill:#e8f5e8
+    style J fill:#e3f2fd
+    style O fill:#f1f8e9
+    style Q fill:#e8f5e8
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab de Diagramas de Sequência -->
+        <div id="sequence" class="tab-content">
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showSequenceDiagram('auth')">🔐 Autenticação</button>
+                <button class="nav-btn" onclick="showSequenceDiagram('register')">📝 Registro</button>
+                <button class="nav-btn" onclick="showSequenceDiagram('project')">📋 Criação Projeto</button>
+                <button class="nav-btn" onclick="showSequenceDiagram('approval')">✅ Aprovação</button>
+                <button class="nav-btn" onclick="showSequenceDiagram('search')">🔍 Busca</button>
+            </div>
+            
+            <!-- Autenticação -->
+            <div id="auth" class="diagram-section active">
+                <h2 class="diagram-title"><span class="emoji">🔐</span>Sequência de Autenticação</h2>
+                <div class="diagram-description">
+                    <p>Fluxo detalhado de autenticação de usuários no sistema.</p>
+                </div>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+sequenceDiagram
+    participant U as 👤 Usuário
+    participant B as 🌐 Browser
+    participant R as 🛣️ Router
+    participant C as 🎯 Controller
+    participant M as 🛡️ Middleware
+    participant A as 🔐 Auth
+    participant D as 🗄️ Database
+
+    U->>B: Acesso à página login
+    B->>R: GET /login
+    R->>C: AuthController@create
+    C->>B: Formulário de login
+    B->>U: Exibe formulário
+
+    U->>B: Submit credenciais
+    B->>R: POST /login
+    R->>M: Middleware guest
+    M->>C: AuthController@store
+    C->>A: Auth::attempt()
+    A->>D: Verificar credenciais
+    
+    alt ✅ Credenciais Válidas
+        D-->>A: Usuário encontrado
+        A-->>C: Login realizado
+        C->>B: Redirect dashboard
+        B->>U: Acesso liberado
+    else ❌ Credenciais Inválidas
+        D-->>A: Usuário não encontrado
+        A-->>C: Falha na autenticação
+        C->>B: Erro de login
+        B->>U: Mensagem de erro
+    end
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registro -->
+            <div id="register" class="diagram-section">
+                <h2 class="diagram-title"><span class="emoji">📝</span>Sequência de Registro</h2>
+                <div class="diagram-description">
+                    <p>Processo de criação de nova conta de usuário.</p>
+                </div>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+sequenceDiagram
+    participant U as 👤 Usuário
+    participant B as 🌐 Browser
+    participant R as 🛣️ Router
+    participant C as 🎯 Controller
+    participant V as ✅ Validator
+    participant D as 🗄️ Database
+    participant E as 📧 Email
+
+    U->>B: Acesso formulário registro
+    B->>R: GET /register
+    R->>C: RegisterController@create
+    C->>B: Formulário registro
+    B->>U: Exibe formulário
+
+    U->>B: Submit dados registro
+    B->>R: POST /register
+    R->>C: RegisterController@store
+    C->>V: Validar dados
+    
+    alt ✅ Dados Válidos
+        V-->>C: Validação OK
+        C->>D: Criar usuário
+        D-->>C: Usuário criado
+        C->>E: Enviar email confirmação
+        E-->>U: Email recebido
+        C->>B: Login automático
+        B->>U: Acesso dashboard
+    else ❌ Dados Inválidos
+        V-->>C: Erros validação
+        C->>B: Retornar erros
+        B->>U: Exibir erros
+    end
+                    </div>
+                </div>
+            </div>
+
+            <!-- Criação de Projeto -->
+            <div id="project" class="diagram-section">
+                <h2 class="diagram-title"><span class="emoji">📋</span>Sequência de Criação de Projeto</h2>
+                <div class="diagram-description">
+                    <p>Processo completo de criação de projetos com upload de arquivos.</p>
+                </div>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+sequenceDiagram
+    participant U as 👤 Usuário
+    participant B as 🌐 Browser
+    participant R as 🛣️ Router
+    participant C as 🎯 Controller
+    participant F as 📁 FileSystem
+    participant D as 🗄️ Database
+    participant N as 📧 Notification
+
+    U->>B: Criar novo projeto
+    B->>R: GET /projetos/create
+    R->>C: ProjetoController@create
+    C->>B: Formulário criação
+    B->>U: Exibe formulário
+
+    U->>B: Submit projeto + arquivos
+    B->>R: POST /projetos
+    R->>C: ProjetoController@store
+    
+    alt 📎 Tem arquivos
+        C->>F: Upload arquivos
+        F-->>C: Paths dos arquivos
+    end
+    
+    C->>D: Salvar projeto
+    D-->>C: Projeto salvo
+    
+    alt 👨‍💼 Usuário é Admin
+        C->>D: Aprovar automaticamente
+    else 👤 Usuário comum
+        C->>N: Notificar admin
+        N-->>C: Notificação enviada
+    end
+    
+    C->>B: Sucesso + redirect
+    B->>U: Projeto criado
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aprovação -->
+            <div id="approval" class="diagram-section">
+                <h2 class="diagram-title"><span class="emoji">✅</span>Sequência de Aprovação</h2>
+                <div class="diagram-description">
+                    <p>Fluxo de aprovação de conteúdo pelos administradores.</p>
+                </div>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+sequenceDiagram
+    participant A as 👨‍💼 Admin
+    participant B as 🌐 Browser
+    participant R as 🛣️ Router
+    participant C as 🎯 Controller
+    participant D as 🗄️ Database
+    participant E as 📧 Email
+
+    A->>B: Acesso painel admin
+    B->>R: GET /admin/projetos
+    R->>C: AdminController@index
+    C->>D: Buscar pendentes
+    D-->>C: Lista projetos
+    C->>B: Exibir lista
+    B->>A: Projetos pendentes
+
+    A->>B: Aprovar projeto
+    B->>R: PATCH /admin/projeto/{id}
+    R->>C: AdminController@approve
+    C->>D: Atualizar status
+    D-->>C: Status atualizado
+    C->>E: Notificar autor
+    E-->>C: Email enviado
+    C->>B: Sucesso
+    B->>A: Projeto aprovado
+                    </div>
+                </div>
+            </div>
+
+            <!-- Busca -->
+            <div id="search" class="diagram-section">
+                <h2 class="diagram-title"><span class="emoji">🔍</span>Sequência de Busca</h2>
+                <div class="diagram-description">
+                    <p>Sistema de busca com cache para otimização de performance.</p>
+                </div>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+sequenceDiagram
+    participant U as 👨‍🎓 Tutorando
+    participant B as 🌐 Browser
+    participant R as 🛣️ Router
+    participant C as 🎯 Controller
+    participant Cache as 🗄️ Cache
+    participant D as 🗄️ Database
+
+    U->>B: Fazer busca
+    B->>R: GET /search?q=termo
+    R->>C: SearchController@search
+    C->>Cache: Verificar cache
+    
+    alt 🎯 Cache Hit
+        Cache-->>C: Resultados em cache
+    else 🔄 Cache Miss
+        C->>D: Buscar projetos
+        D-->>C: Projetos encontrados
+        C->>D: Buscar publicações
+        D-->>C: Publicações encontradas
+        C->>D: Buscar tutores
+        D-->>C: Tutores encontrados
+        C->>Cache: Armazenar resultados
+    end
+    
+    C->>B: Resultados busca
+    B->>U: Exibir resultados
+    
+    U->>B: Selecionar tutor
+    B->>R: GET /tutores/{id}
+    R->>C: TutorController@show
+    C->>D: Buscar dados tutor
+    D-->>C: Dados do tutor
+    C->>B: Perfil tutor
+    B->>U: Exibir perfil
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+    <script>
+        // Inicializar Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            sequence: {
+                diagramMarginX: 50,
+                diagramMarginY: 10,
+                actorMargin: 50,
+                width: 150,
+                height: 65,
+                boxMargin: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35,
+                mirrorActors: true,
+                bottomMarginAdj: 1,
+                useMaxWidth: true,
+                rightAngles: false,
+                showSequenceNumbers: false
+            }
+        });
+
+        // Função para alternar entre abas principais
+        function showTab(tabName) {
+            // Ocultar todas as abas
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remover classe active dos botões
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            
+            // Mostrar aba selecionada
+            document.getElementById(tabName).classList.add('active');
+            
+            // Ativar botão selecionado
+            event.target.classList.add('active');
+            
+            // Reprocessar diagramas
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }, 100);
+        }
+
+        // Função para mostrar diagrama de atividade específico
+        function showActivityDiagram(diagramId) {
+            const sections = document.querySelectorAll('#activity .diagram-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            const buttons = document.querySelectorAll('#activity .nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(diagramId).classList.add('active');
+            event.target.classList.add('active');
+            
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('#activity .mermaid'));
+            }, 100);
+        }
+
+        // Função para mostrar diagrama de sequência específico
+        function showSequenceDiagram(diagramId) {
+            const sections = document.querySelectorAll('#sequence .diagram-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            const buttons = document.querySelectorAll('#sequence .nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(diagramId).classList.add('active');
+            event.target.classList.add('active');
+            
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('#sequence .mermaid'));
+            }, 100);
+        }
+
+        // Aguardar carregamento completo
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

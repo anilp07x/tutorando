@@ -4,9 +4,9 @@
 
 /* Custom styles */
 :root {
-    --primary-color: #ff7609;
-    --primary-dark: #e56508;
-    --primary-light: #ff9039;
+    --primary-color: #ff7906;
+    --primary-dark: #e56905;
+    --primary-light: #ff8b2a;
     --secondary-color: #f8f9fa;
     --text-color: #212529;
 }
@@ -28,11 +28,6 @@ body {
 .card {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: none;
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
 }
 
 .footer {

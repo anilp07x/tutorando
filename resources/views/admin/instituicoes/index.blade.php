@@ -75,8 +75,8 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <div class="bg-info bg-opacity-10 p-3 rounded">
-                                            <i class="bi bi-gear text-info fs-4"></i>
+                                        <div class="bg-primary bg-opacity-10 p-3 rounded">
+                                            <i class="bi bi-gear text-primary fs-4"></i>
                                         </div>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
@@ -166,7 +166,7 @@
                                             <td class="py-3 text-center">
                                                 <div class="btn-group" role="group">
                                                     <a href="{{ route('admin.instituicoes.show', $instituicao) }}" 
-                                                       class="btn btn-sm btn-outline-info" 
+                                                       class="btn btn-sm btn-outline-primary" 
                                                        data-bs-toggle="tooltip" 
                                                        title="Ver Detalhes">
                                                         <i class="bi bi-eye"></i>

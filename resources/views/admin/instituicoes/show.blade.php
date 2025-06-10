@@ -2,7 +2,9 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12 mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-4">
+                                                                 <a href="{{ route('admin.users.show', $user) }}" class="btn btn-sm btn-primary">
+                                                                <i class="bi bi-eye me-1"></i> Ver
+                                                            </a>        <div class="d-flex justify-content-between align-items-center mb-4">
                     <h1 class="fw-bold text-primary">{{ $instituicao->nome }}</h1>
                     <div>
                         <a href="{{ route('admin.instituicoes.index') }}" class="btn btn-secondary me-2">
@@ -35,7 +37,7 @@
                                         @elseif($instituicao->tipo == 'técnico')
                                             <i class="bi bi-tools text-success" style="font-size: 3rem;"></i>
                                         @else
-                                            <i class="bi bi-book text-info" style="font-size: 3rem;"></i>
+                                            <i class="bi bi-book text-primary" style="font-size: 3rem;"></i>
                                         @endif
                                     </div>
                                     <h4>{{ $instituicao->nome }}</h4>
@@ -121,7 +123,7 @@
                                                         </td>
                                                         <td>{{ $user->curso }}</td>
                                                         <td>
-                                                            <a href="{{ route('admin.users.show', $user) }}" class="btn btn-sm btn-info">
+                                                            <a href="{{ route('admin.users.show', $user) }}" class="btn btn-sm btn-primary">
                                                                 <i class="bi bi-eye"></i>
                                                             </a>
                                                         </td>

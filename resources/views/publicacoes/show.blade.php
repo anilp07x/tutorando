@@ -134,7 +134,7 @@
                                                 @if($publicacao->tipo == 'livro')
                                                     <i class="bi bi-book text-primary fs-1"></i>
                                                 @elseif($publicacao->tipo == 'artigo')
-                                                    <i class="bi bi-file-text text-info fs-1"></i>
+                                                    <i class="bi bi-file-text text-primary fs-1"></i>
                                                 @elseif($publicacao->tipo == 'vídeo')
                                                     <i class="bi bi-camera-video text-danger fs-1"></i>
                                                 @elseif($publicacao->tipo == 'curso')

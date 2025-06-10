@@ -12,7 +12,7 @@
             <div class="row mb-4">
                 <div class="col-12">
                     <div class="card border-0 shadow-sm">
-                        <div class="card-header bg-gradient-primary text-white">
+                        <div class="card-header bg-primary text-white">
                             <h5 class="mb-0">
                                 <i class="bi bi-shield-lock me-2"></i>
                                 Painel Administrativo
@@ -39,7 +39,7 @@
                                     </a>
                                 </div>
                                 <div class="col-md-2 col-sm-4 col-6">
-                                    <a href="{{ route('admin.publicacoes.index') }}" class="btn btn-outline-info w-100 h-100 d-flex flex-column align-items-center justify-content-center text-decoration-none">
+                                    <a href="{{ route('admin.publicacoes.index') }}" class="btn btn-outline-primary w-100 h-100 d-flex flex-column align-items-center justify-content-center text-decoration-none">
                                         <i class="bi bi-journal-text fs-3 mb-2"></i>
                                         <span class="small">Publicações</span>
                                     </a>
@@ -66,7 +66,7 @@
             <!-- Admin Dashboard -->
             <div class="row mb-4">
                 <div class="col-md-3 mb-4">
-                    <div class="card bg-primary text-white">
+                    <div class="card stats-card-primary">
                         <div class="card-body">
                             <h5 class="card-title">Total de Utilizadores</h5>
                             <h2 class="display-4">{{ \App\Models\User::count() }}</h2>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card bg-info text-white">
+                    <div class="card bg-primary text-white">
                         <div class="card-body">
                             <h5 class="card-title">Tutorandos</h5>
                             <h2 class="display-4">{{ \App\Models\User::where('role', 'tutorando')->count() }}</h2>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Nome</th>
@@ -122,7 +122,7 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>
-                                                    <span class="badge bg-{{ $user->role == 'admin' ? 'danger' : ($user->role == 'tutor' ? 'success' : 'info') }}">
+                                                    <span class="badge bg-{{ $user->role == 'admin' ? 'danger' : ($user->role == 'tutor' ? 'success' : 'primary') }}">
                                                         {{ ucfirst($user->role) }}
                                                     </span>
                                                 </td>
@@ -152,7 +152,7 @@
                             <div class="tab-content" id="approvalsTabContent">
                                 <div class="tab-pane fade show active" id="projects-tab-pane" role="tabpanel" aria-labelledby="projects-tab" tabindex="0">
                                     <div class="table-responsive mt-3">
-                                        <table class="table table-hover">
+                                        <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th>Título</th>
@@ -181,7 +181,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="publications-tab-pane" role="tabpanel" aria-labelledby="publications-tab" tabindex="0">
                                     <div class="table-responsive mt-3">
-                                        <table class="table table-hover">
+                                        <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th>Título</th>
@@ -217,7 +217,7 @@
             <!-- Painel do Tutor -->
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <div class="card">
+                    <div class="card dashboard-panel">
                         <div class="card-body">
                             <h5 class="card-title">Os Meus Projectos</h5>
                             <div class="d-flex justify-content-between align-items-center mt-3">
@@ -228,7 +228,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card">
+                    <div class="card dashboard-panel">
                         <div class="card-body">
                             <h5 class="card-title">As Minhas Publicações</h5>
                             <div class="d-flex justify-content-between align-items-center mt-3">
@@ -239,10 +239,10 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card">
+                    <div class="card dashboard-panel">
                         <div class="card-body">
                             <h5 class="card-title">Acções Rápidas</h5>
-                            <div class="d-grid gap-2 mt-3">
+                            <div class="d-grid gap-2 mt-3 quick-actions">
                                 <a href="#" class="btn btn-outline-primary">Novo Projecto</a>
                                 <a href="#" class="btn btn-outline-primary">Nova Publicação</a>
                             </div>
@@ -259,7 +259,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Título</th>
@@ -280,7 +280,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="#" class="btn btn-sm btn-info">Ver</a>
+                                                        <a href="#" class="btn btn-sm btn-outline-primary">Ver</a>
                                                         <a href="#" class="btn btn-sm btn-primary">Editar</a>
                                                     </div>
                                                 </td>
@@ -297,7 +297,7 @@
             <!-- Painel do Tutorando -->
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <div class="card">
+                    <div class="card dashboard-panel">
                         <div class="card-body">
                             <h5 class="card-title">Os Meus Projectos</h5>
                             <div class="d-flex justify-content-between align-items-center mt-3">
@@ -308,10 +308,10 @@
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <div class="card">
+                    <div class="card dashboard-panel">
                         <div class="card-body">
                             <h5 class="card-title">Acções Rápidas</h5>
-                            <div class="d-grid gap-2 mt-3">
+                            <div class="d-grid gap-2 mt-3 quick-actions">
                                 <a href="{{ route('projetos.create') }}" class="btn btn-outline-primary">Novo Projecto</a>
                                 <a href="{{ route('tutores.index') }}" class="btn btn-outline-primary">Encontrar Tutores</a>
                             </div>
@@ -328,7 +328,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Título</th>
@@ -349,7 +349,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="#" class="btn btn-sm btn-info">Ver</a>
+                                                        <a href="#" class="btn btn-sm btn-outline-primary">Ver</a>
                                                         <a href="#" class="btn btn-sm btn-primary">Editar</a>
                                                     </div>
                                                 </td>
@@ -373,14 +373,14 @@
                             <div class="row">
                                 @foreach(\App\Models\User::where('role', 'tutor')->inRandomOrder()->take(4)->get() as $tutor)
                                     <div class="col-md-3 mb-3">
-                                        <div class="card h-100">
+                                        <div class="card h-100 featured-tutor-card">
                                             <div class="card-body text-center">
                                                 <div class="mb-3">
-                                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($tutor->name) }}&background=007bff&color=fff" class="rounded-circle" width="80" height="80" alt="{{ $tutor->name }}">
+                                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($tutor->name) }}&background=ff7906&color=fff" class="rounded-circle" width="80" height="80" alt="{{ $tutor->name }}">
                                                 </div>
                                                 <h5 class="card-title">{{ $tutor->name }}</h5>
                                                 <p class="card-text text-muted">{{ $tutor->curso }}</p>
-                                                <a href="#" class="btn btn-sm btn-outline-primary">Ver Perfil</a>
+                                                <a href="{{ route('tutores.show', $tutor) }}" class="btn btn-sm btn-outline-primary">Ver Perfil</a>
                                             </div>
                                         </div>
                                     </div>

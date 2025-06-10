@@ -25,11 +25,9 @@
     </head>
     <body class="{{ auth()->check() && auth()->user()->role === 'admin' && request()->is('admin*') ? 'admin-body' : '' }}">
         <div class="d-flex flex-column min-vh-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
+            @include('layouts.navigation')            <!-- Page Heading -->
             @isset($header)
-                <header class="bg-primary text-white py-3">
+                <header class="py-3 border-bottom">
                     <div class="container">
                         {{ $header }}
                     </div>

@@ -6,11 +6,11 @@
                     <h1 class="fw-bold text-primary">{{ $projeto->titulo }}</h1>
                     <div>
                         <a href="{{ route('projetos.index') }}" class="btn btn-secondary me-2">
-                            <i class="bi bi-arrow-left me-1"></i> {{ __('Back to Projects') }}
+                            <i class="bi bi-arrow-left me-1"></i> Voltar aos Projetos
                         </a>
                         @if(Auth::id() === $projeto->user_id || Auth::user()->role === 'admin')
                             <a href="{{ route('projetos.edit', $projeto) }}" class="btn btn-primary">
-                                <i class="bi bi-pencil me-1"></i> {{ __('Edit') }}
+                                <i class="bi bi-pencil me-1"></i> Editar
                             </a>
                         @endif
                     </div>
@@ -26,9 +26,9 @@
                 <div class="card mb-4">
                     <div class="card-header bg-white">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">{{ __('Project Details') }}</h5>
+                            <h5 class="mb-0">Detalhes do Projeto</h5>
                             <span class="badge bg-{{ $projeto->aprovado ? 'success' : 'warning' }}">
-                                {{ $projeto->aprovado ? __('Approved') : __('Pending Approval') }}
+                                {{ $projeto->aprovado ? 'Aprovado' : 'Aguardando Aprovação' }}
                             </span>
                         </div>
                     </div>
@@ -51,13 +51,13 @@
                                 </div>
                                 
                                 <div class="mb-4">
-                                    <h5>{{ __('Description') }}</h5>
+                                    <h5>Descrição</h5>
                                     <p>{{ $projeto->descricao }}</p>
                                 </div>
                                 
                                 @if($projeto->youtube_link)
                                     <div class="mb-4">
-                                        <h5>{{ __('Video') }}</h5>
+                                        <h5>Vídeo</h5>
                                         <div class="ratio ratio-16x9">
                                             <iframe 
                                                 src="{{ str_replace('watch?v=', 'embed/', $projeto->youtube_link) }}" 
@@ -72,30 +72,30 @@
                             <div class="col-md-4">
                                 <div class="card mb-3">
                                     <div class="card-header bg-light">
-                                        <h6 class="mb-0">{{ __('Author Information') }}</h6>
+                                        <h6 class="mb-0">Informações do Autor</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex align-items-center mb-3">
                                             <img 
-                                                src="https://ui-avatars.com/api/?name={{ urlencode($projeto->user->name) }}&background=007bff&color=fff" 
+                                                src="https://ui-avatars.com/api/?name={{ urlencode($projeto->user->name) }}&background=ff7906&color=fff" 
                                                 class="rounded-circle me-2" 
                                                 width="50" 
                                                 height="50" 
                                                 alt="{{ $projeto->user->name }}">
                                             <div>
                                                 <h6 class="mb-0">{{ $projeto->user->name }}</h6>
-                                                <span class="badge bg-{{ $projeto->user->role === 'tutor' ? 'success' : 'info' }}">
+                                                <span class="badge bg-{{ $projeto->user->role === 'tutor' ? 'success' : 'primary' }}">
                                                     {{ ucfirst($projeto->user->role) }}
                                                 </span>
                                             </div>
                                         </div>
                                         
                                         <div class="mb-2">
-                                            <strong>{{ __('Course') }}:</strong> {{ $projeto->user->curso }}
+                                            <strong>Curso:</strong> {{ $projeto->user->curso }}
                                         </div>
                                         
                                         <div>
-                                            <strong>{{ __('Institution') }}:</strong> {{ $projeto->user->instituicao->nome ?? 'N/A' }}
+                                            <strong>Instituição:</strong> {{ $projeto->user->instituicao->nome ?? 'N/A' }}
                                         </div>
                                     </div>
                                 </div>
@@ -103,11 +103,11 @@
                                 @if($projeto->arquivo_pdf)
                                     <div class="card mb-3">
                                         <div class="card-header bg-light">
-                                            <h6 class="mb-0">{{ __('PDF Document') }}</h6>
+                                            <h6 class="mb-0">Documento PDF</h6>
                                         </div>
                                         <div class="card-body text-center">
                                             <a href="{{ Storage::url($projeto->arquivo_pdf) }}" target="_blank" class="btn btn-danger">
-                                                <i class="bi bi-file-pdf me-1"></i> {{ __('Download PDF') }}
+                                                <i class="bi bi-file-pdf me-1"></i> Baixar PDF
                                             </a>
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@
                 @if($projeto->imagens)
                     <div class="card mb-4">
                         <div class="card-header bg-white">
-                            <h5 class="mb-0">{{ __('Project Images') }}</h5>
+                            <h5 class="mb-0">Imagens do Projeto</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -142,17 +142,17 @@
                 @if(Auth::user()->role === 'admin' && !$projeto->aprovado)
                     <div class="card">
                         <div class="card-body">
-                            <h5>{{ __('Administrative Actions') }}</h5>
+                            <h5>Ações Administrativas</h5>
                             <form action="{{ route('admin.projetos.approve', $projeto) }}" method="POST" class="d-inline-block">
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit" class="btn btn-success">
-                                    <i class="bi bi-check-circle me-1"></i> {{ __('Approve Project') }}
+                                    <i class="bi bi-check-circle me-1"></i> Aprovar Projeto
                                 </button>
                             </form>
                             
                             <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                <i class="bi bi-trash me-1"></i> {{ __('Delete Project') }}
+                                <i class="bi bi-trash me-1"></i> Excluir Projeto
                             </button>
                         </div>
                     </div>
@@ -162,18 +162,18 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteModalLabel">{{ __('Confirm Deletion') }}</h5>
+                                    <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    {{ __('Are you sure you want to delete this project?') }}
+                                    Tem certeza de que deseja excluir este projeto?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                     <form action="{{ route('projetos.destroy', $projeto) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                                        <button type="submit" class="btn btn-danger">Excluir</button>
                                     </form>
                                 </div>
                             </div>

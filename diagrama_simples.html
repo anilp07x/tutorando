@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramas de Atividade - Sistema Tutorando</title>
+    <script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0;">
+    <div style="max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        
+        <h1 style="text-align: center; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 15px;">
+            🎯 Sistema Tutorando - Diagramas de Atividade
+        </h1>
+        
+        <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db;">
+            <strong>📝 Descrição:</strong> Sistema acadêmico com três tipos de usuários (Admin, Tutor, Tutorando) 
+            para gestão de projetos, publicações e interação educacional.
+        </div>
+
+        <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffc107;">
+            <strong>🎨 Legenda:</strong> 
+            🔵 Azul = Início | 🔴 Vermelho = Admin | 🟢 Verde = Tutor | 🟠 Laranja = Tutorando | ✅ Verde = Sucesso | ❌ Vermelho = Erro
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button onclick="mostrarDiagrama(1)" style="background: #3498db; color: white; border: none; padding: 12px 20px; margin: 5px; border-radius: 5px; cursor: pointer; font-size: 14px;" id="btn1">
+                🏠 Fluxo Principal
+            </button>
+            <button onclick="mostrarDiagrama(2)" style="background: #95a5a6; color: white; border: none; padding: 12px 20px; margin: 5px; border-radius: 5px; cursor: pointer; font-size: 14px;" id="btn2">
+                📝 Registro
+            </button>
+            <button onclick="mostrarDiagrama(3)" style="background: #95a5a6; color: white; border: none; padding: 12px 20px; margin: 5px; border-radius: 5px; cursor: pointer; font-size: 14px;" id="btn3">
+                ✅ Aprovação
+            </button>
+            <button onclick="mostrarDiagrama(4)" style="background: #95a5a6; color: white; border: none; padding: 12px 20px; margin: 5px; border-radius: 5px; cursor: pointer; font-size: 14px;" id="btn4">
+                📁 Projeto
+            </button>
+            <button onclick="mostrarDiagrama(5)" style="background: #95a5a6; color: white; border: none; padding: 12px 20px; margin: 5px; border-radius: 5px; cursor: pointer; font-size: 14px;" id="btn5">
+                🔍 Busca
+            </button>
+        </div>
+
+        <!-- Diagrama 1: Fluxo Principal -->
+        <div id="diagrama1" style="margin: 30px 0; padding: 20px; background: #fafafa; border-radius: 8px;">
+            <h2 style="color: #34495e; border-left: 4px solid #3498db; padding-left: 15px;">🏠 Fluxo Principal do Sistema</h2>
+            <div class="mermaid">
+flowchart TB
+    A[👤 Usuário Acessa Sistema] --> B{🔐 Autenticado?}
+    
+    B -->|❌ Não| C[🌐 Página Inicial]
+    C --> D[🔑 Login/Registro]
+    D --> E{👥 Tipo?}
+    E -->|🎓 Tutor| F[📝 Registro Tutor]
+    E -->|📚 Tutorando| G[📝 Registro Tutorando]
+    F --> H[🏛️ Selecionar Instituição]
+    G --> H
+    H --> I[✅ Validar Dados]
+    I --> J[🎉 Conta Criada]
+    J --> K[📊 Dashboard]
+    
+    B -->|✅ Sim| L{🎭 Papel?}
+    
+    L -->|👑 Admin| M[⚙️ Dashboard Admin]
+    L -->|🎓 Tutor| N[📝 Dashboard Tutor]
+    L -->|📚 Tutorando| O[🔍 Dashboard Tutorando]
+    
+    M --> P[🛠️ Gerenciar Sistema]
+    P --> Q{⚡ Ação?}
+    Q -->|🏛️ Instituições| R[📋 CRUD Instituições]
+    Q -->|👥 Usuários| S[👤 Gerenciar Usuários]
+    Q -->|✅ Aprovações| T[📝 Revisar Conteúdo]
+    Q -->|📊 Relatórios| U[📈 Estatísticas]
+    
+    T --> V{📄 Tipo?}
+    V -->|📁 Projeto| W[👀 Revisar Projeto]
+    V -->|📖 Publicação| X[👀 Revisar Publicação]
+    W --> Y{🤔 Decisão?}
+    X --> Y
+    Y -->|✅ Aprovar| Z[🎉 Aprovado]
+    Y -->|❌ Rejeitar| AA[⛔ Rejeitado]
+    
+    N --> BB[🎓 Ações Tutor]
+    BB --> CC{🎯 Ação?}
+    CC -->|📁 Projeto| DD[📝 Criar Projeto]
+    CC -->|📖 Publicação| EE[📝 Criar Publicação]
+    CC -->|👀 Ver Meus| FF[📋 Meus Conteúdos]
+    CC -->|🌐 Explorar| GG[🔍 Ver Públicos]
+    
+    DD --> HH[📝 Preencher]
+    HH --> II[📎 Upload]
+    II --> JJ[📤 Submeter]
+    JJ --> KK[⏳ Aguardar Aprovação]
+    
+    O --> LL[📚 Ações Tutorando]
+    LL --> MM{🎯 Ação?}
+    MM -->|📁 Projeto| DD
+    MM -->|🔍 Tutores| NN[👥 Buscar Tutores]
+    MM -->|📖 Projetos| OO[📁 Ver Projetos]
+    MM -->|📚 Publicações| PP[📖 Ver Publicações]
+    
+    NN --> QQ[🔎 Filtrar]
+    QQ --> RR[👤 Ver Perfil]
+    RR --> SS[📞 Contatar]
+    
+    style A fill:#e1f5fe
+    style M fill:#ffebee
+    style N fill:#e8f5e8
+    style O fill:#fff3e0
+    style Z fill:#c8e6c9
+    style AA fill:#ffcdd2
+            </div>
+        </div>
+
+        <!-- Diagrama 2: Processo de Registro -->
+        <div id="diagrama2" style="margin: 30px 0; padding: 20px; background: #fafafa; border-radius: 8px; display: none;">
+            <h2 style="color: #34495e; border-left: 4px solid #3498db; padding-left: 15px;">📝 Processo de Registro</h2>
+            <div class="mermaid">
+flowchart TB
+    A[🚪 Acessar Registro] --> B[👥 Selecionar Tipo]
+    B --> C{🤔 Tutor ou Tutorando?}
+    
+    C -->|🎓 Tutor| D[📋 Formulário Tutor]
+    C -->|📚 Tutorando| E[📋 Formulário Tutorando]
+    
+    D --> F[✏️ Dados Pessoais]
+    E --> F
+    F --> G[🏛️ Selecionar Instituição]
+    G --> H[📚 Definir Curso]
+    H --> I[📎 Upload Documento]
+    I --> J[📤 Submeter]
+    
+    J --> K[🔍 Validação]
+    K --> L{✅ Válido?}
+    L -->|❌ Não| M[⚠️ Mostrar Erros]
+    M --> F
+    L -->|✅ Sim| N[🎉 Criar Conta]
+    N --> O[📧 Email Verificação]
+    O --> P[🔐 Login Automático]
+    P --> Q[📊 Ir para Dashboard]
+    
+    style N fill:#c8e6c9
+    style M fill:#ffcdd2
+            </div>
+        </div>
+
+        <!-- Diagrama 3: Aprovação de Conteúdo -->
+        <div id="diagrama3" style="margin: 30px 0; padding: 20px; background: #fafafa; border-radius: 8px; display: none;">
+            <h2 style="color: #34495e; border-left: 4px solid #3498db; padding-left: 15px;">✅ Processo de Aprovação</h2>
+            <div class="mermaid">
+flowchart TB
+    A[👑 Admin no Painel] --> B{📄 Tipo Conteúdo?}
+    B -->|📁 Projetos| C[📋 Lista Projetos]
+    B -->|📖 Publicações| D[📋 Lista Publicações]
+    
+    C --> E[👁️ Selecionar Item]
+    D --> E
+    E --> F[📖 Ver Detalhes]
+    F --> G[🔍 Revisar Conteúdo]
+    G --> H[✅ Verificar Qualidade]
+    H --> I{🤔 Decisão?}
+    
+    I -->|✅ Aprovar| J[👍 Clicar Aprovar]
+    I -->|❌ Rejeitar| K[👎 Clicar Rejeitar]
+    I -->|🔄 Alterações| L[💬 Adicionar Comentários]
+    
+    J --> M[✅ Confirmar Aprovação]
+    K --> N[❌ Confirmar Rejeição]
+    L --> O[📤 Enviar de Volta]
+    
+    M --> P[🌐 Conteúdo Público]
+    N --> Q[🔒 Conteúdo Privado]
+    O --> R[📧 Notificar Autor]
+    
+    P --> S[📧 Notificar - Aprovado]
+    Q --> T[📧 Notificar - Rejeitado]
+    R --> U[⏳ Aguardar Reenvio]
+    
+    style P fill:#c8e6c9
+    style Q fill:#ffcdd2
+    style R fill:#fff3e0
+            </div>
+        </div>
+
+        <!-- Diagrama 4: Criação de Projeto -->
+        <div id="diagrama4" style="margin: 30px 0; padding: 20px; background: #fafafa; border-radius: 8px; display: none;">
+            <h2 style="color: #34495e; border-left: 4px solid #3498db; padding-left: 15px;">📁 Criação de Projeto</h2>
+            <div class="mermaid">
+flowchart TB
+    A[💡 Quero Criar Projeto] --> B[📝 Acessar Formulário]
+    B --> C[✏️ Título]
+    C --> D[📝 Descrição]
+    D --> E[🏷️ Categoria/Tags]
+    E --> F{📎 Tem Arquivos?}
+    
+    F -->|✅ Sim| G[📤 Upload Arquivos]
+    F -->|❌ Não| H[🔗 Links Externos]
+    G --> H
+    
+    H --> I{📹 Vídeo YouTube?}
+    I -->|✅ Sim| J[🎬 Link YouTube]
+    I -->|❌ Não| K[👀 Revisar]
+    J --> K
+    
+    K --> L[📤 Submeter]
+    L --> M[🔍 Validação]
+    M --> N{✅ Válido?}
+    
+    N -->|❌ Não| O[⚠️ Mostrar Erros]
+    O --> C
+    N -->|✅ Sim| P[💾 Salvar]
+    P --> Q[⏳ Status: Pendente]
+    Q --> R[📧 Notificar Admin]
+    R --> S[⏰ Aguardar Aprovação]
+    
+    S --> T{📋 Resultado?}
+    T -->|✅ Aprovado| U[🎉 Publicado]
+    T -->|❌ Rejeitado| V[⛔ Rejeitado]
+    T -->|🔄 Alterações| W[✏️ Editar e Reenviar]
+    
+    style U fill:#c8e6c9
+    style V fill:#ffcdd2
+    style W fill:#fff3e0
+            </div>
+        </div>
+
+        <!-- Diagrama 5: Busca de Tutores -->
+        <div id="diagrama5" style="margin: 30px 0; padding: 20px; background: #fafafa; border-radius: 8px; display: none;">
+            <h2 style="color: #34495e; border-left: 4px solid #3498db; padding-left: 15px;">🔍 Busca de Tutores</h2>
+            <div class="mermaid">
+flowchart TB
+    A[📚 Buscar Tutores] --> B[📋 Lista de Tutores]
+    B --> C[🔧 Aplicar Filtros]
+    C --> D{🎛️ Tem Filtros?}
+    
+    D -->|✅ Sim| E[📚 Filtrar por Curso]
+    D -->|❌ Não| F[👥 Ver Todos]
+    E --> G[🎯 Filtrar por Área]
+    G --> H[🔍 Pesquisar Nome]
+    H --> F
+    
+    F --> I[📋 Lista Resultados]
+    I --> J[👤 Selecionar Tutor]
+    J --> K[👁️ Ver Perfil]
+    K --> L[📁 Ver Projetos]
+    L --> M[📖 Ver Publicações]
+    M --> N[📞 Info Contato]
+    
+    N --> O{🤔 Contatar?}
+    O -->|✅ Sim| P[📋 Copiar Contato]
+    O -->|❌ Não| Q[⬅️ Voltar Lista]
+    O -->|👁️ Ver Outro| R[⬅️ Voltar Perfil]
+    
+    P --> S[📞 Contatar Externamente]
+    Q --> I
+    R --> K
+    
+    style P fill:#c8e6c9
+            </div>
+        </div>
+
+        <div style="background: #e8f4fd; padding: 20px; border-radius: 8px; margin: 30px 0; border-left: 4px solid #3498db;">
+            <h3 style="margin-top: 0; color: #2c3e50;">💡 Principais Funcionalidades</h3>
+            <ul style="margin: 0; padding-left: 20px;">
+                <li><strong>🎭 Sistema de Papéis:</strong> Admin, Tutor, Tutorando com permissões específicas</li>
+                <li><strong>✅ Aprovação de Conteúdo:</strong> Projetos e publicações passam por moderação</li>
+                <li><strong>🏛️ Gestão Institucional:</strong> Todos os usuários vinculados a instituições</li>
+                <li><strong>🔍 Descoberta de Tutores:</strong> Sistema de busca e filtros avançados</li>
+                <li><strong>📎 Upload de Arquivos:</strong> Suporte a imagens, PDFs e vídeos do YouTube</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        // Configurar Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            securityLevel: 'loose'
+        });
+
+        function mostrarDiagrama(numero) {
+            // Esconder todos os diagramas
+            for (let i = 1; i <= 5; i++) {
+                const diagrama = document.getElementById('diagrama' + i);
+                const botao = document.getElementById('btn' + i);
+                if (diagrama) diagrama.style.display = 'none';
+                if (botao) botao.style.background = '#95a5a6';
+            }
+
+            // Mostrar o diagrama selecionado
+            const diagramaSelecionado = document.getElementById('diagrama' + numero);
+            const botaoSelecionado = document.getElementById('btn' + numero);
+            if (diagramaSelecionado) diagramaSelecionado.style.display = 'block';
+            if (botaoSelecionado) botaoSelecionado.style.background = '#3498db';
+        }
+
+        // Aguardar carregamento completo
+        window.addEventListener('load', function() {
+            console.log('Página carregada, inicializando diagramas...');
+            setTimeout(() => {
+                mostrarDiagrama(1);
+                mermaid.init();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

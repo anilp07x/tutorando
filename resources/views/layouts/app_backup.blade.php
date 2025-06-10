@@ -29,7 +29,7 @@
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-primary text-white py-3">
+                <header class="py-3 border-bottom">
                     <div class="container">
                         {{ $header }}
                     </div>

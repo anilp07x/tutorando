@@ -15,7 +15,7 @@
                                 <p class="mb-0">Bem-vindo ao painel administrativo do Tutorando. Aqui você gerencia todos os aspectos da plataforma.</p>
                             </div>
                             <div class="mt-3 mt-md-0">
-                                <span class="badge bg-info px-3 py-2">
+                                <span class="badge bg-primary px-3 py-2">
                                     <i class="bi bi-code-slash me-1"></i> Laravel {{ app()->version() }}
                                 </span>
                             </div>
@@ -120,8 +120,8 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="flex-shrink-0">
-                                <div class="bg-info bg-opacity-10 p-3 rounded">
-                                    <i class="bi bi-book text-info fs-1"></i>
+                                <div class="bg-primary bg-opacity-10 p-3 rounded">
+                                    <i class="bi bi-book text-primary fs-1"></i>
                                 </div>
                             </div>
                             <div class="flex-grow-1 ms-3">
@@ -138,7 +138,7 @@
                         </div>
                     </div>
                     <div class="card-footer bg-white border-0">
-                        <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-info w-100">
+                        <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-primary w-100">
                             <i class="bi bi-hourglass-split me-1"></i> Ver Pendentes
                         </a>
                     </div>
@@ -252,10 +252,10 @@
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
                                 <h5 class="card-title mb-0">
-                                    <i class="bi bi-book text-info me-2"></i>
+                                    <i class="bi bi-book text-primary me-2"></i>
                                     Publicações Recentes
                                 </h5>
-                                <a href="{{ route('admin.publicacoes.index') }}" class="btn btn-sm btn-outline-info">
+                                <a href="{{ route('admin.publicacoes.index') }}" class="btn btn-sm btn-outline-primary">
                                     Ver Todas
                                 </a>
                             </div>
@@ -380,7 +380,7 @@
                                         <td class="text-center">
                                             <div class="btn-group btn-group-sm" role="group">
                                                 <a href="{{ route('admin.instituicoes.show', $instituicao) }}" 
-                                                   class="btn btn-outline-info btn-sm" 
+                                                   class="btn btn-outline-primary btn-sm" 
                                                    title="Ver Detalhes">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
@@ -459,10 +459,10 @@
                             </div>
                             <div class="col-6">
                                 <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="card border-0 bg-light text-center p-3 h-100 text-decoration-none hover-shadow">
-                                    <div class="mb-2"><i class="bi bi-journal-check text-info fs-3"></i></div>
+                                    <div class="mb-2"><i class="bi bi-journal-check text-primary fs-3"></i></div>
                                     <h6 class="mb-0">Aprovar Publicações</h6>
                                     @if($publicacoesPendentes = \App\Models\Publicacao::where('aprovado', false)->count())
-                                    <span class="badge bg-info text-dark mt-1">{{ $publicacoesPendentes }}</span>
+                                    <span class="badge bg-primary text-white mt-1">{{ $publicacoesPendentes }}</span>
                                     @endif
                                 </a>
                             </div>
@@ -493,13 +493,13 @@
                             <span class="text-muted">Database</span>
                             <span class="badge bg-success">Conectada</span>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
                             <span class="text-muted">Laravel</span>
-                            <span class="badge bg-info">{{ app()->version() }}</span>
+                            <span class="badge bg-primary">{{ app()->version() }}</span>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="text-muted">PHP</span>
-                            <span class="badge bg-info">{{ PHP_VERSION }}</span>
+                            <span class="badge bg-primary">{{ PHP_VERSION }}</span>
                         </div>
                     </div>
                 </div>
@@ -533,7 +533,7 @@
                         <div class="mb-0">
                             <div class="d-flex justify-content-between mb-2">
                                 <h6 class="mb-0">Publicações pendentes</h6>
-                                <span class="badge bg-info text-dark">
+                                <span class="badge bg-primary text-white">
                                     {{ \App\Models\Publicacao::where('aprovado', false)->count() }}
                                 </span>
                             </div>
@@ -543,7 +543,7 @@
                                     $publicacoesPendentes = \App\Models\Publicacao::where('aprovado', false)->count();
                                     $percentualPublicacoes = $totalPublicacoes > 0 ? ($publicacoesPendentes / $totalPublicacoes) * 100 : 0;
                                 @endphp
-                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $percentualPublicacoes }}%"></div>
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ $percentualPublicacoes }}%"></div>
                             </div>
                         </div>
                         
@@ -556,7 +556,7 @@
                             @endif
                             
                             @if($publicacoesPendentes > 0)
-                            <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="btn btn-sm btn-outline-primary">
                                 <i class="bi bi-journal-check me-1"></i> Aprovar Publicações
                             </a>
                             @endif
