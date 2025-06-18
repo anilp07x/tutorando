@@ -432,78 +432,6 @@
             
             <!-- Sidebar -->
             <div class="col-lg-4">
-                <!-- Quick Actions Card -->
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header bg-primary text-white py-3">
-                        <h5 class="mb-0">
-                            <i class="bi bi-lightning-charge me-2"></i>
-                            Ações Rápidas
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-6">
-                                <a href="{{ route('admin.instituicoes.create') }}" class="card border-0 bg-light text-center p-3 h-100 text-decoration-none hover-shadow">
-                                    <div class="mb-2"><i class="bi bi-building-add text-primary fs-3"></i></div>
-                                    <h6 class="mb-0">Nova Instituição</h6>
-                                </a>
-                            </div>
-                            <div class="col-6">
-                                <a href="{{ route('admin.projetos.index', ['status' => 'pendente']) }}" class="card border-0 bg-light text-center p-3 h-100 text-decoration-none hover-shadow">
-                                    <div class="mb-2"><i class="bi bi-folder-check text-warning fs-3"></i></div>
-                                    <h6 class="mb-0">Aprovar Projetos</h6>
-                                    @if($projetosPendentes = \App\Models\Projeto::where('aprovado', false)->count())
-                                    <span class="badge bg-warning text-dark mt-1">{{ $projetosPendentes }}</span>
-                                    @endif
-                                </a>
-                            </div>
-                            <div class="col-6">
-                                <a href="{{ route('admin.publicacoes.index', ['status' => 'pendente']) }}" class="card border-0 bg-light text-center p-3 h-100 text-decoration-none hover-shadow">
-                                    <div class="mb-2"><i class="bi bi-journal-check text-primary fs-3"></i></div>
-                                    <h6 class="mb-0">Aprovar Publicações</h6>
-                                    @if($publicacoesPendentes = \App\Models\Publicacao::where('aprovado', false)->count())
-                                    <span class="badge bg-primary text-white mt-1">{{ $publicacoesPendentes }}</span>
-                                    @endif
-                                </a>
-                            </div>
-                            <div class="col-6">
-                                <a href="{{ route('admin.users.index') }}" class="card border-0 bg-light text-center p-3 h-100 text-decoration-none hover-shadow">
-                                    <div class="mb-2"><i class="bi bi-people-fill text-success fs-3"></i></div>
-                                    <h6 class="mb-0">Gerir Usuários</h6>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- System Status Card -->
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header bg-success text-white py-3">
-                        <h5 class="mb-0">
-                            <i class="bi bi-shield-check me-2"></i>
-                            Status do Sistema
-                        </h5>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="text-muted">Sistema</span>
-                            <span class="badge bg-success">Online</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="text-muted">Database</span>
-                            <span class="badge bg-success">Conectada</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-muted">Laravel</span>
-                            <span class="badge bg-primary">{{ app()->version() }}</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-muted">PHP</span>
-                            <span class="badge bg-primary">{{ PHP_VERSION }}</span>
-                        </div>
-                    </div>
-                </div>
-                
                 <!-- Approval Summary -->
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-header bg-warning bg-opacity-75 text-dark py-3">
@@ -578,92 +506,119 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Activity Chart
-            const activityCtx = document.getElementById('activityChart').getContext('2d');
-            const activityChart = new Chart(activityCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-                    datasets: [
-                        {
-                            label: 'Projetos',
-                            data: [12, 19, 15, 28, 25, 30],
-                            borderColor: '#ffc107',
-                            backgroundColor: 'rgba(255, 193, 7, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        },
-                        {
-                            label: 'Publicações',
-                            data: [7, 11, 8, 15, 21, 25],
-                            borderColor: '#0dcaf0',
-                            backgroundColor: 'rgba(13, 202, 240, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        },
-                        {
-                            label: 'Usuários',
-                            data: [5, 9, 13, 17, 24, 35],
-                            borderColor: '#0d6efd',
-                            backgroundColor: 'rgba(13, 110, 253, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
+            // Verificar se o Chart.js está carregado
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js não está carregado');
+                return;
+            }
             
-            // User Distribution Chart
-            const userDistributionCtx = document.getElementById('userDistributionChart').getContext('2d');
-            const userDistributionChart = new Chart(userDistributionCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Administradores', 'Tutores', 'Tutorandos'],
-                    datasets: [{
-                        data: [
-                            {{ \App\Models\User::where('role', 'admin')->count() }}, 
-                            {{ \App\Models\User::where('role', 'tutor')->count() }}, 
-                            {{ \App\Models\User::where('role', 'tutorando')->count() }}
-                        ],
-                        backgroundColor: [
-                            '#dc3545',
-                            '#198754',
-                            '#0dcaf0'
-                        ],
-                        hoverOffset: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
+            // Activity Chart
+            const activityCanvas = document.getElementById('activityChart');
+            if (activityCanvas) {
+                try {
+                    const activityCtx = activityCanvas.getContext('2d');
+                    const activityChart = new Chart(activityCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+                            datasets: [
+                                {
+                                    label: 'Projetos',
+                                    data: [12, 19, 15, 28, 25, 30],
+                                    borderColor: '#ffc107',
+                                    backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                                    tension: 0.3,
+                                    fill: true
+                                },
+                                {
+                                    label: 'Publicações',
+                                    data: [7, 11, 8, 15, 21, 25],
+                                    borderColor: '#0dcaf0',
+                                    backgroundColor: 'rgba(13, 202, 240, 0.1)',
+                                    tension: 0.3,
+                                    fill: true
+                                },
+                                {
+                                    label: 'Usuários',
+                                    data: [5, 9, 13, 17, 24, 35],
+                                    borderColor: '#0d6efd',
+                                    backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                                    tension: 0.3,
+                                    fill: true
+                                }
+                            ]
                         },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const value = context.raw;
-                                    const percentage = Math.round((value / total) * 100);
-                                    return `${context.label}: ${value} (${percentage}%)`;
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true
                                 }
                             }
                         }
-                    }
-                });
+                    });
+                } catch (error) {
+                    console.error('Erro ao criar gráfico de atividade:', error);
+                }
+            } else {
+                console.error('Canvas activityChart não encontrado');
+            }
+            
+            // User Distribution Chart
+            const distributionCanvas = document.getElementById('userDistributionChart');
+            if (distributionCanvas) {
+                try {
+                    const userDistributionCtx = distributionCanvas.getContext('2d');
+                    const userDistributionChart = new Chart(userDistributionCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Administradores', 'Tutores', 'Tutorandos'],
+                            datasets: [{
+                                data: [
+                                    {{ \App\Models\User::where('role', 'admin')->count() }}, 
+                                    {{ \App\Models\User::where('role', 'tutor')->count() }}, 
+                                    {{ \App\Models\User::where('role', 'tutorando')->count() }}
+                                ],
+                                backgroundColor: [
+                                    '#dc3545',
+                                    '#198754',
+                                    '#0dcaf0'
+                                ],
+                                hoverOffset: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                            const value = context.raw;
+                                            const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                                            return `${context.label}: ${value} (${percentage}%)`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error('Erro ao criar gráfico de distribuição:', error);
+                }
+            } else {
+                console.error('Canvas userDistributionChart não encontrado');
+            }
             
             // Efeito hover para os cards de ação rápida
             document.querySelectorAll('.hover-shadow').forEach(card => {
